@@ -1,2 +1,2 @@
 # FindersTrace
-Collaborators: Klaffenböck, Zinhobel, Kreuzer, Öllinger
+Collaborators: Klaffenböck, Zinhobel, Kreuzer, Öllinger, Simsek
