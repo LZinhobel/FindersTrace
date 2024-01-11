@@ -10,3 +10,13 @@
 *Beschreibung:*
 
 FindersTrace ist eine Anwendung, die es Benutzern ermöglicht, verlorene oder gefundene Objekte zu melden und zu finden. Die Besonderheit liegt in der Organisation-basierten Struktur, bei der sich Benutzer als Organisationen anmelden können. Innerhalb dieser Organisationen können Mitglieder Objekte melden und suchen.
+
+*Hauptfunktionalitäten:*
+
+- Objekte melden: Benutzer können verlorene oder gefundene Objekte melden und relevante Informationen dazu angeben.
+- Organisationen: Die Anwendung ermöglicht die Registrierung von Organisationen, in denen Mitglieder gemeinsam Objekte verwalten können.
+- Mitgliederverwaltung: Organisationsadministratoren können Mitglieder hinzufügen, um gemeinsam an der Verwaltung von Objekten teilzunehmen.
+
+*Anwendungsbereich:*
+
+FindersTrace ist besonders geeignet für Organisationen, Schulen, Unternehmen oder andere Gruppen, die eine effiziente Möglichkeit zur Verwaltung von verlorenen oder gefundenen Objekten benötigen.
