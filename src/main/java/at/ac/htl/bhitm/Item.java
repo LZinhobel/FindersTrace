@@ -1,22 +1,22 @@
 package at.ac.htl.bhitm;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Item {
     private static int idCounter = 0;
     private int id;
 
-    private String titel;
+    private String title;
     private String description;
     private ItemLevel currentStatus;
     private String imgPath;
-    private LocalDateTime dateAdded;
+    private String dateAdded;
 
     private final static String DEFAULT_DESCRIPTION = "No description available";
     private final static String DEFAULT_IMGPATH = "No image available";
 
-    public String getTitel() {
-        return titel;
+    public String getTitle() {
+        return title;
     }
 
     public String getDescription() {
@@ -39,19 +39,19 @@ public class Item {
         return idCounter;
     }
 
-    public LocalDateTime getDateAdded() {
+    public String getDate() {
         return dateAdded;
     }
 
-    public String getDateAddedPretty() {
-        return dateAdded.getDayOfMonth() + "." + dateAdded.getMonthValue() + "." + dateAdded.getYear();
+    public void setDate(String dateAdded) {
+        this.dateAdded = dateAdded;
     }
 
-    public void setTitel(String titel) {
-        if (titel == null || titel.isEmpty()) {
-            throw new IllegalArgumentException("Title must not be null or blank!");
+    public void setTitle(String title) {
+        if (title == null || title.isEmpty()) {
+            throw new ItemException("Title must not be null or blank!");
         }
-        this.titel = titel;
+        this.title = title;
     }
 
     public void setDescription(String description) {
@@ -80,16 +80,16 @@ public class Item {
 
     public Item(ItemLevel lvl, String titel, String description, String imgPath) {
         setCurrentStatus(lvl);
-        setTitel(titel);
+        setTitle(titel);
         setDescription(description);
         setImgPath(imgPath);
         ++idCounter;
         id = idCounter;
-        dateAdded = LocalDateTime.now();
+        dateAdded = LocalDate.now().toString();
     }
 
     @java.lang.Override
     public java.lang.String toString() {
-        return String.format("#%d: %s (%s) - added on %s", id, titel, currentStatus, this.getDateAddedPretty());
+        return String.format("#%d: %s (%s) %s - added on %s", id, title, currentStatus, description, getDate());
     }
 }
