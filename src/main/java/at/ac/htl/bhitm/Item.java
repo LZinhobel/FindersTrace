@@ -66,6 +66,9 @@ public class Item {
     }
 
     public void setImgPath(String imgPath) {
+        if  (imgPath == null || imgPath.equalsIgnoreCase("x")) {
+            this.imgPath = DEFAULT_IMGPATH;
+        }
         this.imgPath = imgPath;
     }
 

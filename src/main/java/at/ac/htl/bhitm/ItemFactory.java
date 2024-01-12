@@ -10,7 +10,7 @@ public class ItemFactory {
         String title = parts[0].trim();
         String description = parts[1].trim();
         ItemLevel level = ItemLevel.valueOf(parts[2]);
-        String imgPath = parts[3].equals("null") ? null : parts[3].trim();
+        String imgPath = parts[3].trim();
         String dateAdded = parts[4].trim();
 
         Item item = new Item(level, title, description, imgPath);
