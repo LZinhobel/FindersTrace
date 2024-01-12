@@ -58,9 +58,14 @@ public class ItemManager {
                 lines.add(currentStringToAdd);
             }
             Path filePath = Paths.get(path);
-            Files.write(filePath, lines);
+            if (Files.exists(filePath)) {
+                Files.write(filePath, lines);
+            } else {
+                throw new ItemException("File doesn't exist");
+            }
+
         } catch(IOException e) {
-            throw new ItemException("Something happened while loading to file!", e);
+            throw new ItemException("Something happened while writing to file!", e);
         }
     }
 

@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ItemManager itemManager = new ItemManager();
-//        itemManager.AddItemsFromFile("data/reportedItems.csv", new ItemFactory()); funktioniert nicht, Exception wird imma geworfen
+//        itemManager.AddItemsFromFile("data/reportedItems.csv", new ItemFactory()); funktioniert nicht, Exception wird immer geworfen wegen path
         
         System.out.println("Welcome to FindersTrace!");
 
@@ -27,11 +27,11 @@ public class Main {
 
         System.out.println("Choose an option:");
         System.out.println("A: Report an item");
-        System.out.println("B: All items");
+        System.out.println("B: Show items");
         System.out.println("C: Exit");
         String input = scanner.nextLine().trim();
 
-        while (!(input.equalsIgnoreCase("a") || input.equalsIgnoreCase("b") || input.equalsIgnoreCase("c"))) {
+        while (!validInput(input)) {
             System.out.println("Invalid input! Try again.");
             input = scanner.nextLine().trim();
         }
@@ -44,7 +44,7 @@ public class Main {
                 System.out.println("C: Back");
                 input = scanner.nextLine().trim();
 
-                while (!input.equalsIgnoreCase("a") || !input.equalsIgnoreCase("b") || !input.equalsIgnoreCase("c")) {
+                while (!!validInput(input)) {
                     System.out.println("Invalid input! Try again.");
                     input = scanner.nextLine().trim();
                 }
@@ -89,7 +89,7 @@ public class Main {
                 System.out.println("C: Show all items");
                 System.out.println("D: Back");
                 input = scanner.nextLine().trim();
-                while (!input.equalsIgnoreCase("a") || !input.equalsIgnoreCase("b") || !input.equalsIgnoreCase("c") || !input.equalsIgnoreCase("d")) {
+                while (!input.equalsIgnoreCase("d") || !validInput(input)) {
                     System.out.println("Invalid input! Try again.");
                     input = scanner.nextLine().trim();
                 }
@@ -123,5 +123,9 @@ public class Main {
                 break;
         }
         scanner.close();
+    }
+
+    private static boolean validInput(String input) {
+        return input.equalsIgnoreCase("a") || input.equalsIgnoreCase("b") || input.equalsIgnoreCase("c");
     }
 }
