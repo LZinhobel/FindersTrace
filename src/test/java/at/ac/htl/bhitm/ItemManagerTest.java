@@ -53,7 +53,11 @@ public class ItemManagerTest {
         itemManager.addItem(item);
         assertEquals(1, itemManager.getItemsByStatus(ItemLevel.LOST).size());
         assertEquals(item, itemManager.getItemsByStatus(ItemLevel.LOST).get(0));
+
+        assertEquals(0, itemManager.getItemsByStatus(ItemLevel.FOUND).size());
     }
+
+
 
     @Test
     public void test_getItemById() {
@@ -98,7 +102,7 @@ public class ItemManagerTest {
             itemManager.AddItemsToFile("notExistingFile.csv");
         });
 
-     //   assertEquals("Something happened while writing to file!", ex.getMessage());
+        assertEquals("File doesn't exist", ex.getMessage());
     }
 
     @Test
