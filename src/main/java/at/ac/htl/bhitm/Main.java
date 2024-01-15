@@ -1,15 +1,17 @@
 package at.ac.htl.bhitm;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ItemManager itemManager = new ItemManager();
-//        itemManager.AddItemsFromFile("data/reportedItems.csv", new ItemFactory()); funktioniert nicht, Exception wird immer geworfen wegen path
+        try {
+            itemManager.AddItemsFromFile("data/reportedItems.csv", new ItemFactory());
+        } catch (Exception e) {
+            System.out.println("Error while starting! Couldn't read file.");
+        }
 
         System.out.println("Welcome to FindersTrace!");
 
@@ -126,9 +128,13 @@ public class Main {
                     }
                     break;
                 case "c":
-//                itemManager.AddItemsToFile("data/reportedItems.csv");
-                    scanner.close();
-                    System.exit(0);
+                    try {
+                        itemManager.AddItemsToFile("data/reportedItems.csv");
+                        scanner.close();
+                        System.exit(0);
+                    } catch (Exception e) {
+                        System.out.println("Error while exiting! Couldn't write to file.");
+                    }
                     break;
             }
         }

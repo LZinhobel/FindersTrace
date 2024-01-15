@@ -43,6 +43,11 @@ public class Item {
         return dateAdded;
     }
 
+    public String getDatePretty() {
+        String[] date = dateAdded.split("-");
+        return String.format("%s.%s.%s", date[2], date[1], date[0]);
+    }
+
     public void setDate(String dateAdded) {
         this.dateAdded = dateAdded;
     }
@@ -68,8 +73,9 @@ public class Item {
     public void setImgPath(String imgPath) {
         if  (imgPath == null || imgPath.equalsIgnoreCase("x")) {
             this.imgPath = DEFAULT_IMGPATH;
+        } else {
+            this.imgPath = imgPath;
         }
-        this.imgPath = imgPath;
     }
 
 
@@ -93,6 +99,6 @@ public class Item {
 
     @java.lang.Override
     public java.lang.String toString() {
-        return String.format("#%d: %s (%s) %s - added on %s", id, title, currentStatus, description, getDate());
+        return String.format("#%d: %s (%s) %s - added on %s %s", id, title, currentStatus, description, getDatePretty(), imgPath);
     }
 }

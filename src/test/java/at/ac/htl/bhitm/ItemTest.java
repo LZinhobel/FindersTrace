@@ -2,9 +2,8 @@ package at.ac.htl.bhitm;
 
 
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
-
+import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -81,6 +80,10 @@ public class ItemTest {
         assertEquals("Test2", item.getTitle());
         assertEquals("Test2", item.getDescription());
         assertEquals("Test2", item.getImgPath());
+        item.setImgPath("x");
+        assertEquals(DEFAULT_IMGPATH, item.getImgPath());
+        item.setImgPath(null);
+        assertEquals(DEFAULT_IMGPATH, item.getImgPath());
     }
 
     @Test
@@ -94,12 +97,15 @@ public class ItemTest {
     @Test
     public void test_toString() {
         Item item = new Item(ItemLevel.LOST, "Test");
-        assertEquals(String.format("#%d: Test (LOST) %s - added on %s", item.getIdCounter(), DEFAULT_DESCRIPTION, LocalDate.now().toString()), item.toString());
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        assertEquals(String.format("#%d: Test (LOST) %s - added on %s %s", item.getIdCounter(), DEFAULT_DESCRIPTION, date, DEFAULT_IMGPATH), item.toString());
     }
 
     @Test
     public void test_getDate() {
         Item item = new Item(ItemLevel.LOST, "Test");
-        assertEquals(LocalDate.now().toString(), item.getDate());
+        LocalDate date = LocalDate.now();
+        assertEquals(date.toString(), item.getDate());
+        assertEquals(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), item.getDatePretty());
     }
 }
