@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+    private static Scanner scanner = new Scanner(System.in);
+    private static ItemManager itemManager = new ItemManager();
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        ItemManager itemManager = new ItemManager();
+        initialize();
+        mainMenu();
+    }
+
+    private static void initialize() {
         try {
             itemManager.AddItemsFromFile("data/reportedItems.csv", new ItemFactory());
         } catch (Exception e) {
@@ -18,8 +24,12 @@ public class Main {
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
+            scanner.close();
             throw new RuntimeException(e);
         }
+    }
+
+    private static void mainMenu() {
         String input = "";
         while (true) {
             System.out.println("--------------------------------------");
@@ -27,117 +37,123 @@ public class Main {
             System.out.println("A: Report an item");
             System.out.println("B: Show items");
             System.out.println("C: Exit");
-            input = scanner.nextLine().trim();
+            input = getValidInput();
 
-            while (!validInput(input)) {
-                System.out.println("Invalid input! Try again.");
-                input = scanner.nextLine().trim();
-            }
-            input = input.toLowerCase();
-            switch (input) {
+            switch (input.toLowerCase()) {
                 case "a":
-                    System.out.println("Choose an option:");
-                    System.out.println("A: Report a lost item");
-                    System.out.println("B: Report a found item");
-                    System.out.println("C: Back");
-                    input = scanner.nextLine().trim();
-
-                    while (!validInput(input)) {
-                        System.out.println("Invalid input! Try again.");
-                        input = scanner.nextLine().trim();
-                    }
-                    input = input.toLowerCase();
-                    switch (input) {
-                        case "a":
-                            System.out.println("Enter the title of the item:");
-                            String title = scanner.nextLine().trim();
-                            while (title.isEmpty()) {
-                                System.out.println("Invalid input! Try again.");
-                                title = scanner.nextLine().trim();
-                            }
-
-                            System.out.println("Enter the description of the item (optional):");
-                            String description = scanner.nextLine().trim();
-
-                            System.out.println("Enter the URL of an image (type x if no img available):");
-                            String imgPath = scanner.nextLine().trim();
-
-                            Item newItem = new Item(ItemLevel.LOST, title, description, imgPath);
-                            itemManager.addItem(newItem);
-                            break;
-                        case "b":
-                            System.out.println("Enter the title of the item:");
-                            title = scanner.nextLine().trim();
-                            while (title.isEmpty()) {
-                                System.out.println("Invalid input! Try again.");
-                                title = scanner.nextLine().trim();
-                            }
-
-                            System.out.println("Enter the description of the item (optional):");
-                            description = scanner.nextLine().trim();
-
-                            System.out.println("Enter the URL of an image (type x if no img available):");
-                            imgPath = scanner.nextLine().trim();
-
-                            newItem = new Item(ItemLevel.FOUND, title, description, imgPath);
-                            itemManager.addItem(newItem);
-                            break;
-                        case "c":
-                            input = "x";
-                            break;
-                    }
+                    reportItem();
                     break;
                 case "b":
-                    System.out.println("Choose an option:");
-                    System.out.println("A: Show all lost items");
-                    System.out.println("B: Show all found items");
-                    System.out.println("C: Show all items");
-                    System.out.println("D: Back");
-
-                    input = scanner.nextLine().trim();
-
-                    while (!input.equalsIgnoreCase("d") && !validInput(input)) {
-                        System.out.println("Invalid input! Try again.");
-                        input = scanner.nextLine().trim();
-                    }
-
-                    ArrayList<Item> lostItems = null;
-                    switch (input) {
-                        case "a":
-                            lostItems =
-                                    itemManager.getItemsByStatus(ItemLevel.LOST);
-                            break;
-                        case "b":
-                            lostItems =
-                                    itemManager.getItemsByStatus(ItemLevel.FOUND);
-                            break;
-                        case "c":
-                            lostItems =
-                                    itemManager.getItems();
-                            break;
-                        case "d":
-                            break;
-                    }
-                    System.out.println("\n\n\n\n\n\n\n");
-                    if (lostItems == null || lostItems.isEmpty()) {
-                        System.out.println("No items found!");
-                    } else {
-                        for (Item item : lostItems) {
-                            System.out.println(item.toString());
-                        }
-                    }
+                    showItems();
                     break;
                 case "c":
-                    try {
-                        itemManager.AddItemsToFile("data/reportedItems.csv");
-                        scanner.close();
-                        System.exit(0);
-                    } catch (Exception e) {
-                        System.out.println("Error while exiting! Couldn't write to file.");
-                    }
+                    exit();
                     break;
             }
         }
+    }
+
+    private static void reportItem() {
+        System.out.println("Choose an option:");
+        System.out.println("A: Report a lost item");
+        System.out.println("B: Report a found item");
+        System.out.println("C: Back");
+        String input = getValidInput();
+
+        switch (input.toLowerCase()) {
+            case "a":
+                reportLostItem();
+                break;
+            case "b":
+                reportFoundItem();
+                break;
+        }
+    }
+
+    private static void reportLostItem() {
+        Item newItem = getItemDetails(ItemLevel.LOST);
+        itemManager.addItem(newItem);
+    }
+
+    private static void reportFoundItem() {
+        Item newItem = getItemDetails(ItemLevel.FOUND);
+        itemManager.addItem(newItem);
+    }
+
+    private static Item getItemDetails(ItemLevel level) {
+        System.out.println("Enter the title of the item:");
+        String title = getNonEmptyInput();
+
+        System.out.println("Enter the description of the item (optional):");
+        String description = scanner.nextLine().trim();
+
+        System.out.println("Enter the URL of an image (type x if no img available):");
+        String imgPath = scanner.nextLine().trim();
+
+        return new Item(level, title, description, imgPath);
+    }
+
+    private static void showItems() {
+        System.out.println("Choose an option:");
+        System.out.println("A: Show all lost items");
+        System.out.println("B: Show all found items");
+        System.out.println("C: Show all items");
+        System.out.println("D: Back");
+
+        String input = getValidInput();
+
+        ArrayList<Item> items = null;
+        switch (input.toLowerCase()) {
+            case "a":
+                items = itemManager.getItemsByStatus(ItemLevel.LOST);
+                break;
+            case "b":
+                items = itemManager.getItemsByStatus(ItemLevel.FOUND);
+                break;
+            case "c":
+                items = itemManager.getItems();
+                break;
+        }
+        displayItems(items);
+    }
+
+    private static void displayItems(ArrayList<Item> items) {
+        System.out.println("\n\n\n\n\n\n\n");
+        if (items == null || items.isEmpty()) {
+            System.out.println("No items found!");
+        } else {
+            for (Item item : items) {
+                System.out.println(item.toString());
+            }
+        }
+    }
+
+    private static void exit() {
+        try {
+            itemManager.AddItemsToFile("data/reportedItems.csv");
+            scanner.close();
+            System.exit(0);
+        } catch (Exception e) {
+            System.out.println("Error while exiting! Couldn't write to file.");
+        }
+    }
+
+    private static String getValidInput() {
+        String input = scanner.nextLine().trim();
+        while (!validInput(input)) {
+            System.out.println("Invalid input! Try again.");
+            input = scanner.nextLine().trim();
+        }
+        return input;
+    }
+
+    private static String getNonEmptyInput() {
+        String input = scanner.nextLine().trim();
+        while (input.isEmpty()) {
+            System.out.println("Invalid input! Try again.");
+            input = scanner.nextLine().trim();
+        }
+        return input;
     }
 
     private static boolean validInput(String input) {
