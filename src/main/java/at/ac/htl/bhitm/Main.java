@@ -14,7 +14,7 @@ public class Main {
 
     private static void initialize() {
         try {
-            itemManager.AddItemsFromFile("data/reportedItems.csv", new ItemFactory());
+            itemManager.AddItemsFromFile("./data/reportedItems.csv", new ItemFactory());
         } catch (Exception e) {
             System.out.println("Error while starting! Couldn't read file.");
         }
@@ -54,6 +54,7 @@ public class Main {
     }
 
     private static void reportItem() {
+        clearConsoleWithN();
         System.out.println("Choose an option:");
         System.out.println("A: Report a lost item");
         System.out.println("B: Report a found item");
@@ -94,6 +95,7 @@ public class Main {
     }
 
     private static void showItems() {
+        clearConsoleWithN();
         System.out.println("Choose an option:");
         System.out.println("A: Show all lost items");
         System.out.println("B: Show all found items");
@@ -118,7 +120,7 @@ public class Main {
     }
 
     private static void displayItems(ArrayList<Item> items) {
-        System.out.println("\n\n\n\n\n\n\n");
+        clearConsoleWithN();
         if (items == null || items.isEmpty()) {
             System.out.println("No items found!");
         } else {
@@ -130,7 +132,7 @@ public class Main {
 
     private static void exit() {
         try {
-            itemManager.AddItemsToFile("data/reportedItems.csv");
+            itemManager.AddItemsToFile("./data/reportedItems.csv");
             scanner.close();
             System.exit(0);
         } catch (Exception e) {
@@ -158,5 +160,10 @@ public class Main {
 
     private static boolean validInput(String input) {
         return input.equalsIgnoreCase("a") || input.equalsIgnoreCase("b") || input.equalsIgnoreCase("c");
+    }
+
+    private static void clearConsoleWithN() {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush(); 
     }
 }

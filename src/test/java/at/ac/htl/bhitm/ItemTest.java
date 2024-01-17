@@ -98,7 +98,7 @@ public class ItemTest {
     public void test_toString() {
         Item item = new Item(ItemLevel.LOST, "Test");
         String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        assertEquals(String.format("#%d: Test (LOST) %s - added on %s %s", item.getIdCounter(), DEFAULT_DESCRIPTION, date, DEFAULT_IMGPATH), item.toString());
+        assertEquals(String.format("#%d: Test (LOST) %s - hinzugefügt am %s %s", item.getIdCounter(), DEFAULT_DESCRIPTION, date, DEFAULT_IMGPATH), item.toString());
     }
 
     @Test
