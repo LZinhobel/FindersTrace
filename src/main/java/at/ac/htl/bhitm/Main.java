@@ -18,7 +18,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Error while starting! Couldn't read file.");
         }
-
+        clearConsole();
         System.out.println("Welcome to FindersTrace!");
 
         try {
@@ -54,7 +54,7 @@ public class Main {
     }
 
     private static void reportItem() {
-        clearConsoleWithN();
+        clearConsole();
         System.out.println("Choose an option:");
         System.out.println("A: Report a lost item");
         System.out.println("B: Report a found item");
@@ -95,7 +95,7 @@ public class Main {
     }
 
     private static void showItems() {
-        clearConsoleWithN();
+        clearConsole();
         System.out.println("Choose an option:");
         System.out.println("A: Show all lost items");
         System.out.println("B: Show all found items");
@@ -120,7 +120,7 @@ public class Main {
     }
 
     private static void displayItems(ArrayList<Item> items) {
-        clearConsoleWithN();
+        clearConsole();
         if (items == null || items.isEmpty()) {
             System.out.println("No items found!");
         } else {
@@ -162,7 +162,7 @@ public class Main {
         return input.equalsIgnoreCase("a") || input.equalsIgnoreCase("b") || input.equalsIgnoreCase("c");
     }
 
-    private static void clearConsoleWithN() {
+    private static void clearConsole() {
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
     }

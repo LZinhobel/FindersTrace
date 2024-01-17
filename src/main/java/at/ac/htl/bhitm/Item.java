@@ -99,6 +99,6 @@ public class Item {
 
     @java.lang.Override
     public java.lang.String toString() {
-        return String.format("#%d: %s (%s) %s - hinzugefügt am %s %s", id, title, currentStatus, description, getDatePretty(), imgPath);
+        return String.format("#%d: %s (%s) %s - hinzugefügt am %s | %s", id, title, currentStatus, description, getDatePretty(), imgPath);
     }
 }
