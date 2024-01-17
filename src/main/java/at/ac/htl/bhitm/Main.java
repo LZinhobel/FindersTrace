@@ -37,7 +37,7 @@ public class Main {
             System.out.println("A: Report an item");
             System.out.println("B: Show items");
             System.out.println("C: Exit");
-            input = getValidInput();
+            input = getValidInput(false);
 
             switch (input.toLowerCase()) {
                 case "a":
@@ -59,7 +59,7 @@ public class Main {
         System.out.println("A: Report a lost item");
         System.out.println("B: Report a found item");
         System.out.println("C: Back");
-        String input = getValidInput();
+        String input = getValidInput(false);
 
         switch (input.toLowerCase()) {
             case "a":
@@ -102,7 +102,7 @@ public class Main {
         System.out.println("C: Show all items");
         System.out.println("D: Back");
 
-        String input = getValidInput();
+        String input = getValidInput(true);
 
         ArrayList<Item> items = null;
         switch (input.toLowerCase()) {
@@ -115,6 +115,8 @@ public class Main {
             case "c":
                 items = itemManager.getItems();
                 break;
+            case "d":
+                return;
         }
         displayItems(items);
     }
@@ -140,11 +142,13 @@ public class Main {
         }
     }
 
-    private static String getValidInput() {
+    private static String getValidInput(boolean hasFourOptions) {
         String input = scanner.nextLine().trim();
-        while (!validInput(input)) {
-            System.out.println("Invalid input! Try again.");
-            input = scanner.nextLine().trim();
+        if (!(hasFourOptions && input.equalsIgnoreCase("d"))) {
+            while (!validInput(input)) {
+                System.out.println("Invalid input! Try again.");
+                input = scanner.nextLine().trim();
+            }
         }
         return input;
     }
