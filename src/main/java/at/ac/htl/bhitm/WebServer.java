@@ -25,7 +25,7 @@ public class WebServer {
                 <img src="./img/logo.png" alt="" id="welcomeLogo">
                 <div id="welcomeDIv">
                     <h1 id="title">FindersTrace</h1>    
-                    <a href="../overview/index.html" id="◀">get started</a>
+                    <a href="../overview/" id="◀">get started</a>
                 </div>
             </body>
             </html>
@@ -49,8 +49,8 @@ public class WebServer {
                 <img src="../img/logo.png" alt="" id="logo">
                 <nav>
                     <div class="sites">
-                        <div class="linkDiv"><a href="../welcome/index.html" id="welcomeLink">Start</a></div>
-                        <div class="linkDiv"><a href="../overview/index.html" id="overviewLink">Overview</a></div>
+                        <div class="linkDiv"><a href="../welcome" id="welcomeLink">Start</a></div>
+                        <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
                         <div class="linkDiv"><p>Max Mustermann</p></div>
                     </div>
                 </nav>
