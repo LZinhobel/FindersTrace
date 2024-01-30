@@ -240,3 +240,32 @@ nav {
     color: white;
     background-color: var(--teriary);
 }
+
+
+
+/*details*/
+#details_body {
+    display: flex;
+    border-radius: 15px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 80%;
+    height: 65vh;
+    margin-left: 10%;
+    margin-top: 20vh;
+    background-color: white;
+}
+
+.details_image {
+    height: 70%;
+    display: flex;
+    justify-content: center;
+}
+
+.details_image>img {
+    width: auto;
+    height: 100%;
+    border-radius: 5px;
+}
