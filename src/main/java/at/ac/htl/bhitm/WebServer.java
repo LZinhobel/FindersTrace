@@ -3,10 +3,17 @@ package at.ac.htl.bhitm;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("/")
 public class WebServer {
+    private ItemManager mng = new ItemManager();
+    private ItemFactory factory = new ItemFactory();
+    private int visits = 0;
+    private void updateItems() {
+        mng.AddItemsFromFile("./data/reportedItems.csv", factory);
+    }
 
     @GET
     @Path("/welcome")
@@ -36,7 +43,11 @@ public class WebServer {
     @Path("/overview")
     @Produces(MediaType.TEXT_HTML)
     public String overview() {
-        return """
+        if (visits == 0) {
+            updateItems();
+        }
+        ++visits;
+        String text =  """
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -49,9 +60,10 @@ public class WebServer {
                 <img src="../img/logo.png" alt="" id="logo">
                 <nav>
                     <div class="sites">
-                        <div class="linkDiv"><a href="../welcome" id="welcomeLink">Start</a></div>
+                        <div class="linkDiv"
+                        ><a href="../welcome" id="welcomeLink">Start</a></div>
                         <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
-                        <div class="linkDiv"><p>Max Mustermann</p></div>
+                        <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
                     </div>
                 </nav>
                 <select id="filter">
@@ -60,52 +72,78 @@ public class WebServer {
                     <option value="found">Found</option>
                 </select>
                 <div id="📦">
-                    <div class="items">
-                        <div class="IImage">
-                            <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-card-40-iphone15prohero-202309_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=1693086369818" alt="image">
-                        </div>
-                        <div class="OInformation">
-                            <!-- <div class="UInformation">
-                                <h3>Max Mustermann</h3>
-                            </div> -->
-                            <div class="IIonformaion">
-                                <h3>iPhone 13 Pro</h3>
-                                <h5>LOST</h5>
-                                <h5>01.01.2024</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="items">
-                        <div class="IImage">
-                            <img src="https://knize.at/cdn/shop/products/Knize_Wallet_Billfold_Schwarz_1_900x.jpg?v=1620213986" alt="image">
-                        </div>
-                        <div class="OInformation">
-                            <!-- <div class="UInformation">
-                                <h3>Max Mustermann</h3>
-                            </div> -->
-                            <div class="IIonformaion">
-                                <h3>Geldtasche</h3>
-                                <h5>FOUND</h5>
-                                <h5>31.12.2023</h5>
-                            </div>
-                        </div>
-                    </div>
+                    """
+                            + getAllItems() +
+                            """
                 </div>
              
-                <div id="ReportItemButton" onclick="window.location=''">Report<span> !</span></div>
-
+                <div id="ReportItemButton" onclick="window.location='../report/'">Report<span> !</span></div>
             </body>
             </html>
                 """;
+        return text;
     }
 
+    private String getAllItems() {
+        String text = "";
+        int index = 0;
+        for (Item item : mng.getItems()) {
+            text += "<div class=\"items\" onclick=\"window.location.href=\'../details?index="+ index + "'\">";
 
+            text += """
+                <div class="IImage">
+                            <img src=\"
+                            """+
+                                getValidImgPath(item)
+                             +"""
+                                \" alt="image">
+                        </div>
+                        <div class="OInformation">
+                            <!-- <div class="UInformation">
+                                <h3>Max Mustermann</h3>
+                            </div> -->
+                            <div class="IIonformaion">
+                                <h3>"""
+                                + item.getTitle() +
+                                """
+                                    </h3>
+                                <h5>"""
+                                    + item.getCurrentStatus() + 
+                                """
+                                    </h5>
+                                <h5>"""
+                                    + item.getDatePretty() +
+                                """
+                                    </h5>
+                            </div>
+                        </div>
+                    </div>
+                    """;
+            ++index;
+        }
+        if (text.isEmpty()) {
+            text = "<h1>No Items found</h1>";
+        }
+        return text;
+    }
+
+    private String getValidImgPath(Item item) {
+        String path = item.getImgPath();
+        if (path.equals("No image available")) {
+            path = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png";
+        }
+        return path;
+    }
 
     @GET
     @Path("/details")
     @Produces(MediaType.TEXT_HTML)
-    public String details() {
-        return """
+    public String details(@QueryParam("index") Integer index){
+        if (visits == 0) {
+            updateItems();
+        }
+        ++visits;
+        String text =  """
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -120,7 +158,7 @@ public class WebServer {
                     <div class="sites">
                         <div class="linkDiv"><a href="../welcome" id="welcomeLink">Start</a></div>
                         <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
-                        <div class="linkDiv"><p>Max Mustermann</p></div>
+                        <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
                     </div>
                 </nav>
                 <select id="filter">
@@ -128,20 +166,72 @@ public class WebServer {
                     <option value="lost">Lost</option>
                     <option value="found">Found</option>
                 </select>
-                <div id="details_body">
+                <div id="details_body">""";
+                
+        if (index == null) {
+                text += "<h1>Item not found</h1>";
+            } else {
+                Item item = mng.getItems().get(index);
+                text += """
+                
                         <div class="details_image">
-                            <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-card-40-iphone15prohero-202309_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=1693086369818" alt="image">
+                            <img src=\"
+                                """
+                                        +getValidImgPath(item)+
+                                        """
+                            \" alt="image">
                         </div>
                             <div class="IIonformaion">
-                                <h3>iPhone 13 Pro</h3>
-                                <h5>LOST</h5>
-                                <h5>01.01.2024</h5>
+                                <h3>"""
+                                    +item.getTitle()+
+                                """
+                                    </h3>
+                                    <h5>"""
+                                    +item.getCurrentStatus()+
+                                """
+                                    </h5>
+                                <h5>"""
+                                            +item.getDescription()+
+                                            """
+                                    </h5>
+                                <h5>"""
+                                    +item.getDatePretty()+
+                                """
+                                </h5>
                             </div>
                         </div>
+                """;
+            }  
+            text += """
                 </div>
-             
                 <div id="ReportItemButton" onclick="window.location=''">Report<span> !</span></div>
+            </body>
+            </html>
+                """;
+        return text;
+    }
 
+    @GET
+    @Path("/report")
+    @Produces(MediaType.TEXT_HTML)
+    public String report() {
+        return """
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>FindersTrace</title>
+                <link rel="stylesheet" href="../style.css">
+            </head>
+            <body>
+                <img src="../img/logo.png" alt="" id="logo">
+                <nav>
+                    <div class="sites">
+                        <div class="linkDiv"><a href="../welcome" id="welcomeLink">Start</a></div>
+                        <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
+                        <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
+                    </div>
+                </nav>
             </body>
             </html>
                 """;

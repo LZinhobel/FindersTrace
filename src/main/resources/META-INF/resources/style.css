@@ -161,6 +161,7 @@ nav {
     padding: 2%;
     width: 30%;
     height: 60vh;
+    margin-bottom: 5%;
 }
 
 .items:hover {
@@ -175,8 +176,8 @@ nav {
 }
 
 .IImage>img {
-    width: auto;
-    height: 100%;
+    max-width: 100%;
+    height: auto;
     border-radius: 5px;
 }
 
@@ -218,8 +219,6 @@ nav {
 
 #ReportItemButton {
     background-color: var(--secondary);
-    margin-left: 77.5%;
-    margin-top: 1%;
     width: 9%;
     padding: 0.7%;
     border-radius: 5px;
@@ -229,6 +228,8 @@ nav {
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     position: fixed;
+    bottom: 5vh;
+    right: 5vw;
 }
 
 #ReportItemButton>span {

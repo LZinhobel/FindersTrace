@@ -1,9 +1,5 @@
 package at.ac.htl.bhitm;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-
 public class ItemFactory {
     public Item createFromString(String line) {
         String[] parts = line.split(";");
