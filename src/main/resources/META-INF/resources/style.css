@@ -2,6 +2,7 @@
     --main: #684875;
     --secondary: #EDECE8;
     --teriary: #461C58;
+    --teriary-hover: #a342cc;
 }
 
 ::-webkit-scrollbar {
@@ -101,14 +102,19 @@ nav {
 }
 
 .sites {
-    width: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.sites>a {
+.sites>div>a {
     text-decoration: none;
     color: var(--teriary);
     font-size: 1.7rem;
     font-weight: 900;
+    transition: color 0.3s ease;
+    text-align: center;
 }
 
 #filter {
@@ -157,6 +163,10 @@ nav {
     height: 60vh;
 }
 
+.items:hover {
+    /* Hover Effekt für Item Box */
+}
+
 .IImage {
     height: 70%;
     width: 100%;
@@ -183,5 +193,50 @@ nav {
 }
 
 .IInformation {
-    width: 40%;
+    width: 50%;
+}
+
+.linkDiv {
+    width: 33.3%;
+    display: block;
+    text-align: center;
+}
+
+.linkDiv p {
+    font-weight: 400;
+    font-size: 1.3rem;
+}
+
+
+#welcomeLink:hover {
+    color: var(--teriary-hover);
+}
+
+#overviewLink:hover {
+    color: var(--teriary-hover);
+}
+
+#ReportItemButton {
+    background-color: var(--secondary);
+    margin-left: 77.5%;
+    margin-top: 1%;
+    width: 9%;
+    padding: 0.7%;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: fixed;
+}
+
+#ReportItemButton>span {
+    font-weight: 900;
+    font-size: 1.7rem;
+}
+
+#ReportItemButton:hover {
+    color: white;
+    background-color: var(--teriary);
 }
