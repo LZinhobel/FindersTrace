@@ -28,8 +28,8 @@ Over the course of Development FindersTrace will be available online, to reach a
 Our Figma: https://www.figma.com/team_invite/redeem/mF9prIgImvU4uifrm79H9F
 
 Thanks for you Support and good luck with using FindersTrace!
-/
-/
+&nbsp;
+&nbsp;
 
 # *FindersTrace Projekt*
 
