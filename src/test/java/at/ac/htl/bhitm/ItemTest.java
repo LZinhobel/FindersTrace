@@ -18,7 +18,7 @@ public class ItemTest {
         assertEquals("Test", item.getTitle());
         assertEquals(DEFAULT_DESCRIPTION, item.getDescription());
         assertEquals(DEFAULT_IMGPATH, item.getImgPath());
-        assertEquals(item.getIdCounter(), item.getId());
+        assertEquals(item.getIdCounter()-1, item.getId());
     }
 
     @Test
@@ -89,16 +89,16 @@ public class ItemTest {
     @Test
     public void test_getId() {
         Item item = new Item(ItemLevel.LOST, "Test");
-        assertEquals(item.getIdCounter(), item.getId());
+        assertEquals(item.getIdCounter()-1, item.getId());
         Item item2 = new Item(ItemLevel.LOST, "Test");
-        assertEquals(item2.getIdCounter(), item2.getId());
+        assertEquals(item2.getIdCounter()-1, item2.getId());
     }
 
     @Test
     public void test_toString() {
         Item item = new Item(ItemLevel.LOST, "Test");
         String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        assertEquals(String.format("#%d: Test (LOST) %s - hinzugefügt am %s | %s", item.getIdCounter(), DEFAULT_DESCRIPTION, date, DEFAULT_IMGPATH), item.toString());
+        assertEquals(String.format("#%d: Test (LOST) %s - hinzugefügt am %s | %s", item.getIdCounter()-1, DEFAULT_DESCRIPTION, date, DEFAULT_IMGPATH), item.toString());
     }
 
     @Test

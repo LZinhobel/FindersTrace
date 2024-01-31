@@ -122,9 +122,8 @@ public class WebServer {
 
     private String getItemsHtml(List<Item> filteredItems) {
         String text = "";
-        int index = 0;
         for (Item item : filteredItems) {
-            text += "<div class=\"items\" onclick=\"window.location.href=\'../details?index="+ index + "'\">";
+            text += "<div class=\"items\" onclick=\"window.location.href=\'../details?index="+ item.getId() + "'\">";
 
             text += """
                 <div class="IImage">
@@ -155,7 +154,6 @@ public class WebServer {
                         </div>
                     </div>
                     """;
-            ++index;
         }
         if (text.isEmpty()) {
             text = "<h1>No Items found</h1>";
@@ -179,7 +177,7 @@ public class WebServer {
             updateItems();
             hasVisited = true;
         }
-        
+
         String text =  """
             <!DOCTYPE html>
             <html lang="en">

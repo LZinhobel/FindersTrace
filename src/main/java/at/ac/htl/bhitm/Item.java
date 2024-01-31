@@ -92,8 +92,8 @@ public class Item {
         setTitle(titel);
         setDescription(description);
         setImgPath(imgPath);
-        ++idCounter;
         id = idCounter;
+        ++idCounter;
         dateAdded = LocalDate.now().toString();
     }
 
