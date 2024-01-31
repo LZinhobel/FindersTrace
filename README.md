@@ -29,4 +29,6 @@ Die Hauptmethode zum Ausführen der Anwendung befindet sich in der Datei [Main.j
 
 Im Laufe der Entwicklung wird FindersTrace auch online verfügbar sein, um eine breitere Benutzerbasis zu erreichen.
 
+Hier ist unser Figma: https://www.figma.com/team_invite/redeem/mF9prIgImvU4uifrm79H9F
+
 Vielen Dank für Ihre Unterstützung und viel Erfolg bei der Nutzung von FindersTrace!
