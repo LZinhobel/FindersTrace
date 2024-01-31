@@ -1,3 +1,34 @@
+*FindersTrace Project*
+
+- *Projectname:* FindersTrace
+- *Developers:* Zinhobel, Klaffenböck, Öllinger, Simsek, Kreuzer
+
+*Description:*
+
+FindersTrace is an application, that lets the user report lost or found objects. The uniqueness is the organisation-based structur, which lets user sign in as part of an organisation. In this organisation users can report and search for items.
+
+*Features:*
+
+- Report Objects: Users can report lost and found objects and give relevant information
+- Organisations: The App enables the registration of organisations, in which members can manage objects together.
+- Member-management: Organisation-administrators can add and remove members to work on the management of objects.
+
+*Scope of Application:*
+
+FindersTrace is best suitable for organisations such as schools, hobby-groups or companies to ensure an efficient management of lost and found objects.
+
+*Using the Application:*
+
+The main method of using the application is the file [Main.java](src/main/java/at/ac/htl/bhitm/Main.java), which can be found in "\src\main\java\at\ac\htl\bhitm\".
+
+*Web-availability:*
+
+Over the course of Development FindersTrace will be available online, to reach a broader user-base.
+
+Our Figma: https://www.figma.com/team_invite/redeem/mF9prIgImvU4uifrm79H9F
+
+Thanks for you Support and good luck with using FindersTrace!
+
 
 
 *FindersTrace Projekt*
