@@ -1,6 +1,6 @@
 :root {
     --main: #684875;
-    --secondary: #EDECE8;
+    --secondary: #FFFEF0;
     --teriary: #461C58;
     --teriary-hover: #a342cc;
 }
@@ -81,24 +81,20 @@ body {
     width: 5%;
     height: auto;
     background-color: var(--secondary);
-    position: fixed;
-    top: 5vh;
-    left: 5vw;
     border-radius: 5px;
     padding: .5% .5% 0 .1%;
+    border: var(--teriary) solid 1px;
 }
 
 nav {
     background-color: var(--secondary);
-    position: fixed;
-    top: 5vh;
-    left: 13vw;
     width: 70%;
     height: 9.15vh;
     border-radius: 5px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border: var(--teriary) solid 1px;
 }
 
 .sites {
@@ -117,11 +113,19 @@ nav {
     text-align: center;
 }
 
+#mainNav {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: space-around;
+    position: sticky;
+    top: 0;
+    margin-top: 5vh;
+    margin-bottom: -10vh;
+}
+
 #filter {
     background-color: var(--secondary);
-    position: fixed;
-    top: 5vh;
-    right: 5vw;
     width: 10%;
     height: 9.15vh;
     border-radius: 5px;
@@ -130,6 +134,7 @@ nav {
     font-weight: 900;
     text-align: center;
     appearance: none;
+    border: var(--teriary) solid 1px;
 }
 
 #filter>option {
@@ -159,13 +164,15 @@ nav {
     justify-content: center;
     align-items: center;
     padding: 2%;
-    width: 30%;
+    width: 25%;
     height: 60vh;
     margin-bottom: 5%;
+    transition: all 0.2s ease-in-out;
 }
 
 .items:hover {
-    /* Hover Effekt für Item Box */
+    cursor: pointer;
+    transform: scale(1.05);
 }
 
 .IImage {
@@ -230,6 +237,7 @@ nav {
     position: fixed;
     bottom: 5vh;
     right: 5vw;
+    border: var(--teriary) solid 1px;
 }
 
 #ReportItemButton>span {
@@ -269,4 +277,81 @@ nav {
     width: auto;
     height: 100%;
     border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50vw;
+    height: 75vh;
+    margin-left: 25vw;
+    background-color: var(--secondary);
+    position: absolute;
+    border-radius: 5px;
+    bottom: 5vh;
+    padding: 5px;
+}
+
+input, textarea {
+    text-align: center;
+    width: 80%;
+    min-height: 10%;
+    background-color: #D9D9D9;
+    border: none;
+    font-weight: 800;
+}
+
+form>h1, label, input, #LorF>input {
+    color: var(--teriary);
+}
+
+form>h1 {
+    font-size: 2rem;
+    margin-bottom: -6%;
+}
+
+label {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.inputs>input, .inputs>textarea {
+    min-height: 100%;
+}
+
+#RImage {
+    min-height: 50%;
+}
+
+#LorF {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#LorF>input {
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+#RSubmit {
+    width: 40%;
+    transition: all 0.2s ease-in-out;
+}
+
+#RSubmit:hover {
+    cursor: pointer;
+    background-color: var(--teriary);
+    color: var(--secondary);
 }

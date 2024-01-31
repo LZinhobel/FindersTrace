@@ -115,4 +115,36 @@ public class ItemManagerTest {
 
         assertEquals("Something happened while loading from file!", ex.getMessage());
     }
+
+    @Test
+    public void test_factory_with_4_parts() {
+        ItemFactory itemFactory = new ItemFactory();
+        Item item = itemFactory.createFromString("Test;Test;LOST;Test");
+        assertEquals("Test", item.getTitle());
+        assertEquals("Test", item.getDescription());
+        assertEquals(ItemLevel.LOST, item.getCurrentStatus());
+        assertEquals("Test", item.getImgPath());
+    }
+
+    @Test
+    public void test_factory_with_5_parts() {
+        ItemFactory itemFactory = new ItemFactory();
+        Item item = itemFactory.createFromString("Test;Test;LOST;Test;Test");
+        assertEquals("Test", item.getTitle());
+        assertEquals("Test", item.getDescription());
+        assertEquals(ItemLevel.LOST, item.getCurrentStatus());
+        assertEquals("Test", item.getImgPath());
+        assertEquals("Test", item.getDate());
+    }
+
+    @Test
+    public void test_factory_with_wrong_parts() {
+        ItemFactory itemFactory = new ItemFactory();
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            itemFactory.createFromString("Test;Test;LOST");
+        });
+
+        assertEquals("Invalid line format", ex.getMessage());
+    }
 }

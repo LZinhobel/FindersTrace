@@ -57,6 +57,7 @@ public class WebServer {
                 <link rel="stylesheet" href="../style.css">
             </head>
             <body>
+                <div id="mainNav">
                 <img src="../img/logo.png" alt="" id="logo">
                 <nav>
                     <div class="sites">
@@ -71,13 +72,14 @@ public class WebServer {
                     <option value="lost">Lost</option>
                     <option value="found">Found</option>
                 </select>
+                </div>
                 <div id="📦">
                     """
                             + getAllItems() +
                             """
                 </div>
              
-                <div id="ReportItemButton" onclick="window.location='../report/'">Report<span> !</span></div>
+                <div id="ReportItemButton" onclick="window.location='../report'">Report<span> !</span></div>
             </body>
             </html>
                 """;
@@ -153,19 +155,16 @@ public class WebServer {
                 <link rel="stylesheet" href="../style.css">
             </head>
             <body>
+                <div id="mainNav">
                 <img src="../img/logo.png" alt="" id="logo">
-                <nav>
+                <nav  style="width: 69%; margin-left: -15%;">
                     <div class="sites">
                         <div class="linkDiv"><a href="../welcome" id="welcomeLink">Start</a></div>
                         <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
                         <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
                     </div>
                 </nav>
-                <select id="filter">
-                    <option value="all">All</option>
-                    <option value="lost">Lost</option>
-                    <option value="found">Found</option>
-                </select>
+                </div>
                 <div id="details_body">""";
                 
         if (index == null) {
@@ -181,7 +180,7 @@ public class WebServer {
                                         """
                             \" alt="image">
                         </div>
-                            <div class="IIonformaion">
+                            <div class="IIonformaion" style="transform: scale(1.4);">
                                 <h3>"""
                                     +item.getTitle()+
                                 """
@@ -204,7 +203,7 @@ public class WebServer {
             }  
             text += """
                 </div>
-                <div id="ReportItemButton" onclick="window.location=''">Report<span> !</span></div>
+                <div id="ReportItemButton" onclick="window.location='../report'">Report<span> !</span></div>
             </body>
             </html>
                 """;
@@ -214,8 +213,10 @@ public class WebServer {
     @GET
     @Path("/report")
     @Produces(MediaType.TEXT_HTML)
-    public String report() {
-        return """
+    public String report(@QueryParam("i") String line){
+        String text = "";
+
+        text += """
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -224,16 +225,81 @@ public class WebServer {
                 <link rel="stylesheet" href="../style.css">
             </head>
             <body>
+                <div id="mainNav">
                 <img src="../img/logo.png" alt="" id="logo">
-                <nav>
+                <nav  style="width: 85%;">
                     <div class="sites">
                         <div class="linkDiv"><a href="../welcome" id="welcomeLink">Start</a></div>
                         <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
                         <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
                     </div>
                 </nav>
-            </body>
-            </html>
-                """;
+                </div>""";
+
+
+        
+        if  (line != null) {
+            try {
+                mng.addItem(factory.createFromString(line));
+                text += "<form><h1>Reported Item successfully</h1></form>";
+                mng.AddItemsToFile("./data/reportedItems.csv");
+            } catch (Exception e) {
+                text += "<form><h1>Reported Item failed</h1></form>";
+            }
+        } else {
+                        
+        text += """
+            <form id="reportForm" method="get" action="../report">
+                <h1>Report an Item</h1>
+                <div class="inputs">
+                    <label for="RTitel">Titel</label>
+                    <input id="RTitel" placeholder="TITEL"></input>
+                </div>
+
+                <div class="inputs">
+                    <label for="RDescription">Description</label>
+                    <textarea id="RDescription" placeholder="DESCRIPTION"></textarea>
+                </div>
+
+                <div class="inputs">
+                    <label for="RImage">Image URL</label>
+                    <input id="RImage" placeholder="IMAGE URL (optional) | x if no img available"></input>
+                </div>
+
+                <div id="LorF">
+                    <input type="radio" id="lost" name="lostOrFound" value="LOST" checked>LOST</input>
+                    <input type="radio" id="found" name="lostOrFound" value="FOUND">FOUND</input>
+                </div>
+
+                <input id="RSubmit" type="submit" value="SUBMIT"></input>
+            </form>
+
+            <script>
+                document.getElementById('reportForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    var title = document.getElementById('RTitel').value ?? '';
+                    var description = document.getElementById('RDescription').value;
+                    var image = document.getElementById('RImage').value;
+                    var status = document.querySelector('input[name="lostOrFound"]:checked').value;
+                    if (title == '') {
+                        console.log("Title is empty");
+                        document.getElementById('RTitel').style.border = '2px solid red';
+                        document.getElementById('RDescription').value = description;
+                        document.getElementById('RImage').value = image;
+                        return;
+                    }
+
+                    var csv = title + ';' + description + ';' + status + ';' + image;
+                    window.location.href = this.action + '?i=' + encodeURIComponent(csv);
+                });
+            </script>
+            """;
+        }      
+        text += """
+        </body>
+        </html>
+            """;
+
+        return text;
     }
 }
