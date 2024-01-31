@@ -79,7 +79,7 @@ body {
 
 #logo {
     width: 5%;
-    height: auto;
+    height: 55%;
     background-color: var(--secondary);
     border-radius: 5px;
     padding: .5% .5% 0 .1%;
@@ -118,10 +118,14 @@ nav {
     flex-direction: row;
     width: 100vw;
     justify-content: space-around;
-    position: sticky;
+    align-items: center;
+    position: fixed;
     top: 0;
-    margin-top: 5vh;
-    margin-bottom: -10vh;
+    left: 0;
+    z-index: 10;
+    background-color: var(--main);
+    height: 15vh;
+    border-bottom: var(--teriary) dotted 5px;
 }
 
 #filter {
