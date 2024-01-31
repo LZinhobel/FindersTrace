@@ -14,7 +14,7 @@ import jakarta.ws.rs.core.MediaType;
 public class WebServer {
     private ItemManager mng = new ItemManager();
     private ItemFactory factory = new ItemFactory();
-    private int visits = 0;
+    private boolean hasVisited = false;
     private void updateItems() {
         mng.AddItemsFromFile("./data/reportedItems.csv", factory);
     }
@@ -47,10 +47,10 @@ public class WebServer {
     @Path("/overview")
     @Produces(MediaType.TEXT_HTML)
     public String overview(@QueryParam("filter") String filter) {
-        if (visits == 0) {
+        if (!hasVisited) {
             updateItems();
+            hasVisited = true;
         }
-        ++visits;
 
         List<Item> filteredItems;
         if ("LOST".equals(filter)) {
@@ -175,10 +175,11 @@ public class WebServer {
     @Path("/details")
     @Produces(MediaType.TEXT_HTML)
     public String details(@QueryParam("index") Integer index){
-        if (visits == 0) {
+        if (!hasVisited) {
             updateItems();
+            hasVisited = true;
         }
-        ++visits;
+        
         String text =  """
             <!DOCTYPE html>
             <html lang="en">
