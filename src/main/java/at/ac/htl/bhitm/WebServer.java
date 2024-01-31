@@ -1,5 +1,9 @@
 package at.ac.htl.bhitm;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -42,11 +46,27 @@ public class WebServer {
     @GET
     @Path("/overview")
     @Produces(MediaType.TEXT_HTML)
-    public String overview() {
+    public String overview(@QueryParam("filter") String filter) {
         if (visits == 0) {
             updateItems();
         }
         ++visits;
+
+        List<Item> filteredItems;
+        if ("LOST".equals(filter)) {
+            filteredItems = mng.getItems().stream()
+                .filter(item -> filter.equals(item.getCurrentStatus().toString()))
+                .collect(Collectors.toList());
+        } else if ("FOUND".equals(filter)) {
+            filteredItems = mng.getItems().stream()
+                .filter(item -> filter.equals(item.getCurrentStatus().toString()))
+                .collect(Collectors.toList());
+        } else {
+            filteredItems = new ArrayList<>(mng.getItems());
+        }
+
+        String itemsHtml = getItemsHtml(filteredItems);
+
         String text =  """
             <!DOCTYPE html>
             <html lang="en">
@@ -66,16 +86,30 @@ public class WebServer {
                         <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
                         <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
                     </div>
-                </nav>
-                <select id="filter">
-                    <option value="all">All</option>
-                    <option value="lost">Lost</option>
-                    <option value="found">Found</option>
+                </nav>""";
+                        
+        text += """
+                <select id="filter" onchange="location.href = '?filter=' + this.value">
+                    <option value="ALL" """
+                            + ("ALL".equals(filter) ? " selected" : "") + 
+                            """
+                                >All</option>
+                    <option value="LOST" """
+                        + ("LOST".equals(filter) ? " selected" : "") + 
+                        """
+                            >Lost</option>
+                    <option value="FOUND" """
+                        + ("FOUND".equals(filter) ? " selected" : "") + 
+                        """
+                            >Found</option>
                 </select>
+                """;
+                        
+        text += """
                 </div>
                 <div id="📦">
                     """
-                            + getAllItems() +
+                            + itemsHtml +
                             """
                 </div>
              
@@ -86,10 +120,10 @@ public class WebServer {
         return text;
     }
 
-    private String getAllItems() {
+    private String getItemsHtml(List<Item> filteredItems) {
         String text = "";
         int index = 0;
-        for (Item item : mng.getItems()) {
+        for (Item item : filteredItems) {
             text += "<div class=\"items\" onclick=\"window.location.href=\'../details?index="+ index + "'\">";
 
             text += """
