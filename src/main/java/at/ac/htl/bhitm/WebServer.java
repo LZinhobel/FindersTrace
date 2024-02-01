@@ -20,30 +20,6 @@ public class WebServer {
     }
 
     @GET
-    @Path("/welcome")
-    @Produces(MediaType.TEXT_HTML)
-    public String welcome() {
-        return """
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>FindersTrace</title>
-                <link rel="stylesheet" href="./style.css">
-            </head>
-            <body>
-                <img src="./img/logo.png" alt="" id="welcomeLogo">
-                <div id="welcomeDIv">
-                    <h1 id="title">FindersTrace</h1>    
-                    <a href="../overview/" id="◀">get started</a>
-                </div>
-            </body>
-            </html>
-        """;
-    }
-
-    @GET
     @Path("/overview")
     @Produces(MediaType.TEXT_HTML)
     public String overview(@QueryParam("filter") String filter) {
