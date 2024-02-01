@@ -1,4 +1,4 @@
-package at.ac.htl.bhitm;
+package at.ac.htl.bhitm.backend;
 
 import java.io.IOException;
 import java.nio.file.Files;

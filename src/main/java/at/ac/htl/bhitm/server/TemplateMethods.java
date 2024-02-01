@@ -1,4 +1,6 @@
-package at.ac.htl.bhitm;
+package at.ac.htl.bhitm.server;
+
+import at.ac.htl.bhitm.backend.Item;
 
 public class TemplateMethods {
 

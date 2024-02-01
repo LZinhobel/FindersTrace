@@ -117,7 +117,7 @@
         <configuration>
           <excludes>
             <exclude>**/Main.*</exclude>
-            <exclude>**/WebServer.*</exclude>
+            <exclude>**/server/</exclude>
           </excludes>
         </configuration>
         <executions>

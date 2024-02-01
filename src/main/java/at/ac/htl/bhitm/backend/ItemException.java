@@ -1,4 +1,4 @@
-package at.ac.htl.bhitm;
+package at.ac.htl.bhitm.backend;
 
 public class ItemException extends RuntimeException {
     public ItemException(String message) {

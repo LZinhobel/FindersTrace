@@ -1,4 +1,4 @@
-package at.ac.htl.bhitm;
+package at.ac.htl.bhitm.backend;
 
 public enum ItemLevel {
     GIVENBACK,

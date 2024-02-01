@@ -1,7 +1,13 @@
-package at.ac.htl.bhitm;
+package at.ac.htl.bhitm.backend;
 
 
 import org.junit.jupiter.api.Test;
+
+import at.ac.htl.bhitm.backend.Item;
+import at.ac.htl.bhitm.backend.ItemException;
+import at.ac.htl.bhitm.backend.ItemFactory;
+import at.ac.htl.bhitm.backend.ItemLevel;
+import at.ac.htl.bhitm.backend.ItemManager;
 
 import java.io.IOException;
 import java.nio.file.Files;

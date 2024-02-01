@@ -1,7 +1,12 @@
-package at.ac.htl.bhitm;
+package at.ac.htl.bhitm.backend;
 
 
 import org.junit.jupiter.api.Test;
+
+import at.ac.htl.bhitm.backend.Item;
+import at.ac.htl.bhitm.backend.ItemException;
+import at.ac.htl.bhitm.backend.ItemLevel;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,7 +59,7 @@ public class ItemTest {
     @Test
     public void test_constructor_with_null_title() {
         ItemException ex = assertThrows(ItemException.class, () -> {
-            Item item = new Item(ItemLevel.LOST, null);
+            new Item(ItemLevel.LOST, null);
         });
 
         assertEquals("Title must not be null or blank!", ex.getMessage());
@@ -63,7 +68,7 @@ public class ItemTest {
     @Test
     public void test_constructor_with_empty_title() {
         ItemException ex = assertThrows(ItemException.class, () -> {
-            Item item = new Item(ItemLevel.LOST, "");
+            new Item(ItemLevel.LOST, "");
         });
 
         assertEquals("Title must not be null or blank!", ex.getMessage());

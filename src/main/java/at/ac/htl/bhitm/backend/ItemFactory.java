@@ -1,4 +1,4 @@
-package at.ac.htl.bhitm;
+package at.ac.htl.bhitm.backend;
 
 public class ItemFactory {
     public Item createFromString(String line) {

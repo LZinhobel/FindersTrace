@@ -1,10 +1,11 @@
-package at.ac.htl.bhitm;
+package at.ac.htl.bhitm.server;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-
+import at.ac.htl.bhitm.backend.Item;
+import at.ac.htl.bhitm.backend.ItemFactory;
+import at.ac.htl.bhitm.backend.ItemManager;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
