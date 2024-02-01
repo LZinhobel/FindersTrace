@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindersTrace</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div id="mainNav">
+        <img src="../img/logo.png" alt="" id="logo">
+        <nav>
+            <div class="sites">
+                <div class="linkDiv"><a href="../" id="welcomeLink">Start</a></div>
+                <div class="linkDiv"><a href="./" id="overviewLink">Overview</a></div>
+            </div>
+        </nav>
+        <select id="filter" onchange="location.href = '?filter=' + this.value">
+            <option value="ALL"{#if filter == 'ALL'} selected{/if}>All</option>
+            <option value="LOST"{#if filter == 'LOST'} selected{/if}>Lost</option>
+            <option value="FOUND"{#if filter == 'FOUND'} selected{/if}>Found</option>
+        </select>
+    </div>
+    <div id="📦">
+        {#for item in filteredItems}
+            <div class="items" onclick="window.location.href='../details?index={item.id}'">
+                <div class="IImage">
+                    <img src="{templateMethods.getValidImgPath(item)}" alt="image">
+                </div>
+                <div class="OInformation">
+                    <div class="IIonformaion">
+                        <h3>{item.title}</h3>
+                        <h5>{item.currentStatus}</h5>
+                        <h5>{item.datePretty}</h5>
+                    </div>
+                </div>
+            </div>
+        {/for}
+        {#if filteredItems.isEmpty()}
+            <h1>No Items found</h1>
+        {/if}
+    </div>
+    <div id="ReportItemButton" onclick="window.location='../report'">Report<span> !</span></div>
+</body>
+</html>

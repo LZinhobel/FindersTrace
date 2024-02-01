@@ -2,8 +2,13 @@ package at.ac.htl.bhitm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import io.quarkus.qute.Location;
+import io.quarkus.qute.Template;
+import io.quarkus.qute.TemplateInstance;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -19,10 +24,14 @@ public class WebServer {
         mng.AddItemsFromFile("./data/reportedItems.csv", factory);
     }
 
+    @Inject
+    @Location("overview/index.html")
+    Template overviewTemplate;
+
     @GET
     @Path("/overview")
     @Produces(MediaType.TEXT_HTML)
-    public String overview(@QueryParam("filter") String filter) {
+    public TemplateInstance overview(@QueryParam("filter") String filter) {
         if (!hasVisited) {
             updateItems();
             hasVisited = true;
@@ -41,103 +50,12 @@ public class WebServer {
             filteredItems = new ArrayList<>(mng.getItems());
         }
 
-        String itemsHtml = getItemsHtml(filteredItems);
-
-        String text =  """
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>FindersTrace</title>
-                <link rel="stylesheet" href="../style.css">
-            </head>
-            <body>
-                <div id="mainNav">
-                <img src="../img/logo.png" alt="" id="logo">
-                <nav>
-                    <div class="sites">
-                        <div class="linkDiv"
-                        ><a href="../welcome" id="welcomeLink">Start</a></div>
-                        <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
-                        <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
-                    </div>
-                </nav>""";
-                        
-        text += """
-                <select id="filter" onchange="location.href = '?filter=' + this.value">
-                    <option value="ALL" """
-                            + ("ALL".equals(filter) ? " selected" : "") + 
-                            """
-                                >All</option>
-                    <option value="LOST" """
-                        + ("LOST".equals(filter) ? " selected" : "") + 
-                        """
-                            >Lost</option>
-                    <option value="FOUND" """
-                        + ("FOUND".equals(filter) ? " selected" : "") + 
-                        """
-                            >Found</option>
-                </select>
-                """;
-                        
-        text += """
-                </div>
-                <div id="📦">
-                    """
-                            + itemsHtml +
-                            """
-                </div>
-             
-                <div id="ReportItemButton" onclick="window.location='../report'">Report<span> !</span></div>
-            </body>
-            </html>
-                """;
-        return text;
-    }
-
-    private String getItemsHtml(List<Item> filteredItems) {
-        String text = "";
-        for (Item item : filteredItems) {
-            text += "<div class=\"items\" onclick=\"window.location.href=\'../details?index="+ item.getId() + "'\">";
-
-            text += """
-                <div class="IImage">
-                            <img src=\"
-                            """+
-                                getValidImgPath(item)
-                             +"""
-                                \" alt="image">
-                        </div>
-                        <div class="OInformation">
-                            <!-- <div class="UInformation">
-                                <h3>Max Mustermann</h3>
-                            </div> -->
-                            <div class="IIonformaion">
-                                <h3>"""
-                                + item.getTitle() +
-                                """
-                                    </h3>
-                                <h5>"""
-                                    + item.getCurrentStatus() + 
-                                """
-                                    </h5>
-                                <h5>"""
-                                    + item.getDatePretty() +
-                                """
-                                    </h5>
-                            </div>
-                        </div>
-                    </div>
-                    """;
+        return overviewTemplate.data("filteredItems", filteredItems)
+        .data("filter", filter)
+        .data("templateMethods", new TemplateMethods(this));
         }
-        if (text.isEmpty()) {
-            text = "<h1>No Items found</h1>";
-        }
-        return text;
-    }
 
-    private String getValidImgPath(Item item) {
+    public String getValidImgPath(Item item) {
         String path = item.getImgPath();
         if (path.equals("No image available")) {
             path = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png";
@@ -168,7 +86,7 @@ public class WebServer {
                 <img src="../img/logo.png" alt="" id="logo">
                 <nav  style="width: 69%; margin-left: -15%;">
                     <div class="sites">
-                        <div class="linkDiv"><a href="../welcome" id="welcomeLink">Start</a></div>
+                        <div class="linkDiv"><a href="../" id="welcomeLink">Start</a></div>
                         <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
                         <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
                     </div>
@@ -238,7 +156,7 @@ public class WebServer {
                 <img src="../img/logo.png" alt="" id="logo">
                 <nav  style="width: 85%;">
                     <div class="sites">
-                        <div class="linkDiv"><a href="../welcome" id="welcomeLink">Start</a></div>
+                        <div class="linkDiv"><a href="../" id="welcomeLink">Start</a></div>
                         <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
                         <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
                     </div>
