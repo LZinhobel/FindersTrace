@@ -108,4 +108,14 @@ public class ItemTest {
         assertEquals(date.toString(), item.getDate());
         assertEquals(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), item.getDatePretty());
     }
+
+    @Test
+    public void test_editItem() {
+        Item item = new Item(ItemLevel.LOST, "Test");
+        item.editItem(ItemLevel.FOUND, "title", "desc", "img");
+        assertEquals("title", item.getTitle());
+        assertEquals("desc", item.getDescription());
+        assertEquals("img", item.getImgPath());
+        assertEquals(ItemLevel.FOUND, item.getCurrentStatus());
+    }
 }

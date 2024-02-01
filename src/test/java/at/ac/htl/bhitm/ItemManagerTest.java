@@ -147,4 +147,52 @@ public class ItemManagerTest {
 
         assertEquals("Invalid line format", ex.getMessage());
     }
+
+    @Test
+    public void test_editItem() {
+        ItemManager itemManager = new ItemManager();
+        Item item = new Item(ItemLevel.LOST, "Test");
+        itemManager.addItem(item);
+        itemManager.editItem(item, "Test2", "Test2", ItemLevel.FOUND, "Test2");
+        assertEquals("Test2", item.getTitle());
+        assertEquals("Test2", item.getDescription());
+        assertEquals(ItemLevel.FOUND, item.getCurrentStatus());
+        assertEquals("Test2", item.getImgPath());
+    }
+
+    @Test
+    public void test_editItem_with_null() {
+        ItemManager itemManager = new ItemManager();
+        Item item = new Item(ItemLevel.LOST, "Test");
+        itemManager.addItem(item);
+        itemManager.editItem(item, null, null, null, null);
+        assertEquals("Test", item.getTitle());
+        assertEquals("No description available", item.getDescription());
+        assertEquals(ItemLevel.LOST, item.getCurrentStatus());
+        assertEquals("No image available", item.getImgPath());
+    }
+
+    @Test
+    public void test_editItem_with_empty() {
+        ItemManager itemManager = new ItemManager();
+        Item item = new Item(ItemLevel.LOST, "Test");
+        itemManager.addItem(item);
+        itemManager.editItem(item, "", "", null, "");
+        assertEquals("Test", item.getTitle());
+        assertEquals("No description available", item.getDescription());
+        assertEquals(ItemLevel.LOST, item.getCurrentStatus());
+        assertEquals("No image available", item.getImgPath());
+    }
+
+    @Test
+    public void test_editItem_with_null_title() {
+        ItemManager itemManager = new ItemManager();
+        Item item = new Item(ItemLevel.LOST, "Test");
+        itemManager.addItem(item);
+        itemManager.editItem(item, null, "Test2", ItemLevel.FOUND, "Test2");
+        assertEquals("Test", item.getTitle());
+        assertEquals("Test2", item.getDescription());
+        assertEquals(ItemLevel.FOUND, item.getCurrentStatus());
+        assertEquals("Test2", item.getImgPath());
+    }
 }

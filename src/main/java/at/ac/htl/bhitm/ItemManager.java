@@ -84,4 +84,22 @@ public class ItemManager {
             throw new ItemException("Something happened while loading from file!", e);
         }
     }
+
+    public void editItem(Item item, String title, String description, ItemLevel status, String imgPath) {
+        if (!(title == null || title.isEmpty())) {
+            item.setTitle(title);
+        }
+
+        if (!(description == null || description.isEmpty())) {
+            item.setDescription(description);
+        }
+
+        if (status != null) {
+            item.setCurrentStatus(status);
+        }
+
+        if (!(imgPath == null || imgPath.isEmpty())) {
+            item.setImgPath(imgPath);
+        }
+    }
 }
