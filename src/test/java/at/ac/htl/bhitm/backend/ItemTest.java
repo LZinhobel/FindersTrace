@@ -1,12 +1,6 @@
 package at.ac.htl.bhitm.backend;
 
-
 import org.junit.jupiter.api.Test;
-
-import at.ac.htl.bhitm.backend.Item;
-import at.ac.htl.bhitm.backend.ItemException;
-import at.ac.htl.bhitm.backend.ItemLevel;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
