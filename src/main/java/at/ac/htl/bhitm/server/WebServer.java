@@ -143,6 +143,18 @@ public class WebServer {
     // @Location("report/report.html")
     // Template reportTemplate;
 
+    // @GET
+    // @Path("/report")
+    // @Produces(MediaType.TEXT_HTML)
+    // public TemplateInstance report(@QueryParam("i") String line) {
+
+
+    //     return reportTemplate.data("line", line)
+    //     .data("line", line)
+    //     .data("templateMethods", new TemplateMethods(this));
+    // }
+    
+
     @GET
     @Path("/report")
     @Produces(MediaType.TEXT_HTML)
