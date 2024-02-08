@@ -21,6 +21,7 @@ public class WebServer {
     private ItemManager mng = new ItemManager();
     private ItemFactory factory = new ItemFactory();
     private boolean hasVisited = false;
+    
     private void updateItems() {
         mng.AddItemsFromFile("./data/reportedItems.csv", factory);
     }
