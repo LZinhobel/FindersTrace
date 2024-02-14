@@ -139,112 +139,110 @@ public class WebServer {
         return text;
     }
 
-    // @Inject
-    // @Location("report/report.html")
-    // Template reportTemplate;
-
-    // @GET
-    // @Path("/report")
-    // @Produces(MediaType.TEXT_HTML)
-    // public TemplateInstance report(@QueryParam("i") String line) {
-
-
-    //     return reportTemplate.data("line", line)
-    //     .data("line", line)
-    //     .data("templateMethods", new TemplateMethods(this));
-    // }
-    
+    @Inject
+    @Location("report/index.html")
+    Template reportTemplate;
 
     @GET
     @Path("/report")
     @Produces(MediaType.TEXT_HTML)
-    public String report(@QueryParam("i") String line){
-        String text = "";
+    public TemplateInstance report(@QueryParam("i") String line) {
 
-        text += """
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <title>FindersTrace</title>
-                <link rel="stylesheet" href="../style.css">
-            </head>
-            <body>
-                <div id="mainNav">
-                <img src="../img/logo.png" alt="" id="logo">
-                <nav  style="width: 85%;">
-                    <div class="sites">
-                        <div class="linkDiv"><a href="../" id="welcomeLink">Start</a></div>
-                        <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
-                        <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
-                    </div>
-                </nav>
-                </div>""";
+        return reportTemplate.data("line", line)
+        .data("mng", mng);
+    }
+    
+
+    // @GET
+    // @Path("/report")
+    // @Produces(MediaType.TEXT_HTML)
+    // public String report(@QueryParam("i") String line){
+    //     String text = "";
+
+    //     text += """
+    //         <!DOCTYPE html>
+    //         <html lang="en">
+    //         <head>
+    //             <meta charset="UTF-8">
+    //             <title>FindersTrace</title>
+    //             <link rel="stylesheet" href="../style.css">
+    //         </head>
+    //         <body>
+    //             <div id="mainNav">
+    //             <img src="../img/logo.png" alt="" id="logo">
+    //             <nav  style="width: 85%;">
+    //                 <div class="sites">
+    //                     <div class="linkDiv"><a href="../" id="welcomeLink">Start</a></div>
+    //                     <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
+    //                     <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
+    //                 </div>
+    //             </nav>
+    //             </div>""";
 
 
         
-        if  (line != null) {
-            try {
-                mng.addItem(factory.createFromString(line));
-                text += "<form><h1>Reported Item successfully</h1></form>";
-                mng.AddItemsToFile("./data/reportedItems.csv");
-            } catch (Exception e) {
-                text += "<form><h1>Reported Item failed</h1></form>";
-            }
-        } else {
+    //     if  (line != null) {
+    //         try {
+    //             mng.addItem(factory.createFromString(line));
+    //             text += "<form><h1>Reported Item successfully</h1></form>";
+    //             mng.AddItemsToFile("./data/reportedItems.csv");
+    //         } catch (Exception e) {
+    //             text += "<form><h1>Reported Item failed</h1></form>";
+    //         }
+    //     } else {
                         
-        text += """
-            <form id="reportForm" method="get" action="../report">
-                <h1>Report an Item</h1>
-                <div class="inputs">
-                    <label for="RTitel">Titel</label>
-                    <input id="RTitel" placeholder="TITEL"></input>
-                </div>
+    //     text += """
+    //         <form id="reportForm" method="get" action="../report">
+    //             <h1>Report an Item</h1>
+    //             <div class="inputs">
+    //                 <label for="RTitel">Titel</label>
+    //                 <input id="RTitel" placeholder="TITEL"></input>
+    //             </div>
 
-                <div class="inputs">
-                    <label for="RDescription">Description</label>
-                    <textarea id="RDescription" placeholder="DESCRIPTION"></textarea>
-                </div>
+    //             <div class="inputs">
+    //                 <label for="RDescription">Description</label>
+    //                 <textarea id="RDescription" placeholder="DESCRIPTION"></textarea>
+    //             </div>
 
-                <div class="inputs">
-                    <label for="RImage">Image URL</label>
-                    <input id="RImage" placeholder="IMAGE URL (optional) | x if no img available"></input>
-                </div>
+    //             <div class="inputs">
+    //                 <label for="RImage">Image URL</label>
+    //                 <input id="RImage" placeholder="IMAGE URL (optional) | x if no img available"></input>
+    //             </div>
 
-                <div id="LorF">
-                    <input type="radio" id="lost" name="lostOrFound" value="LOST" checked>LOST</input>
-                    <input type="radio" id="found" name="lostOrFound" value="FOUND">FOUND</input>
-                </div>
+    //             <div id="LorF">
+    //                 <input type="radio" id="lost" name="lostOrFound" value="LOST" checked>LOST</input>
+    //                 <input type="radio" id="found" name="lostOrFound" value="FOUND">FOUND</input>
+    //             </div>
 
-                <input id="RSubmit" type="submit" value="SUBMIT"></input>
-            </form>
+    //             <input id="RSubmit" type="submit" value="SUBMIT"></input>
+    //         </form>
 
-            <script>
-                document.getElementById('reportForm').addEventListener('submit', function(event) {
-                    event.preventDefault();
-                    var title = document.getElementById('RTitel').value ?? '';
-                    var description = document.getElementById('RDescription').value;
-                    var image = document.getElementById('RImage').value;
-                    var status = document.querySelector('input[name="lostOrFound"]:checked').value;
-                    if (title == '') {
-                        console.log("Title is empty");
-                        document.getElementById('RTitel').style.border = '2px solid red';
-                        document.getElementById('RDescription').value = description;
-                        document.getElementById('RImage').value = image;
-                        return;
-                    }
+    //         <script>
+    //             document.getElementById('reportForm').addEventListener('submit', function(event) {
+    //                 event.preventDefault();
+    //                 var title = document.getElementById('RTitel').value ?? '';
+    //                 var description = document.getElementById('RDescription').value;
+    //                 var image = document.getElementById('RImage').value;
+    //                 var status = document.querySelector('input[name="lostOrFound"]:checked').value;
+    //                 if (title == '') {
+    //                     console.log("Title is empty");
+    //                     document.getElementById('RTitel').style.border = '2px solid red';
+    //                     document.getElementById('RDescription').value = description;
+    //                     document.getElementById('RImage').value = image;
+    //                     return;
+    //                 }
 
-                    var csv = title + ';' + description + ';' + status + ';' + image;
-                    window.location.href = this.action + '?i=' + encodeURIComponent(csv);
-                });
-            </script>
-            """;
-        }      
-        text += """
-        </body>
-        </html>
-            """;
+    //                 var csv = title + ';' + description + ';' + status + ';' + image;
+    //                 window.location.href = this.action + '?i=' + encodeURIComponent(csv);
+    //             });
+    //         </script>
+    //         """;
+    //     }      
+    //     text += """
+    //     </body>
+    //     </html>
+    //         """;
 
-        return text;
-    }
+    //     return text;
+    // }
 }

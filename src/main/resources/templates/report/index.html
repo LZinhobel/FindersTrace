@@ -6,21 +6,20 @@
                 <link rel="stylesheet" href="../style.css">
             </head>
             <body>
-                 <div id="mainNav">
-                <img src="../img/logo.png" alt="" id="logo">
-                <nav  style="width: 85%;">
-                    <div class="sites">
-                        <div class="linkDiv"><a href="../" id="welcomeLink">Start</a></div>
-                        <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
-                        <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
+                <nav>
+                    <div id="logo">
+                        <img src="../img/logo.png" alt="logo">
+                        <h1>FindersTrace</h1>
                     </div>
+                    <a href="../">Start</a>
+                    <a href="../report">Report</a>
+                    <img id="usericon" src="../img/defaultuser.svg" alt="usericon">
                 </nav>
-                </div>
                 {#if line != null }
                     try {
                         mng.addItem(factory.createFromString(line));
+                        mng.AddItemsToFile(../data/reportedItems.csv");
                         <form><h1>Reported Item successfully</h1></form>
-                        mng.AddItemsToFile("./data/reportedItems.csv");
                     } catch (Exception e) {
                         <form><h1>Reported Item failed</h1></form>
                     }
