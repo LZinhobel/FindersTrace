@@ -15,14 +15,8 @@
                     <a href="../report">Report</a>
                     <img id="usericon" src="../img/defaultuser.svg" alt="usericon">
                 </nav>
-                {#if line != null }
-                    try {
-                        mng.addItem(factory.createFromString(line));
-                        mng.AddItemsToFile(../data/reportedItems.csv");
-                        <form><h1>Reported Item successfully</h1></form>
-                    } catch (Exception e) {
-                        <form><h1>Reported Item failed</h1></form>
-                    }
+                {#if message != null }
+                    <form><h1>{message}</h1></form>
                 {#else}
                     <form id="reportForm" method="get" action="../report">
                         <h1>Report an Item</h1>
