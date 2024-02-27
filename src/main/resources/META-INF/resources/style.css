@@ -2,6 +2,8 @@
     --mainWhite: #FDFDF7;
     --lighterPurple: #8D619E;
     --darkerPurple: #442F4C;
+    --middlePurple: #623F71;
+    --lightgrey: rgb(173, 172, 172);
     --pink: #ECDCEF;
 }
 
@@ -326,41 +328,42 @@ nav>a {
     border-radius: 5px;
 }
 
-form {
+#reportForm {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 50vw;
-    height: 75vh;
-    margin-left: 25vw;
-    background-color: var(--secondary);
+    width: 50%;
+    margin-left: -0.5%;
+    height: 90%;
+    background-color: var(--middlePurple);
     position: absolute;
     border-radius: 5px;
+    top: 10vh;
     bottom: 5vh;
     padding: 5px;
 }
 
 input, textarea {
-    text-align: center;
+    text-align: left;
+    padding: 2%;
     width: 80%;
     min-height: 10%;
-    background-color: #D9D9D9;
+    background-color: var(--mainWhite);
+    color: black;
     border: none;
-    font-weight: 800;
-}
-
-form>h1, label, input, #LorF>input {
-    color: var(--teriary);
+    font-weight: 700;
 }
 
 form>h1 {
     font-size: 2rem;
-    margin-bottom: -6%;
+    margin-bottom: -1%;
+    text-align: center;
+    color: var(--mainWhite);
 }
 
 label {
-    text-align: center;
+    text-align: left;
     font-size: 1.5rem;
     font-weight: 900;
 }
@@ -383,22 +386,29 @@ label {
 #LorF {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    color: var(--mainWhite);
 }
 
 #LorF>input {
     font-size: 1.5rem;
     font-weight: 900;
+    margin: 0% 10%;
 }
 
 #RSubmit {
+    justify-content: center;
     width: 40%;
+    border: var(--mainWhite) 2px solid;
+    text-align: center;
     transition: all 0.2s ease-in-out;
+    background-color: var(--middlePurple);
+    color: var(--mainWhite);
 }
 
 #RSubmit:hover {
     cursor: pointer;
-    background-color: var(--teriary);
-    color: var(--secondary);
+    background-color: var(--mainWhite);
+    color: var(--middlePurple);
 }
