@@ -1,5 +1,6 @@
 :root {
     --mainWhite: #FDFDF7;
+    --lightestPurple: #ECDCEF;
     --lighterPurple: #8D619E;
     --darkerPurple: #442F4C;
     --middlePurple: #623F71;
@@ -299,9 +300,43 @@ nav>a {
     background-color: var(--teriary);
 }
 
+#reportMainContent {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10%;
+    width: 100%;
+    height: 80%;
+}
 
+#reportInfoSide {
+    width: 50%;
+    height: 35vw;
+    margin-top: -3%;
+    margin-left: 50%;
+    padding: 2%;
+    background-color: var(--lightestPurple);
+}
+
+#reportInfoSide>h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--darkerPurple);
+}
+
+#reportInfoSide>p {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--darkerPurple);
+}
 
 /*details*/
+
+#reportBody {
+    overflow: hidden;
+}
+
 #details_body {
     display: flex;
     border-radius: 15px;
@@ -335,11 +370,11 @@ nav>a {
     align-items: center;
     width: 50%;
     margin-left: -0.5%;
-    height: 90%;
+    height: 85%;
     background-color: var(--middlePurple);
     position: absolute;
     border-radius: 5px;
-    top: 10vh;
+    top: 15%;
     bottom: 5vh;
     padding: 5px;
 }

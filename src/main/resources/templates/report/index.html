@@ -5,19 +5,20 @@
                 <title>FindersTrace</title>
                 <link rel="stylesheet" href="../style.css">
             </head>
-            <body>
+            <body id="reportBody">
                 <nav>
                     <div id="logo">
                         <img src="../img/logo.png" alt="logo">
                         <h1>FindersTrace</h1>
                     </div>
-                    <a href="../overview">Start</a>
-                    <a href="../report">Report</a>
+                    <a href="../../">Start</a>
+                    <a href="../overview">Overview</a>
                     <img id="usericon" src="../img/defaultuser.svg" alt="usericon">
                 </nav>
                 {#if message != null }
                     <form><h1>{message}</h1></form>
                 {#else}
+                <div id="reportMainContent">
                     <form id="reportForm" method="get" action="../report">
                         <h1>Report</h1>
                         <div class="inputs">
@@ -39,6 +40,15 @@
         
                         <input id="RSubmit" type="submit" value="SUBMIT"></input>
                     </form>
+
+                    <div id="reportInfoSide">
+                        <h2>Report</h2>
+                        <p>Report a lost or found item. Please provide a title and a description of the item. You can also add an image of the item. If you found an item, please select "FOUND" and if you lost an item, please select "LOST".</p>
+                    </div>
+
+                </div>
+                    
+
         
                     <script>
                         document.getElementById('reportForm').addEventListener('submit', function(event) {

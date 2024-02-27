@@ -84,16 +84,16 @@ public class WebServer {
                 <link rel="stylesheet" href="../style.css">
             </head>
             <body>
-                <div id="mainNav">
-                <img src="../img/logo.png" alt="" id="logo">
-                <nav  style="width: 69%; margin-left: -15%;">
-                    <div class="sites">
-                        <div class="linkDiv"><a href="../" id="welcomeLink">Start</a></div>
-                        <div class="linkDiv"><a href="../overview" id="overviewLink">Overview</a></div>
-                        <!--<div class="linkDiv"><p>Max Mustermann</p></div>-->
+                <nav>
+                    <div id="logo">
+                        <img src="../img/logo.png" alt="logo">
+                        <h1>FindersTrace</h1>
                     </div>
+                    <a href="../../">Start</a>
+                    <a href="../overview">Overview</a>
+                    <img id="usericon" src="../img/defaultuser.svg" alt="usericon">
                 </nav>
-                </div>
+                
                 <div id="details_body">""";
                 
         if (index == null) {
