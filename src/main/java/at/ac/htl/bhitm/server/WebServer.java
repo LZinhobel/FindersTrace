@@ -89,7 +89,7 @@ public class WebServer {
                         <img src="../img/logo.png" alt="logo">
                         <h1>FindersTrace</h1>
                     </div>
-                    <a href="../../">Start</a>
+                    <a href="../overview">Start</a>
                     <a href="../overview">Overview</a>
                     <img id="usericon" src="../img/defaultuser.svg" alt="usericon">
                 </nav>
