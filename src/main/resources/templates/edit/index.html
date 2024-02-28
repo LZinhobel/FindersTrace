@@ -18,24 +18,33 @@
     </nav>
     <div id="edit_body">
         {#if item}
-            <div class="edit_image_box">
+            <div class="details_image_box">
                 <img src="{templateMethods.getValidImgPath(item)}" alt="image">
             </div>
-            <form class="IIonformaion" style="transform: scale(1.4);">
-                <h1 id="title_edit">{item.title}</h3>
-                <h5>{prefix}datum: {item.datePretty}</h5>
-                <h5>Beschreibung: {item.description}</h5>
-                <img id="usericon_edit" src="../img/defaultuser.svg" alt="usericon">
+            <form class="editItemInformation" style="transform: scale(1.4);">
+                <div class="editInputDiv">
+                    Titel:
+                    <input type="text" value="{item.title}">
+                </div>
+                <div class="editInputDiv">
+                    {prefix}datum:
+                    <input type="text" value="{item.datePretty}">
+                </div> 
+                <div class="editInputDiv">
+                    Beschreibung:
+                    <input type="text" value="{item.description}">
+                </div> 
+                <div class="editInputDiv">
+                    Bild:
+                    <input type="text" value="{item.getImgPath}">
+                </div>
+                <div class="editInputDiv">
+                    <button id="RSubmit">Submit</button>
+                </div>
             </form>
-            <div class="IIonformaion" style="transform: scale(1.4);">
-                <h1 id="title_edit">{item.title}</h3>
-                <h5>{prefix}datum: {item.datePretty}</h5>
-                <h5>Beschreibung: {item.description}</h5>
-                <img id="usericon_edit" src="../img/defaultuser.svg" alt="usericon">
-            </div>
         {#else}
             <h1>Item not found</h1>
         {/if}
-    </div>
+        </div>
 </body>
 </html>
