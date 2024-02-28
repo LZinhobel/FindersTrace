@@ -111,7 +111,33 @@ public class WebServer {
         return reportTemplate.data("line", line)
                              .data("mng", mng)
                              .data("message", message);
-    }
+    }    
     
+    
+ 
+    @Inject
+    @Location("edit/index.html")
+    Template editTemplate;
+
+    @GET
+    @Path("/edit")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance edit(@QueryParam("index") Integer index){
+        if (!hasVisited) {
+            updateItems();
+            hasVisited = true;
+        }
+
+        Item item = null;
+        String lostOrFound = "";
+        if (index != null) {
+            item = mng.getItemById(index);
+            lostOrFound = item.getCurrentStatus().toString().equals("LOST") ? "Verlust" : "Fund";
+        }
+
+        return editTemplate.data("item", item)
+        .data("templateMethods", new TemplateMethods(this))
+        .data("prefix", lostOrFound);    
+    }                        
 
 }
