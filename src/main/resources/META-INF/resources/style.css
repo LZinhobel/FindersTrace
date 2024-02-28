@@ -254,6 +254,11 @@ nav>a {
     padding: 2%;
 }
 
+.itemInformation>h3, .itemInformation>h5 {
+    margin: 0;
+    padding: 0;
+}
+
 .linkDiv {
     width: 33.3%;
     display: block;
