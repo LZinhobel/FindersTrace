@@ -65,79 +65,30 @@ public class WebServer {
         return path;
     }
 
+    @Inject
+    @Location("details/index.html")
+    Template detailsTemplate;
+
     @GET
     @Path("/details")
     @Produces(MediaType.TEXT_HTML)
-    public String details(@QueryParam("index") Integer index){
+    public TemplateInstance details(@QueryParam("index") Integer index){
         if (!hasVisited) {
             updateItems();
             hasVisited = true;
         }
 
-        String text =  """
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>FindersTrace</title>
-                <link rel="stylesheet" href="../style.css">
-            </head>
-            <body>
-                <nav>
-                    <div id="logo">
-                        <img src="../img/logo.png" alt="logo">
-                        <h1>FindersTrace</h1>
-                    </div>
-                    <a href="../overview">Start</a>
-                    <a href="../overview">Overview</a>
-                    <img id="usericon" src="../img/defaultuser.svg" alt="usericon">
-                </nav>
-                
-                <div id="details_body">""";
-                
-        if (index == null) {
-                text += "<h1>Item not found</h1>";
-            } else {
-                Item item = mng.getItems().get(index);
-                text += """
-                
-                        <div class="details_image">
-                            <img src=\"
-                                """
-                                        +getValidImgPath(item)+
-                                        """
-                            \" alt="image">
-                        </div>
-                            <div class="IIonformaion" style="transform: scale(1.4);">
-                                <h3>"""
-                                    +item.getTitle()+
-                                """
-                                    </h3>
-                                    <h5>"""
-                                    +item.getCurrentStatus()+
-                                """
-                                    </h5>
-                                <h5>"""
-                                            +item.getDescription()+
-                                            """
-                                    </h5>
-                                <h5>"""
-                                    +item.getDatePretty()+
-                                """
-                                </h5>
-                            </div>
-                        </div>
-                """;
-            }  
-            text += """
-                </div>
-                <div id="ReportItemButton" onclick="window.location='../report'">Report<span> !</span></div>
-            </body>
-            </html>
-                """;
-        return text;
-    }
+        Item item = null;
+        String lostOrFound = "";
+        if (index != null) {
+            item = mng.getItemById(index);
+            lostOrFound = item.getCurrentStatus().toString().equals("LOST") ? "Verlust" : "Fund";
+        }
+
+        return detailsTemplate.data("item", item)
+        .data("templateMethods", new TemplateMethods(this))
+        .data("prefix", lostOrFound);    
+    }                     
 
     @Inject
     @Location("report/index.html")
