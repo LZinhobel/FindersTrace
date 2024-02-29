@@ -21,11 +21,17 @@
             <div class="details_image_box">
                 <img src="{templateMethods.getValidImgPath(item)}" alt="image">
             </div>
-            <div class="IIonformaion" style="transform: scale(1.4);">
-                <h1 id="title_details">{item.title}</h3>
-                <h5>{prefix}datum: {item.datePretty}</h5>
-                <h5>Beschreibung: {item.description}</h5>
-                <img id="usericon_details" src="../img/defaultuser.svg" alt="usericon">
+            <div id="details_text_box">
+                <div>
+                    <h1 id="title_details">{item.title}</h1>
+                </div>
+                <div id="details_text_inner_box">
+                    <p><span>{prefix}datum:</span> {item.datePretty}</p>
+                    <p><span>Beschreibung:</span> {item.description}</p>
+                </div>
+                <div id="usericon_details_box">
+                    <img id="usericon_details" src="../img/defaultuser.svg" alt="usericon">
+                </div>
             </div>
         {#else}
             <h1>Item not found</h1>

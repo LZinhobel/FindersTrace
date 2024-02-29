@@ -413,14 +413,16 @@ nav>a {
     color: white;
 }
 
-.IIonformaion {
-    margin-left: 40vh;
+#usericon_details_box {
+    width: 100%;
 }
 
 #usericon_details {
-    width: 10%;
-    height: auto;
-    border-radius: 50%;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 60%;
+    margin-left: 10%;
+    background-color: white;
 }
 
 .details_image_box {
@@ -431,14 +433,42 @@ nav>a {
 }
 
 .details_image_box>img {
+    border-radius: 10px;
+}
+
+#details_text_box {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#details_text_inner_box {
+    width: 100%;
+    justify-content: start;
+}
+
+#details_text_inner_box>p {
+    text-align: start;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    width: 80%;
+    word-break: break-word;
+}
+
+#details_text_inner_box>p>span {
+    font-weight: bold;
+}
+
+.details_image_box>img {
     width: 100%;
     height: auto;
 }
 
-#title_details {
-    margin-top: 0;
-    margin-bottom: 80px;
-}
+
 
 input, textarea {
     text-align: left;
