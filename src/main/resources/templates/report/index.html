@@ -13,7 +13,7 @@
                     <form id="reportForm" method="get" action="../report">
                         <h1>Report</h1>
                         <div class="inputs">
-                            <input id="RTitel" placeholder="TITEL"></input>
+                            <input id="RTitel" placeholder="TITEL" maxlength="50"></input>
                         </div>
         
                         <div class="inputs">
@@ -25,10 +25,19 @@
                         </div>
         
                         <div id="LorF">
-                            <input type="radio" id="lost" name="lostOrFound" value="LOST" checked>LOST</input>
-                            <input type="radio" id="found" name="lostOrFound" value="FOUND">FOUND</input>
+                            <label class="container">
+                                <input type="radio" id="lost" name="lostOrFound" value="LOST" checked class="radioButton"></input>
+                                <span class="checkmark" id="lostCheckmark">LOST</span>
+                            </label>
+
+                            <label class="container">
+                                <input type="radio" id="found" name="lostOrFound" value="FOUND" class="radioButton"></input>
+                                <span class="checkmark" id="foundCheckmark">FOUND</span>
+                            </label>
+
                         </div>
-        
+                        
+                        <p>Ready to report?</p>
                         <input id="RSubmit" type="submit" value="SUBMIT"></input>
                     </form>
 

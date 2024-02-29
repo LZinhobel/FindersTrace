@@ -10,7 +10,7 @@
     --lighterPurple: #8D619E;
     --darkerPurple: #442F4C;
     --middlePurple: #623F71;
-    --lightgrey: rgb(173, 172, 172);
+    --lightgrey: rgba(232, 228, 228, 0.879);
     --pink: #ECDCEF;
 }
 
@@ -327,34 +327,38 @@ nav>a {
     display: flex;
     flex-direction: row;
     background-color: var(--middlePurple);
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
+    margin: 10vh;
+    border-radius: 9px;
 }
 
 #reportInfoSide {
     width: 40%;
-    height: 100vh;
+    height: 80vh;
     padding: 2%;
     background-color: var(--lightestPurple);
-    border-radius: 100px 0 0 100px;
+    border-radius: 100px 8px 8px 100px;
 }
 
 #reportInfoSide>h2 {
     text-align: center;
-    margin-left: 15%;
+    width: 90%;
+    margin-left: 5%;
     margin-top: 20%;
-    font-size: 2.5em;
-    font-weight: 900;
+    font-size: 2.3em;
+    font-weight: 800;
+    font-style: italic;
     color: var(--darkerPurple);
 }
 
 #reportInfoSide>p {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: var(--darkerPurple);
     width: 80%;
     margin-top: 8%;
-    margin-left: 15%;
+    margin-left: 10%;
 }
 
 #reportForm {
@@ -363,22 +367,32 @@ nav>a {
     justify-content: space-around;
     align-items: center;
     width: 60%;
-    height: 100vh;
+    height: 80vh;
+    border-radius: 8px 0px 0px 8px;
     background-color: var(--middlePurple);
     padding: 5px;
+}
+
+#reportForm p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--lightgrey);
+    margin-bottom: -2%;
+    text-align: center;
 }
 
 #reportBackButton {
     background-color: var(--middlePurple);
     width: 50%;
     margin-top: 20%;
-    margin-left: 30%;
+    margin-left: 25%;
     text-align: center;
     color: white;
     font-size: 1.5rem;
     padding: 1.5%;
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
+    filter: drop-shadow(0px 4px 4px #00000051);
 }
 
 #reportBackButton:hover {
@@ -391,10 +405,99 @@ nav>a {
     text-decoration: none;
 }
 
+#RDescription {
+    min-width: 80%;
+    min-height: 15vh;
+    max-width: 80%;
+    max-height: 35vh;
+}
+
+
+/* Report Radio Button Style */
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 0;
+    margin-bottom: 3vh;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+    color: black;
+  }
+  
+  /* Hide the browser's default radio button */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4vh;
+    width: 15vh;
+    padding: 1vh;
+    font-weight: 500;
+    font-size: 1rem;
+    font-style: italic;     
+    text-align: center;
+    background-color: var(--mainWhite);
+    border-radius: 5px;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container .checkmark:after {
+    display: none;
+  }
+
+  #foundCheckmark {
+    margin-left: -20vh;
+  }
+
+  #lostCheckmark {
+    margin-left: 5vh;
+  }
+
+
+/* Radio Button End */
 
 /*details*/
 
 #reportBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
 }
 
@@ -470,7 +573,7 @@ nav>a {
 
 
 
-input, textarea {
+.inputs>input, .inputs>textarea, #RSubmit {
     text-align: left;
     padding: 2%;
     width: 80%;
@@ -479,13 +582,16 @@ input, textarea {
     color: black;
     border: none;
     font-weight: 700;
+    border-radius: 6px;
 }
 
 form>h1 {
     font-size: 2rem;
-    margin-bottom: -1%;
+    margin-bottom: -1.5%;
+    margin-top: 1.5%;
     text-align: center;
     color: var(--mainWhite);
+    font-style: italic;
 }
 
 label {
@@ -519,8 +625,7 @@ label {
 
 #LorF>input {
     font-size: 1.5rem;
-    font-weight: 900;
-    margin: 0% 10%;
+    font-weight: 500;
 }
 
 #RSubmit {
