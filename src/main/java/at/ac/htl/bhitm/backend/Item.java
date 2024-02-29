@@ -57,7 +57,7 @@ public class Item {
         if (title == null || title.isEmpty()) {
             throw new ItemException("Title must not be null or blank!");
         }
-        if (title.length() > MAX_TITLE_LENGTH) {
+        if (title.length() >= MAX_TITLE_LENGTH) {
             throw new ItemException("Title must not be longer than " + MAX_TITLE_LENGTH + " characters!");
         }
         this.title = title;
