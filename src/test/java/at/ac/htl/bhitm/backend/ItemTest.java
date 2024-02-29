@@ -69,6 +69,15 @@ public class ItemTest {
     }
 
     @Test
+    public void test_setTitle_with_String_to_long() {
+        ItemException ex = assertThrows(ItemException.class, () -> {
+            new Item(ItemLevel.LOST, "more than 20 characters");
+        });
+
+        assertEquals("Title must not be longer than 20 characters!", ex.getMessage());
+    }
+
+    @Test
     public void test_setter() {
         Item item = new Item(ItemLevel.LOST, "Test");
         item.setCurrentStatus(ItemLevel.FOUND);

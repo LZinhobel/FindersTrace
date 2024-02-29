@@ -12,6 +12,7 @@ public class Item {
     private String imgPath;
     private String dateAdded;
 
+    private final static int MAX_TITLE_LENGTH = 20;
     private final static String DEFAULT_DESCRIPTION = "No description available";
     private final static String DEFAULT_IMGPATH = "No image available";
 
@@ -55,6 +56,9 @@ public class Item {
     public void setTitle(String title) {
         if (title == null || title.isEmpty()) {
             throw new ItemException("Title must not be null or blank!");
+        }
+        if (title.length() > MAX_TITLE_LENGTH) {
+            throw new ItemException("Title must not be longer than " + MAX_TITLE_LENGTH + " characters!");
         }
         this.title = title;
     }
