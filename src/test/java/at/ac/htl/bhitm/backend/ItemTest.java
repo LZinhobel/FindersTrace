@@ -88,8 +88,6 @@ public class ItemTest {
         assertEquals("Test2", item.getTitle());
         assertEquals("Test2", item.getDescription());
         assertEquals("Test2", item.getImgPath());
-        item.setImgPath("x");
-        assertEquals(DEFAULT_IMGPATH, item.getImgPath());
         item.setImgPath(null);
         assertEquals(DEFAULT_IMGPATH, item.getImgPath());
     }

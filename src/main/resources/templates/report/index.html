@@ -21,7 +21,7 @@
                         </div>
         
                         <div class="inputs">
-                            <input id="RImage" placeholder="IMAGE URL (optional) | x if no img available"></input>
+                            <input id="RImage" placeholder="IMAGE URL (optional)"></input>
                         </div>
         
                         <div id="LorF">
@@ -41,8 +41,6 @@
 
                 </div>
                     
-
-        
                     <script>
                         document.getElementById('reportForm').addEventListener('submit', function(event) {
                             event.preventDefault();
@@ -55,6 +53,13 @@
                                 document.getElementById('RTitel').style.border = '2px solid red';
                                 document.getElementById('RDescription').value = description;
                                 document.getElementById('RImage').value = image;
+                                return;
+                            }
+                            if (description.includes(";") || image.includes(";")) {
+                                console.log("Description or image contains ;");
+                                document.getElementById('RDescription').style.border = '2px solid red';
+                                document.getElementById('RImage').style.border = '2px solid red';
+                                document.getElementById('RTitel').value = title;
                                 return;
                             }
         
