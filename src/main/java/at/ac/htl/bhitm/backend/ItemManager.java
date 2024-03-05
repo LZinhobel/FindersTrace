@@ -101,5 +101,8 @@ public class ItemManager {
         if (!(imgPath == null || imgPath.isEmpty())) {
             item.setImgPath(imgPath);
         }
+
+        items.put(item.getId(), item);
+        
     }
 }

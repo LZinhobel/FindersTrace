@@ -16,35 +16,38 @@
         <a href="../report">Report</a>
         <img id="usericon" src="../img/defaultuser.svg" alt="usericon">
     </nav>
-    <div id="edit_body">
+    <div id="details_body">
         {#if item}
             <div class="details_image_box">
                 <img src="{templateMethods.getValidImgPath(item)}" alt="image">
+                <input id="details_image_box_input" value="{item.getImgPath()}"></input>
             </div>
-            <form class="editItemInformation" style="transform: scale(1.4);">
-                <div class="editInputDiv">
-                    Titel:
-                    <input type="text" value="{item.title}">
+            <div id="details_text_box">
+                <div>
+                    <input id="title_edit" value="{item.getTitle()}"></input>
                 </div>
-                <div class="editInputDiv">
-                    {prefix}datum:
-                    <input type="text" value="{item.datePretty}">
-                </div> 
-                <div class="editInputDiv">
-                    Beschreibung:
-                    <input type="text" value="{item.description}">
-                </div> 
-                <div class="editInputDiv">
-                    Bild:
-                    <input type="text" value="{item.getImgPath}">
+                <div id="details_text_inner_box">
+                    <p><span>{prefix}datum:</span> {item.datePretty}</p>
+                    <textarea id="details_text_inner_box_textarea">{item.getDescription()}</textarea>
                 </div>
-                <div class="editInputDiv">
-                    <button id="RSubmit">Submit</button>
+                <div id="usericon_details_box">
+                    <img id="usericon_details" src="../img/defaultuser.svg" alt="usericon">
+                    <img id="editicon_details" src="../img/checkmark.png" alt="edit" onclick="edit()">
                 </div>
-            </form>
+                <a id="back_edit" href="../details?index={item.getId()}">Back</a>
+            </div>
         {#else}
             <h1>Item not found</h1>
         {/if}
-        </div>
+    </div>
+    <script>
+        function edit() {
+            window.location.href="../edit?index={item.getId()}"+
+            "&title="+document.getElementById('title_edit').value+""+
+            "&desc="+document.getElementById("details_text_inner_box_textarea").value+""+
+            "&imgPath="+document.getElementById('details_image_box_input').value+""+
+            "&status={item.getCurrentStatus()}";
+        }
+    </script>
 </body>
 </html>

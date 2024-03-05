@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import at.ac.htl.bhitm.backend.Item;
 import at.ac.htl.bhitm.backend.ItemFactory;
+import at.ac.htl.bhitm.backend.ItemLevel;
 import at.ac.htl.bhitm.backend.ItemManager;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
@@ -122,10 +123,16 @@ public class WebServer {
     @GET
     @Path("/edit")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance edit(@QueryParam("index") Integer index){
+    public TemplateInstance edit(@QueryParam("index") Integer index, @QueryParam("title") String title, @QueryParam("desc") String description, @QueryParam("imgPath") String imgPath, @QueryParam("status") ItemLevel status){
         if (!hasVisited) {
             updateItems();
             hasVisited = true;
+        }
+
+        if (title != null && imgPath != null) {
+            Item item = mng.getItemById(index);
+            mng.editItem(item, title, description, status, imgPath);
+            mng.AddItemsToFile("./data/reportedItems.csv");
         }
 
         Item item = null;
@@ -138,6 +145,5 @@ public class WebServer {
         return editTemplate.data("item", item)
         .data("templateMethods", new TemplateMethods(this))
         .data("prefix", lostOrFound);    
-    }                        
-
+    }
 }
