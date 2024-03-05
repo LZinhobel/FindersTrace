@@ -538,11 +538,14 @@ nav>a {
     background-color: white;
 }
 
-.details_image_box {
+.details_image_box, .details_image_box_edit {
     height: 100%;
     width: 40%;
     display: flex;
     justify-content: center;
+}
+
+.details_image_box_edit {
     flex-direction: column;
 }
 
