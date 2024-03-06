@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ItemTest {
     private final static String DEFAULT_DESCRIPTION = "No description available";
-    private final static String DEFAULT_IMGPATH = "No image available";
+    private final static String DEFAULT_IMGPATH = "https://upload.wikimedia.org/wikipedia/commons/thu…e_available.svg/1200px-No_image_available.svg.png";
 
     @Test
     public void test_constructor() {

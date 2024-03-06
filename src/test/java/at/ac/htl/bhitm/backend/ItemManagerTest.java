@@ -169,7 +169,7 @@ public class ItemManagerTest {
         assertEquals("Test", item.getTitle());
         assertEquals("No description available", item.getDescription());
         assertEquals(ItemLevel.LOST, item.getCurrentStatus());
-        assertEquals("No image available", item.getImgPath());
+        assertEquals("https://upload.wikimedia.org/wikipedia/commons/thu…e_available.svg/1200px-No_image_available.svg.png", item.getImgPath());
     }
 
     @Test
@@ -181,7 +181,7 @@ public class ItemManagerTest {
         assertEquals("Test", item.getTitle());
         assertEquals("No description available", item.getDescription());
         assertEquals(ItemLevel.LOST, item.getCurrentStatus());
-        assertEquals("No image available", item.getImgPath());
+        assertEquals("https://upload.wikimedia.org/wikipedia/commons/thu…e_available.svg/1200px-No_image_available.svg.png", item.getImgPath());
     }
 
     @Test
