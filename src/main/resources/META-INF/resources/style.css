@@ -708,4 +708,5 @@ label {
     border-radius: 5px;
     border: var(--darkerPurple) solid 2px;
     background-color: var(--lightestPurple);
+    padding: 5px;
 }
