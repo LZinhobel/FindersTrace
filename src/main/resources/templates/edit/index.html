@@ -20,15 +20,15 @@
         {#if item}
             <div class="details_image_box_edit">
                 <img src="{templateMethods.getValidImgPath(item)}" alt="image">
-                <input id="details_image_box_input" value="{item.getImgPath()}"></input>
+                <input class="edit_input" id="details_image_box_input" value="{item.getImgPath()}"></input>
             </div>
             <div id="details_text_box">
                 <div>
-                    <input id="title_edit" value="{item.getTitle()}"></input>
+                    <input class="edit_input" id="title_edit" value="{item.getTitle()}"></input>
                 </div>
                 <div id="details_text_inner_box">
                     <p><span>{prefix}datum:</span> {item.datePretty}</p>
-                    <textarea id="details_text_inner_box_textarea">{item.getDescription()}</textarea>
+                    <textarea class="edit_input" id="details_text_inner_box_textarea">{item.getDescription()}</textarea>
                 </div>
                 <div id="usericon_details_box">
                     <img id="usericon_details" src="../img/defaultuser.svg" alt="usericon">

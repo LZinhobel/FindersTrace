@@ -703,3 +703,9 @@ label {
     justify-content:flex-start;
     flex-direction: row;
 }
+
+.edit_input{
+    border-radius: 5px;
+    border: var(--darkerPurple) solid 2px;
+    background-color: var(--lightestPurple);
+}
