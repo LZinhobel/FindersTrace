@@ -482,6 +482,7 @@ nav>a {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    filter: drop-shadow(2px 2px 10px #00000079);
 }
 
 #details_body {
