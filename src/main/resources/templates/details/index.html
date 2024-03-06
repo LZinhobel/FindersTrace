@@ -19,7 +19,7 @@
     <div id="details_body">
         {#if item}
             <div class="details_image_box">
-                <img src="{templateMethods.getValidImgPath(item)}" alt="image">
+                <img src="{item.getImgPath()}" alt="image">
             </div>
             <div id="details_text_box">
                 <div>

@@ -14,7 +14,7 @@ public class Item {
 
     private final static int MAX_TITLE_LENGTH = 20;
     private final static String DEFAULT_DESCRIPTION = "No description available";
-    private final static String DEFAULT_IMGPATH = "https://upload.wikimedia.org/wikipedia/commons/thu…e_available.svg/1200px-No_image_available.svg.png";
+    private final static String DEFAULT_IMGPATH = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png";
 
     public String getTitle() {
         return title;

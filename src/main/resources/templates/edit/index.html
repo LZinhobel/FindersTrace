@@ -19,7 +19,7 @@
     <div id="details_body">
         {#if item}
             <div class="details_image_box_edit">
-                <img src="{templateMethods.getValidImgPath(item)}" alt="image">
+                <img src="{{item.getImgPath()}}" alt="image">
                 <input class="edit_input" id="details_image_box_input" value="{item.getImgPath()}"></input>
             </div>
             <div id="details_text_box">

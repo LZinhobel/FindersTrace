@@ -54,17 +54,8 @@ public class WebServer {
         }
 
         return overviewTemplate.data("filteredItems", filteredItems)
-        .data("filter", filter)
-        .data("templateMethods", new TemplateMethods(this));
+        .data("filter", filter);
         }
-
-    public String getValidImgPath(Item item) {
-        String path = item.getImgPath();
-        if (path.equals("No image available")) {
-            path = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png";
-        }
-        return path;
-    }
 
     @Inject
     @Location("details/index.html")
@@ -87,7 +78,6 @@ public class WebServer {
         }
 
         return detailsTemplate.data("item", item)
-        .data("templateMethods", new TemplateMethods(this))
         .data("prefix", lostOrFound);    
     }                     
 
@@ -143,7 +133,6 @@ public class WebServer {
         }
 
         return editTemplate.data("item", item)
-        .data("templateMethods", new TemplateMethods(this))
         .data("prefix", lostOrFound);    
     }
 }

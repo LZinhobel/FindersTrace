@@ -20,7 +20,7 @@
         {#for item in filteredItems}
             <div class="items" onclick="window.location.href='../details?index={item.id}'">
                 <div class="itemImage">
-                    <img src="{templateMethods.getValidImgPath(item)}" alt="image">
+                    <img src="{item.getImgPath()}" alt="image">
                 </div>
                 <div class="itemFooter">
                     <div class="itemInformation">
