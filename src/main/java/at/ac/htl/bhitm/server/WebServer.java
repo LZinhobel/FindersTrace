@@ -149,14 +149,8 @@ public class WebServer {
             hasVisited = true;
         }
 
-        if (title != null && imgPath != null) {
-            Item item = mng.getItemById(index);
-            mng.editItem(item, title, description, status, imgPath);
-            mng.AddItemsToFile("./data/reportedItems.csv");
-        }
-
         List items = new ArrayList<>(mng.getItems());
 
-        return editTemplate.data("items", items);    
+        return tableTemplate.data("items", items);    
     }
 }

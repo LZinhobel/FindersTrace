@@ -694,3 +694,41 @@ label {
     background-color: var(--lightestPurple);
     padding: 5px;
 }
+
+
+/***TABLE***/
+#table{
+    margin: 10%;
+    border-radius: 10px;
+    background-color: var(--middlePurple);
+    padding-top: 0.7vw;
+    padding-bottom: 0.7vw;
+}
+.tableRow{
+    display: flex;
+    flex-direction: row;
+}
+.tableRow p{
+    background-color: var(--mainWhite);
+    padding: 0.5vw;
+    border-radius: 5px;
+    margin: 0.3vw;
+    margin-right: 1vw;
+    margin-left: 1vw;
+}
+.collumnDate{
+    width: 6vw;
+}
+.collumnTitle{
+    width: 10vw;
+}
+.collumnDesc{
+    width: 60vw;
+}
+#lineBreak{
+    height: 5px;
+    background-color: var(--mainWhite);
+    margin: 1vw;
+    margin-top: 0.3vw;
+    margin-bottom: 0.3vw;
+}
