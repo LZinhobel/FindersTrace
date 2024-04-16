@@ -135,4 +135,28 @@ public class WebServer {
         return editTemplate.data("item", item)
         .data("prefix", lostOrFound);    
     }
+
+    @Inject
+    @Location("table/index.html")
+    Template tableTemplate;
+
+    @GET
+    @Path("/table")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance table(@QueryParam("index") Integer index, @QueryParam("title") String title, @QueryParam("desc") String description, @QueryParam("imgPath") String imgPath, @QueryParam("status") ItemLevel status){
+        if (!hasVisited) {
+            updateItems();
+            hasVisited = true;
+        }
+
+        if (title != null && imgPath != null) {
+            Item item = mng.getItemById(index);
+            mng.editItem(item, title, description, status, imgPath);
+            mng.AddItemsToFile("./data/reportedItems.csv");
+        }
+
+        List items = new ArrayList<>(mng.getItems());
+
+        return editTemplate.data("items", items);    
+    }
 }
