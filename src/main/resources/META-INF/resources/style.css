@@ -206,7 +206,8 @@ nav>a {
     padding: 2%;
     width: 33%;
     height: 60vh;
-    margin-bottom: 15%;
+    margin-top: 5%;
+    margin-bottom: 10%;
     transition: all 0.2s ease-in-out;
 }
 
