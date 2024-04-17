@@ -698,7 +698,7 @@ label {
 
 /***TABLE***/
 #table{
-    margin: 10%;
+    margin: 10% 10% 2% 10%;
     border-radius: 10px;
     background-color: var(--middlePurple);
     padding-top: 0.7vw;
@@ -731,4 +731,13 @@ label {
     margin: 1vw;
     margin-top: 0.3vw;
     margin-bottom: 0.3vw;
+}
+
+#exportButton {
+    background-color: var(--lighterPurple);
+    color: white;
+    padding: 1%;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-left: 10%;
 }
