@@ -704,6 +704,7 @@ label {
     background-color: var(--middlePurple);
     padding-top: 0.7vw;
     padding-bottom: 0.7vw;
+    font-size: 80%;
 }
 .tableRow{
     display: flex;
