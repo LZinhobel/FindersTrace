@@ -107,7 +107,7 @@ nav {
     z-index: 1;
 }
 
-#logo {
+#logo_box {
     width: 10%;
     height: auto;
     display: flex;
@@ -116,12 +116,12 @@ nav {
     margin-left: 2%;
 }
 
-#logo>img {
-    width: 70%;
+#logo_img {
+    width: 8vw;
     height: auto;
 }
 
-#logo>h1 {
+#logo_box>h1 {
     margin-left: 15%;
     font-size: 300%;
     color: var(--lighterPurple);
