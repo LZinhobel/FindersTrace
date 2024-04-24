@@ -1,5 +1,6 @@
 package at.ac.htl.bhitm.server;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @Path("/")
 public class WebServer {
@@ -152,5 +154,20 @@ public class WebServer {
         List items = new ArrayList<>(mng.getItems());
 
         return tableTemplate.data("items", items);    
+    }
+
+    @Path("/data")
+    public class DataResource {
+
+        @GET
+        @Path("/reportedItems.csv")
+        @Produces(MediaType.TEXT_PLAIN)
+        public Response getReportedItems() {
+            File file = new File("./data/reportedItems.csv");
+            if (!file.exists()) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+            return Response.ok(file).header("Content-Disposition", "attachment; filename=\"reportedItems.csv\"").build();
+        }
     }
 }
