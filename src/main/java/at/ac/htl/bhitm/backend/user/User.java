@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class User {
-    private int id;
     private String username;
     private String email;
     private LinkedList<Item> items;
@@ -15,16 +14,15 @@ public class User {
     private String lastname;
     private String phonenumber;
 
-    public User(int id, String firstname, String lastname, String username, LinkedList<Item> items) {
-        this.id = id;
+    public User(String firstname, String lastname, String username, LinkedList<Item> items) {
         setFirstname(firstname);
         setLastname(lastname);
         setUsername(username);
         setItems(items);
     }
 
-    public User(int id, String firstname, String lastname, String username) {
-        this(id, firstname, lastname, username, new LinkedList<>());
+    public User(String firstname, String lastname, String username) {
+        this(firstname, lastname, username, new LinkedList<>());
     }
 
     public String getFirstname() {
@@ -61,10 +59,6 @@ public class User {
             throw new IllegalArgumentException("Phonenumber must only contain numbers");
         }
         this.phonenumber = phonenumber;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getUsername() {

@@ -1,10 +1,13 @@
 package at.ac.htl.bhitm.server;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import at.ac.htl.bhitm.backend.item.*;
+import at.ac.htl.bhitm.backend.user.Login;
 import at.ac.htl.bhitm.backend.user.User;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
@@ -20,10 +23,46 @@ public class WebServer {
     private ItemFactory factory = new ItemFactory();
     private boolean hasVisited = false;
     private User user;
+    Login login = Login.getInstance();
     
     private void updateItems() {
         mng.AddItemsFromFile("./data/reportedItems.csv", factory);
     }
+
+    @Inject
+    @Location("login/index.html")
+    Template loginTemplate;
+
+    @GET
+    @Path("/login")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance login(@QueryParam("username") String username, @QueryParam("message") String message) {
+
+        System.out.println("Username: " + username);
+
+        if (username == null) {
+            return loginTemplate.data("username", "")
+                    .data("message", message != null ? message : "");
+        } else if (user != null) {
+            return overview(username);
+        }
+
+        return loginTemplate.data("username", username)
+                .data("message", "User not found");
+    }
+
+    @POST
+    @Path("/loginUser")
+    public Response loginUser(@FormParam("username") String username) throws URISyntaxException {
+        user = login.login(username);
+
+        if (user != null) {
+            return Response.seeOther(new URI("/overview")).build();
+        } else {
+            return Response.seeOther(new URI("/login?username=" + username)).build();
+        }
+    }
+
 
     @Inject
     @Location("overview/index.html")
