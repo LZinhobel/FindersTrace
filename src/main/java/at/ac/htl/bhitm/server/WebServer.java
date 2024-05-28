@@ -147,10 +147,19 @@ public class WebServer {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance report(@QueryParam("i") String line) {
         String message = null;
+
+        if (user == null) {
+            return loginTemplate.data("username", "")
+                    .data("message", "Login to Report an Item");
+        }
+
         if (line != null) {
             try {
                 mng.addItem(factory.createFromString(line));
                 mng.AddItemsToFile("./data/reportedItems.csv");
+                user.addItem(mng.getItems().get(mng.getItems().size() - 1));
+
+                login.writeToFile();
                 message = "Reported Item successfully";
             } catch (Exception e) {
                 message = "Reported Item failed";
@@ -159,9 +168,7 @@ public class WebServer {
         return reportTemplate.data("line", line)
                              .data("mng", mng)
                              .data("message", message);
-    }    
-    
-    
+    }
  
     @Inject
     @Location("edit/index.html")

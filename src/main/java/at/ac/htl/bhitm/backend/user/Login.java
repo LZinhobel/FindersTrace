@@ -62,15 +62,17 @@ public class Login {
 
         if (parts.length == 3) {
             user = new User(firstname, lastname, username);
-        } else if (parts.length > 3 && parts.length < 7) {
+        } else if (parts.length < 7) {
             String itemids = parts[3];
             LinkedList<Item> itemList = new LinkedList<>();
 
             ItemManager mng = new ItemManager();
             mng.AddItemsFromFile("data/reportedItems.csv", new ItemFactory());
 
-            for (String itemid : itemids.split(",")) {
-                itemList.add(mng.getItemById(Integer.parseInt(itemid)));
+            if (!itemids.isBlank()) {
+                for (String itemid : itemids.split(",")) {
+                    itemList.add(mng.getItemById(Integer.parseInt(itemid)));
+                }
             }
 
             user = new User(firstname, lastname, username, itemList);
@@ -100,22 +102,32 @@ public class Login {
     public void writeToFile() {
         StringBuilder sb = new StringBuilder();
         sb.append("username;firstname;lastname;itemids;email;phonenumber\n");
-
+        System.out.println("Writing to file");
         for(User user : users) {
             sb.append(user.getUsername()).append(";");
+            System.out.println("username: " + user.getUsername());
+
             sb.append(user.getFirstname()).append(";");
+            System.out.println("firstname: " + user.getFirstname());
+
             sb.append(user.getLastname()).append(";");
+            System.out.println("lastname: " + user.getLastname());
 
             LinkedList<Item> items = user.getItems();
             if (!items.isEmpty()) {
+                System.out.println("adding items");
                 for(Item item : items) {
                     sb.append(item.getId()).append(",");
+                    System.out.println("item: " + item.getId());
                 }
                 sb.deleteCharAt(sb.length() - 1);
             }
             sb.append(";");
             sb.append(user.getEmail()).append(";");
+            System.out.println("email: " + user.getEmail());
+
             sb.append(user.getPhonenumber()).append("\n");
+            System.out.println("phonenumber: " + user.getPhonenumber());
         }
 
         try {

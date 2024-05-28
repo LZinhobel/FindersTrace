@@ -7,7 +7,8 @@
             </head>
             <body id="reportBody">
                 {#if message != null }
-                    <form><h1>{message}</h1></form>
+                    <form><h1 id="report_message">{message}</h1></form>
+                    <a href="../overview" id="report_back">back</a>
                 {#else}
                 <div id="reportMainContent">
                     <form id="reportForm" method="get" action="../report">

@@ -743,3 +743,12 @@ label {
     text-decoration: none;
     margin-left: 10%;
 }
+
+#report_message {
+    color: black;
+}
+
+#report_back {
+    text-decoration: none;
+    color: black;
+}
