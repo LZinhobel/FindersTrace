@@ -1,4 +1,4 @@
-package at.ac.htl.bhitm.backend;
+package at.ac.htl.bhitm.backend.item;
 
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;

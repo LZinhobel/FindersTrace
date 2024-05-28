@@ -3,10 +3,7 @@ package at.ac.htl.bhitm;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import at.ac.htl.bhitm.backend.Item;
-import at.ac.htl.bhitm.backend.ItemFactory;
-import at.ac.htl.bhitm.backend.ItemLevel;
-import at.ac.htl.bhitm.backend.ItemManager;
+import at.ac.htl.bhitm.backend.item.*;
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);

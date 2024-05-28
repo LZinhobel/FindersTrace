@@ -1,4 +1,7 @@
-package at.ac.htl.bhitm.backend;
+package at.ac.htl.bhitm.backend.item;
+
+import at.ac.htl.bhitm.backend.item.ItemException;
+import at.ac.htl.bhitm.backend.item.ItemLevel;
 
 import java.time.LocalDate;
 
