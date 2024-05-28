@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import at.ac.htl.bhitm.backend.item.*;
+import at.ac.htl.bhitm.backend.user.User;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
@@ -18,6 +19,7 @@ public class WebServer {
     private ItemManager mng = new ItemManager();
     private ItemFactory factory = new ItemFactory();
     private boolean hasVisited = false;
+    private User user;
     
     private void updateItems() {
         mng.AddItemsFromFile("./data/reportedItems.csv", factory);

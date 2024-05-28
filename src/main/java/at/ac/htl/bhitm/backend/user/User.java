@@ -101,4 +101,19 @@ public class User {
     public void setItems(LinkedList<Item> items) {
         this.items = items;
     }
+
+    public void addItem(Item item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Item must not be null");
+        }
+        items.add(item);
+    }
+
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
+
+    public boolean containsItem(Item item) {
+        return items.contains(item);
+    }
 }

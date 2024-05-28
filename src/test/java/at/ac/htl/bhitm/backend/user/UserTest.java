@@ -158,4 +158,47 @@ public class UserTest {
         User user = new User(1, "firstname", "lastname", "username");
         assertThrows(IllegalArgumentException.class, () -> user.setEmail("mail@"));
     }
+
+    @Test
+    public void test_addItem() {
+        User user = new User(1, "firstname", "lastname", "username");
+        Item item = new Item(ItemLevel.LOST, "name", "description");
+        user.addItem(item);
+        assertEquals(1, user.getItems().size());
+        assertEquals(item, user.getItems().get(0));
+    }
+
+    @Test
+    public void test_addItem_null() {
+        User user = new User(1, "firstname", "lastname", "username");
+        assertThrows(IllegalArgumentException.class, () -> user.addItem(null));
+    }
+
+    @Test
+    public void test_addItem_twice() {
+        User user = new User(1, "firstname", "lastname", "username");
+        Item item = new Item(ItemLevel.LOST, "name", "description");
+        user.addItem(item);
+        user.addItem(item);
+        assertEquals(2, user.getItems().size());
+        assertEquals(item, user.getItems().get(0));
+        assertEquals(item, user.getItems().get(1));
+    }
+
+    @Test
+    public void test_removeItem() {
+        User user = new User(1, "firstname", "lastname", "username");
+        Item item = new Item(ItemLevel.LOST, "name", "description");
+        user.addItem(item);
+        user.removeItem(item);
+        assertEquals(0, user.getItems().size());
+    }
+
+    @Test
+    public void test_containsItem() {
+        User user = new User(1, "firstname", "lastname", "username");
+        Item item = new Item(ItemLevel.LOST, "name", "description");
+        user.addItem(item);
+        assertEquals(true, user.containsItem(item));
+    }
 }
