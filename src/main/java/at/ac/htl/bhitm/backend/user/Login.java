@@ -76,13 +76,52 @@ public class Login {
             user = new User(firstname, lastname, username, itemList);
 
             if (parts.length == 5) {
-                user.setEmail(parts[4]);
+                if (!"null".equals(parts[4])) {
+                    user.setEmail(parts[4]);
+                }
             } else if (parts.length == 6) {
-                user.setPhonenumber(parts[5]);
+                if (!"null".equals(parts[5])) {
+                    user.setPhonenumber(parts[5]);
+                }
             }
 
         }
 
         return user;
+    }
+
+    public void register(User user) {
+        users.add(user);
+        usernames.add(user.getUsername());
+
+        writeToFile();
+    }
+
+    public void writeToFile() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("username;firstname;lastname;itemids;email;phonenumber\n");
+
+        for(User user : users) {
+            sb.append(user.getUsername()).append(";");
+            sb.append(user.getFirstname()).append(";");
+            sb.append(user.getLastname()).append(";");
+
+            LinkedList<Item> items = user.getItems();
+            if (!items.isEmpty()) {
+                for(Item item : items) {
+                    sb.append(item.getId()).append(",");
+                }
+                sb.deleteCharAt(sb.length() - 1);
+            }
+            sb.append(";");
+            sb.append(user.getEmail()).append(";");
+            sb.append(user.getPhonenumber()).append("\n");
+        }
+
+        try {
+            Files.write(Paths.get("data/user.csv"), sb.toString().getBytes());
+        } catch(IOException e) {
+            throw new ItemException("Something happened while writing to file!", e);
+        }
     }
 }

@@ -1,2 +1,3 @@
-username;firstname;lastname;itemsIds;email;phonenumber
-admin;admin;admin;1
+username;firstname;lastname;itemids;email;phonenumber
+admin;admin;admin;1;null;null
+it210190;Luca;Zinhobel;;null;null

@@ -10,12 +10,18 @@
 
 <img src="./img/logo.png" alt="" id="welcomeLogo">
 
-<form action="/loginUser" method="post" id="loginForm">
+<form action="/registerUser" method="post" id="registerForm">
     <label for="username">Username:</label>
     <input type="text" name="username" id="username" required>
-    <input type="submit" value="Login">
-    <a href="../register">Register</a>
+    <label for="firstname">Firstname:</label>
+    <input type="text" name="firstname" id="firstname" required>
+    <label for="lastname">Lastname:</label>
+    <input type="text" name="lastname" id="lastname" required>
+    <input type="submit" value="register">
 </form>
+
+
+
 
 </body>
 </html>

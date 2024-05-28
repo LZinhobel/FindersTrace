@@ -38,7 +38,6 @@ public class WebServer {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance login(@QueryParam("username") String username, @QueryParam("message") String message) {
 
-        System.out.println("Username: " + username);
 
         if (username == null) {
             return loginTemplate.data("username", "")
@@ -61,6 +60,27 @@ public class WebServer {
         } else {
             return Response.seeOther(new URI("/login?username=" + username)).build();
         }
+    }
+
+    @Inject
+    @Location("register/index.html")
+    Template registerTemplate;
+
+    @GET
+    @Path("/register")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance register() {
+
+        return registerTemplate.data("username", null);
+    }
+
+    @POST
+    @Path("/registerUser")
+    public Response registerUser(@FormParam("username") String username, @FormParam("firstname") String firstname, @FormParam("lastname") String lastname) throws URISyntaxException {
+
+        login.register(new User(firstname, lastname, username));
+
+        return Response.seeOther(new URI("/login")).build();
     }
 
 
