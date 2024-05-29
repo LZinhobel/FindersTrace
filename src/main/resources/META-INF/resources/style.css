@@ -761,13 +761,22 @@ label {
     color: var(--lighterPurple);
 }
 
-#profileH1 {
-    text-align: center;
-    font-size: 3rem;
+#profileH1, #profileH2 {
+    text-align: left;
     font-weight: 900;
     font-style: italic;
     margin-top: 20vh;
+    margin-left: 10vh;
     margin-bottom: -25vh;
+}
+
+#profileH1 {
+    font-size: 3rem;
+}
+
+#profileH2 {
+    margin-top: 23vh;
+    font-size: 1.5rem;
 }
 
 #noItemsUser {
