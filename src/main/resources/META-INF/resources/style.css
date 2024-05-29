@@ -827,3 +827,17 @@ label {
 #noItemsUser {
     margin-top: 10vh;
 }
+
+#helpBoxes{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+#helpBox{
+    width: 367px;
+    height: 479px;
+    color: white;
+    background-color: #623F71;
+}
+
+
