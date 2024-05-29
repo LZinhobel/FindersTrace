@@ -232,4 +232,18 @@ public class WebServer {
             return Response.ok(file).header("Content-Disposition", "attachment; filename=\"reportedItems.csv\"").build();
         }
     }
+
+    @Inject
+    @Location("profile/index.html")
+    Template userTemplate;
+
+    @GET
+    @Path("/profile")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance profile() {
+        List items = new ArrayList<>(mng.getItems());
+
+        return userTemplate.data("user", user);    
+    }
+
 }
