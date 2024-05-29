@@ -752,3 +752,48 @@ label {
     text-decoration: none;
     color: black;
 }
+
+
+
+/*LOGIN*/
+#loginForm {
+    background-color: var(--lighterPurple);
+    color: var(--lightestPurple);
+
+    width: 40vw;
+    height: 60vh;
+    margin-top: 20vh;
+    margin-left: 10vw;
+    padding: 5vw;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginForm * {
+    margin: 2vh;
+    font-size: x-large;
+}
+
+#submit {
+    background: none;
+    border: none;
+    color: var(--lightestPurple);
+}
+
+#username {
+    background-color: var(--lightestPurple);
+    color: var(--darkerPurple);
+    border: none;
+    border-radius: 2px;
+    padding: 2px;
+    width: 15vw;
+    font-size: large;
+}
+
+#register {
+    color: var(--darkerPurple);
+    text-decoration: none;
+}
