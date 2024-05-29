@@ -194,9 +194,6 @@ public class WebServer {
         }
 
         if (user != null) {
-            System.out.println(index);
-            System.out.println(user.getId());
-
             if (mng.getItemById(index).getOwnerId() != user.getId()) {
                 return details(index);
             }
