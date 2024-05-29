@@ -29,7 +29,7 @@
             <p><span>Beschreibung:</span> {item.description}</p>
         </div>
         <div id="usericon_details_box">
-            <img id="usericon_details" src="../img/defaultuser.svg" alt="usericon">
+            <img id="usericon_details" src="../img/defaultuser.svg" alt="usericon" onclick="window.location.href='../profile?index={item.getOwnerId()}'">
             {#if user}
                 {#if item.getOwnerId() == user.getId()}
             <img id="editicon_details" src="../img/pen.png" alt="edit" onclick="window.location.href='../edit?index={item.getId}'">

@@ -259,5 +259,4 @@ public class WebServer {
 
         return userTemplate.data("user", user);    
     }
-
 }
