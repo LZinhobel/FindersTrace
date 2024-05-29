@@ -193,6 +193,10 @@ public class WebServer {
             hasVisited = true;
         }
 
+        if (index != user.getId()) {
+            return details(index);
+        }
+
         if (title != null && imgPath != null) {
             Item item = mng.getItemById(index);
             mng.editItem(item, title, description, status, imgPath);
