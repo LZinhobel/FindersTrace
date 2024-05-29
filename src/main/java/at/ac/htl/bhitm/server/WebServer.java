@@ -257,6 +257,10 @@ public class WebServer {
     @Path("/profile")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance profile(@QueryParam("index") Integer index){
+        if (!hasVisited) {
+            updateItems();
+            hasVisited = true;
+        }
 
         // @Path("/api/user") class UserController {
     
@@ -277,7 +281,6 @@ public class WebServer {
         LinkedList<Item> neededItems = new LinkedList<>();
 
         User currentUser = login.getUserById(index);
-
         for (Item item : mng.getItems()) {
             if (item.getOwnerId() == index) {
                 neededItems.add(item);
