@@ -22,7 +22,7 @@ public class WebServer {
     private ItemManager mng = new ItemManager();
     private ItemFactory factory = new ItemFactory();
     private boolean hasVisited = false;
-    private User user;
+    private static User user;
     Login login = Login.getInstance();
     
     private void updateItems() {
@@ -135,7 +135,8 @@ public class WebServer {
         }
 
         return detailsTemplate.data("item", item)
-        .data("prefix", lostOrFound);    
+        .data("prefix", lostOrFound)
+                .data("user", user);
     }                     
 
     @Inject
@@ -155,11 +156,20 @@ public class WebServer {
 
         if (line != null) {
             try {
-                mng.addItem(factory.createFromString(line));
-                mng.AddItemsToFile("./data/reportedItems.csv");
-                user.addItem(mng.getItems().get(mng.getItems().size() - 1));
+                System.out.println(line.split(";").length);
+                if (line.split(";").length == 3) {
+                    line += "null";
+                }
+                System.out.println(line.split(";").length);
 
-                login.writeToFile();
+                Item item = factory.createFromString(line);
+                mng.addItem(item);
+
+                item.setOwnerId(user.getId());
+                item.addItemToUser(user);
+
+                mng.AddItemsToFile("./data/reportedItems.csv");
+
                 message = "Reported Item successfully";
             } catch (Exception e) {
                 message = "Reported Item failed";

@@ -1,11 +1,11 @@
 package at.ac.htl.bhitm.backend.item;
 
-import at.ac.htl.bhitm.backend.item.ItemException;
-import at.ac.htl.bhitm.backend.item.ItemLevel;
+import at.ac.htl.bhitm.backend.user.User;
 
 import java.time.LocalDate;
 
 public class Item {
+    private int ownerId = -1;
     private static int idCounter = 0;
     private int id;
 
@@ -114,5 +114,21 @@ public class Item {
         setTitle(titel);
         setDescription(description);
         setImgPath(imgPath);
+    }
+
+    public void setOwner(User user) {
+        ownerId = user.getId();
+    }
+
+    public void setOwnerId(int id) {
+        ownerId = id;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void addItemToUser(User user) {
+        user.addItem(this);
     }
 }

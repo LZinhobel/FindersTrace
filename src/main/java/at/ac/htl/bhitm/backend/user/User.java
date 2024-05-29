@@ -3,10 +3,11 @@ package at.ac.htl.bhitm.backend.user;
 import at.ac.htl.bhitm.backend.item.Item;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class User {
+    private int id;
+    private static int idCounter = 0;
     private String username;
     private String email;
     private LinkedList<Item> items;
@@ -19,10 +20,20 @@ public class User {
         setLastname(lastname);
         setUsername(username);
         setItems(items);
+        setId(idCounter++);
     }
 
     public User(String firstname, String lastname, String username) {
         this(firstname, lastname, username, new LinkedList<>());
+    }
+
+    public void setId(int id) {
+        this.id = id;
+        idCounter = id+1;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getFirstname() {

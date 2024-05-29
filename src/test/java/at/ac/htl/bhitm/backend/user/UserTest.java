@@ -32,6 +32,21 @@ public class UserTest {
     }
 
     @Test
+    public void test_setId() {
+        User user = new User("firstname", "lastname", "username");
+        user.setId(1);
+        assertEquals(1, user.getId());
+    }
+
+    @Test
+    public void test_setId_idCounter() {
+        User user = new User("firstname", "lastname", "username");
+        user.setId(1);
+        User user2 = new User("firstname", "lastname", "username");
+        assertEquals(2, user2.getId());
+    }
+
+    @Test
     public void test_setFirstname() {
         User user = new User("firstname", "lastname", "username");
         user.setFirstname("newFirstname");

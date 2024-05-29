@@ -51,9 +51,9 @@ public class ItemManager {
     public void AddItemsToFile(String path) {
         try {
             List<String> lines = new ArrayList<>();
-            lines.add("titel;description;currentStatus;imgPath;dateAdded");
+            lines.add("titel;description;currentStatus;imgPath;dateAdded;ownerId");
             for(Item item : items.values()) {
-                String currentStringToAdd = String.format("%s;%s;%s;%s;%s", item.getTitle(), item.getDescription(), item.getCurrentStatus(), item.getImgPath(), item.getDate());
+                String currentStringToAdd = String.format("%s;%s;%s;%s;%s;%s", item.getTitle(), item.getDescription(), item.getCurrentStatus(), item.getImgPath(), item.getDate(), item.getOwnerId());
                 lines.add(currentStringToAdd);
             }
             Path filePath = Paths.get(path);

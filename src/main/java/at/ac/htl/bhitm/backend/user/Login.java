@@ -59,32 +59,25 @@ public class Login {
         String firstname = parts[1];
         String lastname = parts[2];
 
+        user = new User(firstname, lastname, username);
 
-        if (parts.length == 3) {
-            user = new User(firstname, lastname, username);
-        } else if (parts.length < 7) {
-            String itemids = parts[3];
-            LinkedList<Item> itemList = new LinkedList<>();
+        if (parts.length < 7) {
 
-            ItemManager mng = new ItemManager();
-            mng.AddItemsFromFile("data/reportedItems.csv", new ItemFactory());
-
-            if (!itemids.isBlank()) {
-                for (String itemid : itemids.split(",")) {
-                    itemList.add(mng.getItemById(Integer.parseInt(itemid)));
+            if (parts.length == 4) {
+                if (!"null".equals(parts[3])) {
+                    user.setEmail(parts[3]);
                 }
             }
 
-            user = new User(firstname, lastname, username, itemList);
-
             if (parts.length == 5) {
                 if (!"null".equals(parts[4])) {
-                    user.setEmail(parts[4]);
+                    user.setPhonenumber(parts[4]);
                 }
-            } else if (parts.length == 6) {
-                if (!"null".equals(parts[5])) {
-                    user.setPhonenumber(parts[5]);
-                }
+            }
+
+            if (parts.length == 6) {
+                int id = Integer.parseInt(parts[5]);
+                user.setId(id);
             }
 
         }
@@ -101,7 +94,7 @@ public class Login {
 
     public void writeToFile() {
         StringBuilder sb = new StringBuilder();
-        sb.append("username;firstname;lastname;itemids;email;phonenumber\n");
+        sb.append("username;firstname;lastname;email;phonenumber\n");
         System.out.println("Writing to file");
         for(User user : users) {
             sb.append(user.getUsername()).append(";");
@@ -113,21 +106,14 @@ public class Login {
             sb.append(user.getLastname()).append(";");
             System.out.println("lastname: " + user.getLastname());
 
-            LinkedList<Item> items = user.getItems();
-            if (!items.isEmpty()) {
-                System.out.println("adding items");
-                for(Item item : items) {
-                    sb.append(item.getId()).append(",");
-                    System.out.println("item: " + item.getId());
-                }
-                sb.deleteCharAt(sb.length() - 1);
-            }
-            sb.append(";");
             sb.append(user.getEmail()).append(";");
             System.out.println("email: " + user.getEmail());
 
-            sb.append(user.getPhonenumber()).append("\n");
+            sb.append(user.getPhonenumber()).append(";");
             System.out.println("phonenumber: " + user.getPhonenumber());
+
+            sb.append(user.getId()).append("\n");
+            System.out.println("id: " + user.getId());
         }
 
         try {

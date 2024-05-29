@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import at.ac.htl.bhitm.backend.user.User;
 
 public class ItemTest {
     private final static String DEFAULT_DESCRIPTION = "No description available";
@@ -123,5 +124,20 @@ public class ItemTest {
         assertEquals("desc", item.getDescription());
         assertEquals("img", item.getImgPath());
         assertEquals(ItemLevel.FOUND, item.getCurrentStatus());
+    }
+
+    @Test
+    public void test_setOwner() {
+        Item item = new Item(ItemLevel.LOST, "Test");
+        User user = new User("firstname", "lastname", "username");
+        item.setOwner(user);
+        assertEquals(user.getId(), item.getOwnerId());
+    }
+
+    @Test
+    public void test_setOwnerId() {
+        Item item = new Item(ItemLevel.LOST, "Test");
+        item.setOwnerId(1);
+        assertEquals(1, item.getOwnerId());
     }
 }

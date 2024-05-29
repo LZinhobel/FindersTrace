@@ -118,6 +118,7 @@
           <excludes>
             <exclude>**/Main.*</exclude>
             <exclude>**/server/</exclude>
+            <exclude>**/Login.*/</exclude>
           </excludes>
         </configuration>
         <executions>

@@ -1,3 +1,6 @@
-titel;description;currentStatus;imgPath;dateAdded
-Apple Watch;Habe eine Appel Watch in Blau gefunden;FOUND;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU36Ss4Ib3-VEpYSvLsn0a8IMxeQatmCBanQ7WuYOe9A&s;2024-05-28
-Geldtasche;Ich habe gestern meine Geldtasche verloren. Es sind natürlich ein paar Ausweise drinnen. Finderlohn: 50€;LOST;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHRDFYt0-z22jK9zzZ_u7YGuoxWk8qp58cwzPqtwHp4Q&s;2024-05-28
+titel;description;currentStatus;imgPath;dateAdded;ownerId
+Apple Watch;Habe eine Appel Watch in Blau gefunden;FOUND;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU36Ss4Ib3-VEpYSvLsn0a8IMxeQatmCBanQ7WuYOe9A&s;2024-05-29;-1
+Geldtasche;Ich habe gestern meine Geldtasche verloren. Es sind natürlich ein paar Ausweise drinnen. Finderlohn: 50€;LOST;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHRDFYt0-z22jK9zzZ_u7YGuoxWk8qp58cwzPqtwHp4Q&s;2024-05-29;-1
+Cowboy Hat;I lost my hat;LOST;https://americanhatmakers.com/cdn/shop/products/Hollywood-Copper-Leather-CowboyHat-AmericanHatMakers-Men-STUD.jpg?v=1690495286;2024-05-29;-1
+Mercedes AMG GT key;I found a key to a Mercedes AMG GT Black Series;FOUND;https://www.collinsdictionary.com/images/full/key_69270748_1000.jpg;2024-05-29;1
+Schlüssel;Schlüssel verloren für meinen Mercedes Vito;LOST;https://www.collinsdictionary.com/images/full/key_69270748_1000.jpg;2024-05-29;0
