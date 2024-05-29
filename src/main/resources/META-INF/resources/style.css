@@ -754,7 +754,7 @@ label {
     color: black;
 }
 
-<<<<<<< HEAD
+
 
 
 /*LOGIN*/
@@ -798,7 +798,7 @@ label {
 #register {
     color: var(--darkerPurple);
     text-decoration: none;
-=======
+}
 /* Profile Page */
 
 #profileBody {
@@ -826,5 +826,4 @@ label {
 
 #noItemsUser {
     margin-top: 10vh;
->>>>>>> 70b82e999f1cdb6d84423f40f50691c0e87ce157
 }
