@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindersTrace</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+    <div id="logo_box">
+        <img id="logo_img" src="../img/logo.png" alt="logo">
+        <h1>FindersTrace</h1>
+    </div>
+    <a href="../overview">Home</a>
+    <a href="../report">Report</a>
+    <img id="usericon" src="../img/defaultuser.svg" alt="usericon">
+</nav>
+<div id="details_body">
+    {#if item}
+    <div class="details_image_box">
+        <img src="{item.getImgPath()}" alt="image">
+    </div>
+    <div id="details_text_box">
+        <div>
+            <h1 id="title_details">{item.title}</h1>
+        </div>
+        <div id="details_text_inner_box">
+            <p><span>{prefix}datum:</span> {item.datePretty}</p>
+            <p><span>Beschreibung:</span> {item.description}</p>
+        </div>
+        <div id="usericon_details_box">
+            <img id="usericon_details" src="../img/defaultuser.svg" alt="usericon">
+            <img id="editicon_details" src="../img/pen.png" alt="edit" onclick="window.location.href='../edit?index={item.getId}'">
+        </div>
+    </div>
+    {#else}
+    <h1>Item not found</h1>
+    {/if}
+</div>
+</body>
+</html>
