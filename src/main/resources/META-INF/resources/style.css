@@ -142,6 +142,7 @@ nav>a {
 #usericon {
     width: 7%;
     height: auto;
+    cursor: pointer;
     margin-right: 2%;
 }
 
@@ -751,4 +752,24 @@ label {
 #report_back {
     text-decoration: none;
     color: black;
+}
+
+/* Profile Page */
+
+#profileBody {
+    background-color: var(--mainWhite);
+    color: var(--lighterPurple);
+}
+
+#profileH1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 900;
+    font-style: italic;
+    margin-top: 20vh;
+    margin-bottom: -25vh;
+}
+
+#noItemsUser {
+    margin-top: 10vh;
 }

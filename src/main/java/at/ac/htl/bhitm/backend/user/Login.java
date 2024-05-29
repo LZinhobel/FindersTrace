@@ -122,4 +122,13 @@ public class Login {
             throw new ItemException("Something happened while writing to file!", e);
         }
     }
+
+    public User getUserById(Integer index) {
+        for(User user : users) {
+            if(user.getId() == index) {
+                return user;
+            }
+        }
+        return null;
+    }
 }
