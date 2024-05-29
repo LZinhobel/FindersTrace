@@ -4,11 +4,11 @@ import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import at.ac.htl.bhitm.backend.item.*;
-import at.ac.htl.bhitm.backend.user.Login;
-import at.ac.htl.bhitm.backend.user.User;
+import at.ac.htl.bhitm.backend.user.*;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
@@ -193,9 +193,17 @@ public class WebServer {
             hasVisited = true;
         }
 
-        if (index != user.getId()) {
+        if (user != null) {
+            System.out.println(index);
+            System.out.println(user.getId());
+
+            if (mng.getItemById(index).getOwnerId() != user.getId()) {
+                return details(index);
+            }
+        } else {
             return details(index);
         }
+
 
         if (title != null && imgPath != null) {
             Item item = mng.getItemById(index);
@@ -254,9 +262,38 @@ public class WebServer {
     @GET
     @Path("/profile")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance profile() {
-        List items = new ArrayList<>(mng.getItems());
+    public TemplateInstance profile(@QueryParam("index") Integer index){
+        if (!hasVisited) {
+            updateItems();
+            hasVisited = true;
+        }
 
-        return userTemplate.data("user", user);    
+        // @Path("/api/user") class UserController {
+    
+        //     @GET
+        //     @Produces(MediaType.APPLICATION_JSON)
+        //     public Response getUser() {
+        //         // Replace with actual logic to get the user ID
+        //         int userID = index;
+        //         return Response.ok(userID).build();
+        //     }
+        // }
+
+
+        if(index == null) {
+            throw new Error("No User Id in path (missing Index)!");
+        }
+
+        LinkedList<Item> neededItems = new LinkedList<>();
+
+        User currentUser = login.getUserById(index);
+        for (Item item : mng.getItems()) {
+            if (item.getOwnerId() == index) {
+                neededItems.add(item);
+            }
+        }
+
+        return userTemplate.data("user", currentUser)
+        .data("items", neededItems);   
     }
 }

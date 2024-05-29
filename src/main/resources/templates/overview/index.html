@@ -8,13 +8,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <div id="navbar"></div>
+<div id="navbar"></div>
 
-    <script>
+<script>
     $(function(){
-      $("#navbar").load("navbar.html");
+        $("#navbar").load("navbar.html");
     });
-    </script>
+</script>
     <div id="content">
         {#for item in filteredItems}
             <div class="items" onclick="window.location.href='../details?index={item.id}'">

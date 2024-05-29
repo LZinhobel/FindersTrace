@@ -5,5 +5,17 @@
     </div>
     <a href="../overview">Home</a>
     <a href="../report">Report</a>
-    <img id="usericon" src="../img/defaultuser.svg" alt="usericon">
+    <img id="usericon" src="../img/defaultuser.svg" alt="usericon" onclick='window.location.href="../profile?index=0"'>
 </nav>
+
+<!-- <script>
+    window.onload = function() {
+        fetch('/api/user')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('usericon').onclick = function() {
+                    window.location.href = "../profile?index=" + data.userID;
+                }
+            });
+    }
+</script> -->

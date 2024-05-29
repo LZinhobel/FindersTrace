@@ -7,14 +7,41 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
-<div id="navbar"></div>
+<body id="profileBody">
 
-<script>
-    $(function(){
-        $("#navbar").load("navbar.html");
-    });
-</script>
-    <h1>Profile</h1>
+    <div id="navbar"></div>
+
+    <script>
+        $(function(){
+            $("#navbar").load("navbar.html");
+        });
+    </script>
+
+    <h2 id="profileH1">{user.getFirstname()} {user.getLastname()}!</h2>
+    <h2 id="profileH2">@{user.getUsername}</h2>
+
+
+    <div id="content">
+        {#for item in items}
+            <div class="items" onclick="window.location.href='../details?index={item.id}'">
+                <div class="itemImage">
+                    <img src="{item.getImgPath()}" alt="image">
+                </div>
+                <div class="itemFooter">
+                    <div class="itemInformation">
+                        <h3>{item.title}</h3>
+                        <h5>{item.currentStatus}</h5>
+                        <h5>{item.datePretty}</h5>
+                    </div>
+                    <div class="userInformation">
+                        <img src="../img/defaultuser.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        {/for}
+        {#if items.isEmpty()}
+            <h1 id="noItemsUser">No Items found</h1>
+        {/if}
+    </div>
 </body>
 </html>
