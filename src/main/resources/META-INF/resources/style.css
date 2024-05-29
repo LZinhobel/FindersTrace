@@ -536,7 +536,7 @@ nav>a {
 }
 
 .details_image_box>img {
-    border-radius: 10px;
+    border-radius: 10px 0px 0px 10px;
 }
 
 #details_text_box {
