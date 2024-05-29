@@ -6,11 +6,9 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.stream.Collectors;
 import at.ac.htl.bhitm.backend.item.*;
-import at.ac.htl.bhitm.backend.user.Login;
-import at.ac.htl.bhitm.backend.user.User;
+import at.ac.htl.bhitm.backend.user.*;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
@@ -195,9 +193,17 @@ public class WebServer {
             hasVisited = true;
         }
 
-        if (index != user.getId()) {
+        if (user != null) {
+            System.out.println(index);
+            System.out.println(user.getId());
+
+            if (mng.getItemById(index).getOwnerId() != user.getId()) {
+                return details(index);
+            }
+        } else {
             return details(index);
         }
+
 
         if (title != null && imgPath != null) {
             Item item = mng.getItemById(index);
