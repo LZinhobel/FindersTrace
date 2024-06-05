@@ -8,20 +8,20 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Login {
-    private static Login instance;
+public class UserRepository {
+    private static UserRepository instance;
     private LinkedList<User> users;
     private LinkedList<String> usernames;
 
-    private Login() {
+    private UserRepository() {
         users = new LinkedList<>();
         usernames = new LinkedList<>();
         readFromFile();
     }
 
-    public static Login getInstance() {
+    public static UserRepository getInstance() {
         if (instance == null) {
-            instance = new Login();
+            instance = new UserRepository();
         }
         return instance;
     }

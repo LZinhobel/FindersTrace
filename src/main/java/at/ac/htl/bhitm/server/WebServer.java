@@ -23,7 +23,7 @@ public class WebServer {
     private ItemFactory factory = new ItemFactory();
     private boolean hasVisited = false;
     private static User user;
-    Login login = Login.getInstance();
+    UserRepository userRepository = UserRepository.getInstance();
     
     private void updateItems() {
         mng.AddItemsFromFile("./data/reportedItems.csv", factory);
@@ -53,7 +53,7 @@ public class WebServer {
     @POST
     @Path("/loginUser")
     public Response loginUser(@FormParam("username") String username) throws URISyntaxException {
-        user = login.login(username);
+        user = userRepository.login(username);
 
         if (user != null) {
             return Response.seeOther(new URI("/overview")).build();
@@ -78,7 +78,7 @@ public class WebServer {
     @Path("/registerUser")
     public Response registerUser(@FormParam("username") String username, @FormParam("firstname") String firstname, @FormParam("lastname") String lastname) throws URISyntaxException {
 
-        login.register(new User(firstname, lastname, username));
+        userRepository.register(new User(firstname, lastname, username));
 
         return Response.seeOther(new URI("/login")).build();
     }
@@ -283,7 +283,7 @@ public class WebServer {
 
         LinkedList<Item> neededItems = new LinkedList<>();
 
-        User currentUser = login.getUserById(index);
+        User currentUser = userRepository.getUserById(index);
         for (Item item : mng.getItems()) {
             if (item.getOwnerId() == index) {
                 neededItems.add(item);
