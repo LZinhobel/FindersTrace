@@ -118,7 +118,7 @@
           <excludes>
             <exclude>**/Main.*</exclude>
             <exclude>**/server/</exclude>
-            <exclude>**/Login.*/</exclude>
+            <exclude>**/UserRepository.*/</exclude>
           </excludes>
         </configuration>
         <executions>

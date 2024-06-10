@@ -140,4 +140,12 @@ public class ItemTest {
         item.setOwnerId(1);
         assertEquals(1, item.getOwnerId());
     }
+
+    @Test
+    public void test_addItemToUser() {
+        User user = new User("firstname", "lastname", "username");
+        Item item = new Item(ItemLevel.LOST, "Test");
+        item.addItemToUser(user);
+        assertEquals(1, user.getItems().size());
+    }
 }

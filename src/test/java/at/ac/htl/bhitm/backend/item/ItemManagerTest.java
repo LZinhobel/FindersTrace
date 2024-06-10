@@ -128,11 +128,11 @@ public class ItemManagerTest {
     @Test
     public void test_factory_with_5_parts() {
         ItemFactory itemFactory = new ItemFactory();
-        Item item = itemFactory.createFromString("Test;Test;LOST;Test;Test");
+        Item item = itemFactory.createFromString("Test;Test;LOST;null;Test");
         assertEquals("Test", item.getTitle());
         assertEquals("Test", item.getDescription());
         assertEquals(ItemLevel.LOST, item.getCurrentStatus());
-        assertEquals("Test", item.getImgPath());
+        assertEquals("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png", item.getImgPath());
         assertEquals("Test", item.getDate());
     }
 
