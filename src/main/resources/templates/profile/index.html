@@ -5,20 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body id="profileBody">
 
-    <div id="navbar"></div>
+    {#if user}
+    {#include 'navbar.html' userId=user.getId()}
+    {#else}
+    {#include 'navbar.html' userId=-1}
+    {/if}
 
-    <script>
-        $(function(){
-            $("#navbar").load("navbar.html");
-        });
-    </script>
-
-    <h2 id="profileH1">{user.getFirstname()} {user.getLastname()}!</h2>
-    <h2 id="profileH2">@{user.getUsername}</h2>
+    <h2 id="profileH1">{currentUser.getFirstname()} {currentUser.getLastname()}!</h2>
+    <h2 id="profileH2">@{currentUser.getUsername()}</h2>
 
 
     <div id="content">

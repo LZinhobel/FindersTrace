@@ -35,6 +35,17 @@ public class WebServer {
     @Path("/login")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance login(@QueryParam("username") String username, @QueryParam("message") String message, @Context HttpServletRequest request) {
+        
+        HttpSession session = request.getSession();
+        user = (User) session.getAttribute("user");
+        if (user != null) {
+            try {
+                loginUser(username, request);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+        
         if (username == null) {
             return loginTemplate.data("username", "")
                     .data("message", message != null ? message : "");
@@ -110,7 +121,8 @@ public class WebServer {
         }
 
         return overviewTemplate.data("filteredItems", filteredItems)
-        .data("filter", filter);
+        .data("filter", filter)
+        .data("user", user);
         }
 
     @Inject
@@ -217,7 +229,8 @@ public class WebServer {
         }
 
         return editTemplate.data("item", item)
-        .data("prefix", lostOrFound);    
+        .data("prefix", lostOrFound)
+        .data("user", user);    
     }
 
     @Inject
@@ -227,11 +240,14 @@ public class WebServer {
     @GET
     @Path("/table")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance table(@QueryParam("index") Integer index, @QueryParam("title") String title, @QueryParam("desc") String description, @QueryParam("imgPath") String imgPath, @QueryParam("status") ItemLevel status){
+    public TemplateInstance table(@QueryParam("index") Integer index, @QueryParam("title") String title, @QueryParam("desc") String description, @QueryParam("imgPath") String imgPath, @QueryParam("status") ItemLevel status, @Context HttpServletRequest request){
+        HttpSession session = request.getSession();
+        user = (User) session.getAttribute("user");
 
         List<Item> items = new ArrayList<>(mng.all());
 
-        return tableTemplate.data("items", items);    
+        return tableTemplate.data("items", items)
+        .data("user", user);      
     }
 
     @Inject
@@ -241,19 +257,9 @@ public class WebServer {
     @GET
     @Path("/profile")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance profile(@QueryParam("index") Integer index){
-
-        // @Path("/api/user") class UserController {
-    
-        //     @GET
-        //     @Produces(MediaType.APPLICATION_JSON)
-        //     public Response getUser() {
-        //         // Replace with actual logic to get the user ID
-        //         int userID = index;
-        //         return Response.ok(userID).build();
-        //     }
-        // }
-
+    public TemplateInstance profile(@QueryParam("index") Integer index, @Context HttpServletRequest request){
+        HttpSession session = request.getSession();
+        user = (User) session.getAttribute("user");
 
         if(index == null) {
             throw new Error("No User Id in path (missing Index)!");
@@ -268,7 +274,20 @@ public class WebServer {
             }
         }
 
-        return userTemplate.data("user", currentUser)
-        .data("items", neededItems);   
+        return userTemplate.data("currentUser", currentUser)
+        .data("items", neededItems)
+        .data("user", user);   
+    }
+
+    @Inject
+    Template navbar;
+
+    @GET
+    @Path("/navbar")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance getNavbar(@Context HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        return navbar.data("userId", user.getId());
     }
 }
