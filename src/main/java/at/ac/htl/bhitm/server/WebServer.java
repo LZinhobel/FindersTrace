@@ -1,6 +1,5 @@
 package at.ac.htl.bhitm.server;
 
-import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -13,11 +12,12 @@ import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.inject.Inject;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 
 
 @Path("/")
@@ -34,12 +34,12 @@ public class WebServer {
     @GET
     @Path("/login")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance login(@QueryParam("username") String username, @QueryParam("message") String message) {
+    public TemplateInstance login(@QueryParam("username") String username, @QueryParam("message") String message, @Context HttpServletRequest request) {
         if (username == null) {
             return loginTemplate.data("username", "")
                     .data("message", message != null ? message : "");
         } else if (user != null) {
-            return overview(username);
+            return overview(username, request);
         }
 
         return loginTemplate.data("username", username)
@@ -48,8 +48,11 @@ public class WebServer {
 
     @POST
     @Path("/loginUser")
-    public Response loginUser(@FormParam("username") String username) throws URISyntaxException {
+    public Response loginUser(@FormParam("username") String username, @Context HttpServletRequest request) throws URISyntaxException {
         User user = userRepository.login(username);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
 
         if (user != null) {
             return Response.seeOther(new URI("/overview")).build();
@@ -88,7 +91,11 @@ public class WebServer {
     @GET
     @Path("/overview")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance overview(@QueryParam("filter") String filter) {
+    public TemplateInstance overview(@QueryParam("filter") String filter, @Context HttpServletRequest request) {
+        
+        HttpSession session = request.getSession();
+        user = (User) session.getAttribute("user");
+        
         List<Item> filteredItems;
         if ("LOST".equals(filter)) {
             filteredItems = mng.all().stream()
@@ -113,7 +120,11 @@ public class WebServer {
     @GET
     @Path("/details")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance details(@QueryParam("index") Integer index){
+    public TemplateInstance details(@QueryParam("index") Integer index, @Context HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        user = (User) session.getAttribute("user");
+
         Item item = null;
         String lostOrFound = "";
         if (index != null) {
@@ -134,7 +145,11 @@ public class WebServer {
     @Path("/report")
     @Produces(MediaType.TEXT_HTML)
     @Transactional
-    public TemplateInstance report(@QueryParam("i") String line) {
+    public TemplateInstance report(@QueryParam("i") String line, @Context HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        user = (User) session.getAttribute("user");
+
         String message = null;
 
         if (user == null) {
@@ -170,13 +185,22 @@ public class WebServer {
     @GET
     @Path("/edit")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance edit(@QueryParam("index") Integer index, @QueryParam("title") String title, @QueryParam("desc") String description, @QueryParam("imgPath") String imgPath, @QueryParam("status") ItemLevel status){
+    public TemplateInstance edit(@QueryParam("index") Integer index, 
+    @QueryParam("title") String title, 
+    @QueryParam("desc") String description, 
+    @QueryParam("imgPath") String imgPath, 
+    @QueryParam("status") ItemLevel status, 
+    @Context HttpServletRequest request){
+        
+        HttpSession session = request.getSession();
+        user = (User) session.getAttribute("user");
+        
         if (user != null) {
             if (index == null) {
-                return details(index);
+                return details(index, request);
             }
         } else {
-            return details(index);
+            return details(index, request);
         }
 
 
@@ -208,21 +232,6 @@ public class WebServer {
         List<Item> items = new ArrayList<>(mng.all());
 
         return tableTemplate.data("items", items);    
-    }
-
-    @Path("/data")
-    public class DataResource {
-
-        @GET
-        @Path("/reportedItems.csv")
-        @Produces(MediaType.TEXT_PLAIN)
-        public Response getReportedItems() {
-            File file = new File("./data/reportedItems.csv");
-            if (!file.exists()) {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
-            return Response.ok(file).header("Content-Disposition", "attachment; filename=\"reportedItems.csv\"").build();
-        }
     }
 
     @Inject
