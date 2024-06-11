@@ -4,7 +4,7 @@ public class ItemFactory {
     public Item createFromString(String line) {
         String[] parts = line.split(";");
 
-        if (parts.length != 5 && parts.length != 4 && parts.length != 6) {
+        if (parts.length != 5 && parts.length != 4) {
             throw new IllegalArgumentException("Invalid line format");
         }
 
@@ -23,10 +23,6 @@ public class ItemFactory {
             item.setDate(dateAdded);
         }
 
-        if (parts.length == 6) {
-            int ownerId = Integer.parseInt(parts[5].trim());
-            item.setOwnerId(ownerId);
-        }
         return item;
     }
 

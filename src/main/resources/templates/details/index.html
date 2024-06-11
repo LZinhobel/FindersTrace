@@ -29,11 +29,11 @@
             <p><span>Beschreibung:</span> {item.description}</p>
         </div>
         <div id="usericon_details_box">
-            {#if  && item.getOwnerId() > -1}
-            <img id="usericon_details" src="../img/defaultuser.svg" alt="usericon" onclick="window.location.href='../profile?index={item.getOwnerId()}'">
+            {#if item.getOwner() && item.getOwner().getId() > -1}
+            <img id="usericon_details" src="../img/defaultuser.svg" alt="usericon" onclick="window.location.href='../profile?index={item.getOwner().getId()}'">
             {/if}
             {#if user}
-                {#if item.getOwnerId() == user.getId()}
+                {#if item.getOwner().getId() == user.getId()}
             <img id="editicon_details" src="../img/pen.png" alt="edit" onclick="window.location.href='../edit?index={item.getId}'">
                 {/if}
             {/if}

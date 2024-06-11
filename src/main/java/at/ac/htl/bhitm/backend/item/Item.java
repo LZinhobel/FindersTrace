@@ -1,19 +1,28 @@
 package at.ac.htl.bhitm.backend.item;
 
 import at.ac.htl.bhitm.backend.user.User;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "items")
 public class Item {
-    private int ownerId = -1;
-    private static int idCounter = 0;
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
     private String title;
     private String description;
+    @Enumerated(EnumType.STRING)
     private ItemLevel currentStatus;
     private String imgPath;
-    private String dateAdded;
+    private LocalDate dateAdded;
 
     private final static int MAX_TITLE_LENGTH = 20;
     private final static String DEFAULT_DESCRIPTION = "No description available";
@@ -35,25 +44,17 @@ public class Item {
         return imgPath;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public int getIdCounter() {
-        return idCounter;
-    }
-
     public String getDate() {
-        return dateAdded;
+        return dateAdded.toString();
     }
 
     public String getDatePretty() {
-        String[] date = dateAdded.split("-");
+        String[] date = dateAdded.toString().split("-");
         return String.format("%s.%s.%s", date[2], date[1], date[0]);
     }
 
     public void setDate(String dateAdded) {
-        this.dateAdded = dateAdded;
+        this.dateAdded = LocalDate.parse(dateAdded);
     }
 
     public void setTitle(String title) {
@@ -85,27 +86,32 @@ public class Item {
         }
     }
 
+    public long getId() {
+        return id;
+    }
+    
+    public Item() {
+        this(ItemLevel.LOST, "No title");
+    }
 
     public Item(ItemLevel lvl, String title) {
         this(lvl, title, DEFAULT_DESCRIPTION);
     }
 
-    public Item(ItemLevel lvl, String titel, String description) {
-        this(lvl, titel, description, DEFAULT_IMGPATH);
+    public Item(ItemLevel lvl, String title, String description) {
+        this(lvl, title, description, DEFAULT_IMGPATH);
     }
 
-    public Item(ItemLevel lvl, String titel, String description, String imgPath) {
+    public Item(ItemLevel lvl, String title, String description, String imgPath) {
         setCurrentStatus(lvl);
-        setTitle(titel);
+        setTitle(title);
         setDescription(description);
         setImgPath(imgPath);
-        id = idCounter;
-        ++idCounter;
-        dateAdded = LocalDate.now().toString();
+        dateAdded = LocalDate.now();
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return String.format("#%d: %s (%s) %s - hinzugefügt am %s | %s", id, title, currentStatus, description, getDatePretty(), imgPath);
     }
 
@@ -117,15 +123,11 @@ public class Item {
     }
 
     public void setOwner(User user) {
-        ownerId = user.getId();
+        owner = user;
     }
 
-    public void setOwnerId(int id) {
-        ownerId = id;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
+    public User getOwner() {
+        return owner;
     }
 
     public void addItemToUser(User user) {

@@ -28,7 +28,7 @@
                         <h5>{item.datePretty}</h5>
                     </div>
                     <div class="userInformation">
-                        {#if  && item.getOwnerId() > -1}
+                        {#if item.getOwner() && item.getOwner().getId() > -1}
                         <img src="../img/defaultuser.svg" alt="">
                         {/if}
                     </div>
