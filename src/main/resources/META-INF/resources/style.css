@@ -828,16 +828,103 @@ label {
     margin-top: 10vh;
 }
 
-#helpBoxes{
+#text{
+    position: absolute;
+    margin-left: 2.5%;
+    width: 852px;
+    height: 78px;
+    left: 87px;
+    top: 85px;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 65px;
+    line-height: 78px;
+    color: #623F71;
+}
+
+#text2{
+    position: absolute;
+    margin-left: 2.5%;
+    margin-top: 3%;
+    width: 852px;
+    height: 78px;
+    left: 87px;
+    top: 196px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #623F71;
+}
+
+.button{
+    margin-left: 2.5%;
+    margin-top: 5%;
+    position: absolute;
+    box-sizing: border-box;
+    text-align: center;
+    width: 277px;
+    height: 48px;
+    left: 87px;
+    top: 317px;
+    color: white;
+    padding-top: 0.5%;
+
+    background: #623F71;
+    border: 1px solid #FFFFFF;
+    border-radius: 6px;
+}
+
+#boxes{
+    margin-top: 10%;
     display: grid;
     grid-template-columns: auto auto auto;
+    align-content: space-evenly;
 }
 
-#helpBox{
-    width: 367px;
+.box{
+    box-sizing: border-box;
+    width: 407px;
     height: 479px;
-    color: white;
-    background-color: #623F71;
+    left: 87px;
+    top: 408px;
+    margin-top: 50%;
+    margin-left: 20%;
+    background: #623F71;
+    border: 1px solid #E9C4F0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+
 }
 
+.ueberschrift{
+    text-align: center;
+    margin-top: 60%;
+    height: 29px;
+    left: 129px;
+    top: 314px;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 30px;
+
+
+    color: #FFFEFE;
+}
+
+.text3{
+    margin-left: 10%;
+    margin-top: 3%;
+    width: 322px;
+    height: 97px;
+    left: 55px;
+    top: 359px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+
+    color: #FFFFFF;
+}
 
