@@ -172,7 +172,7 @@ public class WebServer {
         if (line != null) {
             try {
                 if (line.split(";").length < 4) {
-                    line += ";null";
+                    line += "null";
                 }
                 Item item = factory.createFromString(line);
                 
