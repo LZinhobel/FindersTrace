@@ -759,7 +759,6 @@ label {
 
 /*LOGIN*/
 #loginForm {
-    background-color: var(--lighterPurple);
     color: var(--lightestPurple);
 
     width: 40vw;
@@ -966,7 +965,7 @@ label {
     position: absolute;
     left: 10%;
     bottom: 10vh;
-    width: 40%;
+    width: 50%;
     height: 80vh;
     background-color: var(--middlePurple);
     color: white;
@@ -974,10 +973,15 @@ label {
 
 #left_box>h1 {
     position: absolute;
+    font-size: 3rem;
     top: 10%;
+    left: 36.5%;
 }
 
 #loginForm {
+    position: absolute;
+    margin-top: 10%;
+    left: -12%;
     width: 80%;
     height: 30%;
     display: flex;
@@ -997,8 +1001,8 @@ label {
 
 #submit_button {
     background-color: var(--lightestPurple);
+    padding: 2%;
     width: 20%;
-    padding: 0.7%;
     margin-bottom: 5%;
     border-radius: 5px;
     font-size: 1.5rem;
@@ -1017,15 +1021,16 @@ label {
 
 #register_button {
     background-color: var(--middlePurple);
-    width: 22%;
+    color: var(--lightestPurple);
     padding: 2%;
-    margin-top: 7%;
+    margin-top: 10%;
+    margin-bottom: -15%;
+    width: 25%;
     border-radius: 5px;
     font-size: 1.5rem;
     font-weight: 700;
     text-align: center;
     cursor: pointer;
-    color: var(--lightestPurple);
     transition: all 0.2s ease-in-out;
     border: var(--teriary) solid 1px;
 }
@@ -1045,7 +1050,7 @@ label {
     text-align: center;
     font-size: large;
     font-weight: 700;
-    width: 45%;
+    width: 35%;
     right: 10%;
     height: 80vh;
     bottom: 10vh;
