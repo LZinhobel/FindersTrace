@@ -839,7 +839,7 @@ label {
     font-weight: 700;
     font-size: 65px;
     line-height: 78px;
-    color: #623F71;
+    color: var(--middlePurple);
 }
 
 #text2{
@@ -855,7 +855,7 @@ label {
     font-size: 40px;
     line-height: 48px;
 
-    color: #623F71;
+    color: var(--middlePurple);
 }
 
 .button{
@@ -871,9 +871,14 @@ label {
     color: white;
     padding-top: 0.5%;
 
-    background: #623F71;
+    background: var(--middlePurple);
     border: 1px solid #FFFFFF;
     border-radius: 6px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: var(--lighterPurple);
 }
 
 #boxes{
@@ -891,7 +896,7 @@ label {
     top: 408px;
     margin-top: 50%;
     margin-left: 20%;
-    background: #623F71;
+    background: var(--middlePurple);
     border: 1px solid #E9C4F0;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 6px;
@@ -900,7 +905,7 @@ label {
 
 .ueberschrift{
     text-align: center;
-    margin-top: 60%;
+    margin-top: 2%;
     height: 29px;
     left: 129px;
     top: 314px;
@@ -915,7 +920,7 @@ label {
 
 .text3{
     margin-left: 10%;
-    margin-top: 3%;
+    margin-top: 2%;
     width: 322px;
     height: 97px;
     left: 55px;
@@ -926,5 +931,10 @@ label {
     line-height: 30px;
 
     color: #FFFFFF;
+}
+
+.imgHelp{
+    margin-top: 15%;
+    margin-left: 20%;
 }
 
