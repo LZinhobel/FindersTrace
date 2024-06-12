@@ -997,7 +997,7 @@ label {
     margin: 2%;
     border-radius: 5px;
     border: none;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
 
 }
 
@@ -1092,20 +1092,20 @@ label {
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-}
+    border: 2px solid var(--lighterPurple);
+}   
 
 #loginSubmitButton:hover{
+    background-color: var(--lighterPurple);
     color: white;
 }
 
 #userNameLogin{
     color: #F5F3F3;
-    margin-left: -30%;
 }
 
 #signInText{
     font-style: italic;
-
 }
 
 #readyforlandf{
@@ -1149,7 +1149,7 @@ label {
     color: var(--lightestPurple);
 }
 
-#username {
+#username .username{
     background-color: var(--lightestPurple);
     color: var(--darkerPurple);
     border: none;
@@ -1161,26 +1161,15 @@ label {
 
 #usernamelbl{
     color: #F5F3F3;
-    margin-left: -40%;
+    margin-left: -36%;
 }
 
 #firstnamelbl{
     color: #F5F3F3;
-    margin-left: -40%;
+    margin-left: -36%;
 }
 
 #lastnamelbl{
     color: #F5F3F3;
-    margin-left: -40%;
-}
-
-.username {
-    background-color: var(--lightestPurple);
-    color: var(--darkerPurple);
-    border: none;
-    border-radius: 2px;
-    padding: 2px;
-    width: 15vw;
-    
-    font-size: large;
+    margin-left: -36%;
 }
