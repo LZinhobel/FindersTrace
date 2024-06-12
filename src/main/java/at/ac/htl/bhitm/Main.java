@@ -3,11 +3,12 @@ package at.ac.htl.bhitm;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 import at.ac.htl.bhitm.backend.item.*;
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
-    private static ItemManager itemManager = new ItemManager();
+    private static ItemsResource itemManager = new ItemsResource();
 
     public static void main(String[] args) {
         initialize();
@@ -15,11 +16,6 @@ public class Main {
     }
 
     private static void initialize() {
-        try {
-            itemManager.AddItemsFromFile("./data/reportedItems.csv", new ItemFactory());
-        } catch (Exception e) {
-            System.out.println("Error while starting! Couldn't read file.");
-        }
         clearConsole();
         System.out.println("Welcome to FindersTrace!");
 
@@ -75,12 +71,12 @@ public class Main {
 
     private static void reportLostItem() {
         Item newItem = getItemDetails(ItemLevel.LOST);
-        itemManager.addItem(newItem);
+        itemManager.add(newItem);
     }
 
     private static void reportFoundItem() {
         Item newItem = getItemDetails(ItemLevel.FOUND);
-        itemManager.addItem(newItem);
+        itemManager.add(newItem);
     }
 
     private static Item getItemDetails(ItemLevel level) {
@@ -109,13 +105,13 @@ public class Main {
         ArrayList<Item> items = null;
         switch (input.toLowerCase()) {
             case "a":
-                items = itemManager.getItemsByStatus(ItemLevel.LOST);
+                items = (ArrayList<Item>) itemManager.getByStatus(ItemLevel.LOST);
                 break;
             case "b":
-                items = itemManager.getItemsByStatus(ItemLevel.FOUND);
+                items = (ArrayList<Item>) itemManager.getByStatus(ItemLevel.FOUND);
                 break;
             case "c":
-                items = itemManager.getItems();
+                items = (ArrayList<Item>) itemManager.all();
                 break;
             case "d":
                 return;
@@ -136,7 +132,6 @@ public class Main {
 
     private static void exit() {
         try {
-            itemManager.AddItemsToFile("./data/reportedItems.csv");
             scanner.close();
             System.exit(0);
         } catch (Exception e) {

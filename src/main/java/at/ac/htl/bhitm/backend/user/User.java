@@ -2,38 +2,38 @@ package at.ac.htl.bhitm.backend.user;
 
 import at.ac.htl.bhitm.backend.item.Item;
 
+import jakarta.persistence.*;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Pattern;
 
+@Entity
+@Table(name = "users")
 public class User {
-    private int id;
-    private static int idCounter = 0;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String username;
     private String email;
-    private LinkedList<Item> items;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Item> items;
     private String firstname;
     private String lastname;
     private String phonenumber;
 
-    public User(String firstname, String lastname, String username, LinkedList<Item> items) {
+    public User(String firstname, String lastname, String username, List<Item> items) {
         setFirstname(firstname);
         setLastname(lastname);
         setUsername(username);
         setItems(items);
-        setId(idCounter++);
     }
 
     public User(String firstname, String lastname, String username) {
         this(firstname, lastname, username, new LinkedList<>());
     }
 
-    public void setId(int id) {
-        this.id = id;
-        idCounter = id+1;
-    }
-
-    public int getId() {
-        return id;
+    public User() {
     }
 
     public String getFirstname() {
@@ -99,13 +99,17 @@ public class User {
         this.email = email;
     }
 
-    public LinkedList<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(LinkedList<Item> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
+
+   public long getId() {
+        return id;
+   }
 
     public void addItem(Item item) {
         if (item == null) {

@@ -6,16 +6,30 @@
     <title>FindersTrace</title>
     <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body id="login_body">
 
-<img src="./img/logo.png" alt="" id="welcomeLogo">
 
+<div id="left_box">
+<h1>Sign In!</h1>
 <form action="/loginUser" method="post" id="loginForm">
+<<<<<<< HEAD
     <label for="username">Username:</label>
     <input type="text" name="username" id="username" required>
     <input type="submit" value="Login" id="submit">
     <a href="../register" id="register">Register</a>
+=======
+    <label for="username">Your Username:</label>
+    <input  name="username" id="username" required>
+    <input id="submit_button" type="submit" value="Login">
+    
+>>>>>>> 31217e4 (Login-Page)
 </form>
-<p>{message}</p>
+</div>
+<div id="right_box">
+    <h1>Wanna Sign up?</h1>
+    
+    <p>Sign up to report lost and found items. <br>Find them within your Organisation.</p>
+    <a id="register_button" href="../register">Sign Up?</a>
+</div>
 </body>
 </html>

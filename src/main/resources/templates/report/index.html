@@ -54,29 +54,33 @@
                     <script>
                         document.getElementById('reportForm').addEventListener('submit', function(event) {
                             event.preventDefault();
-                            var title = document.getElementById('RTitel').value ?? '';
+
+                            var title = document.getElementById('RTitel').value;
                             var description = document.getElementById('RDescription').value;
                             var image = document.getElementById('RImage').value;
                             var status = document.querySelector('input[name="lostOrFound"]:checked').value;
+
+                            // Reset border colors
+                            document.getElementById('RTitel').style.border = '';
+                            document.getElementById('RDescription').style.border = '';
+                            document.getElementById('RImage').style.border = '';
+
                             if (title == '') {
-                                console.log("Title is empty");
+                                alert("Title is empty");
                                 document.getElementById('RTitel').style.border = '2px solid red';
-                                document.getElementById('RDescription').value = description;
-                                document.getElementById('RImage').value = image;
                                 return;
                             }
                             if (description.includes(";") || image.includes(";")) {
-                                console.log("Description or image contains ;");
+                                alert("Description or image should not contain ;");
                                 document.getElementById('RDescription').style.border = '2px solid red';
                                 document.getElementById('RImage').style.border = '2px solid red';
-                                document.getElementById('RTitel').value = title;
                                 return;
                             }
-        
+
                             var csv = title + ';' + description + ';' + status + ';' + image;
                             window.location.href = this.action + '?i=' + encodeURIComponent(csv);
-                        });
-                    </script>
+                        });                        
+                        </script>
 
                 {/if}
            

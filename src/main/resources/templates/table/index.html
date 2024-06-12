@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FindersTrace</title>
     <link rel="stylesheet" href="../style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div id="navbar"></div>
-
-<script>
-    $(function(){
-        $("#navbar").load("navbar.html");
-    });
-</script>
+{#if user}
+{#include 'navbar.html' userId=user.getId()}
+{#else}
+{#include 'navbar.html' userId=-1}
+{/if}
         
     <div id="table">
         <div class="tableRow">
@@ -30,9 +28,6 @@
             <p class="collumnDesc">{item.description}</p>
         </div>
         {/for}
-    </div>
-
-    <a href="../data/reportedItems.csv" target="_blank" id="exportButton">Export</a>   
-         
+    </div>         
 </body>
 </html>

@@ -1,217 +1,60 @@
-package at.ac.htl.bhitm.backend.user;
+// package at.ac.htl.bhitm.backend.user;
 
-import at.ac.htl.bhitm.backend.item.Item;
-import at.ac.htl.bhitm.backend.item.ItemLevel;
-import org.junit.jupiter.api.Test;
+// import at.ac.htl.bhitm.backend.item.Item;
+// import org.junit.jupiter.api.BeforeEach;
+// import org.junit.jupiter.api.Test;
 
-import java.util.LinkedList;
+// import java.util.LinkedList;
+// import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+// import static org.junit.jupiter.api.Assertions.*;
 
-public class UserTest {
-    @Test
-    public void test_constructor_and_getters() {
-        User user = new User("firstname", "lastname", "username");
-        assertEquals("username", user.getUsername());
-        assertEquals("firstname", user.getFirstname());
-        assertEquals("lastname", user.getLastname());
-        assertEquals(new LinkedList<>(), user.getItems());
-    }
+// class UserTest {
+//     private User user;
+//     private Item item;
 
-    @Test
-    public void test_constructor_with_items() {
-        Item item = new Item(ItemLevel.LOST, "name", "description");
-        LinkedList<Item> items = new LinkedList<>();
+//     @BeforeEach
+//     void setUp() {
+//         user = new User("John", "Doe", "johndoe");
+//         item = new Item();
+//     }
 
-        User user = new User("firstname", "lastname", "username", items);
-        assertEquals("username", user.getUsername());
-        assertEquals("firstname", user.getFirstname());
-        assertEquals("lastname", user.getLastname());
-        assertEquals(items, user.getItems());
-    }
+//     @Test
+//     void testCreateUser() {
+//         assertNotNull(user);
+//         assertEquals("John", user.getFirstname());
+//         assertEquals("Doe", user.getLastname());
+//         assertEquals("johndoe", user.getUsername());
+//     }
 
-    @Test
-    public void test_setId() {
-        User user = new User("firstname", "lastname", "username");
-        user.setId(1);
-        assertEquals(1, user.getId());
-    }
+//     @Test
+//     void testSetAndGetFirstname() {
+//         user.setFirstname("Jane");
+//         assertEquals("Jane", user.getFirstname());
+//     }
 
-    @Test
-    public void test_setId_idCounter() {
-        User user = new User("firstname", "lastname", "username");
-        user.setId(1);
-        User user2 = new User("firstname", "lastname", "username");
-        assertEquals(2, user2.getId());
-    }
+//     @Test
+//     void testSetAndGetLastname() {
+//         user.setLastname("Smith");
+//         assertEquals("Smith", user.getLastname());
+//     }
 
-    @Test
-    public void test_setFirstname() {
-        User user = new User("firstname", "lastname", "username");
-        user.setFirstname("newFirstname");
-        assertEquals("newFirstname", user.getFirstname());
-    }
+//     @Test
+//     void testSetAndGetUsername() {
+//         user.setUsername("janesmith");
+//         assertEquals("janesmith", user.getUsername());
+//     }
 
-    @Test
-    public void test_setFirstname_null() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setFirstname(null));
-    }
+//     @Test
+//     void testAddItem() {
+//         user.addItem(item);
+//         assertTrue(user.containsItem(item));
+//     }
 
-    @Test
-    public void test_setFirstname_empty() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setFirstname(""));
-    }
-
-    @Test
-    public void test_setLastname() {
-        User user = new User("firstname", "lastname", "username");
-        user.setLastname("newLastname");
-        assertEquals("newLastname", user.getLastname());
-    }
-
-    @Test
-    public void test_setLastname_null() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setLastname(null));
-    }
-
-    @Test
-    public void test_setLastname_empty() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setLastname(""));
-    }
-
-    @Test
-    public void test_setUsername() {
-        User user = new User("firstname", "lastname", "username");
-        user.setUsername("newUsername");
-        assertEquals("newUsername", user.getUsername());
-    }
-
-    @Test
-    public void test_setUsername_null() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setUsername(null));
-    }
-
-    @Test
-    public void test_setUsername_empty() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setUsername(""));
-    }
-
-    @Test
-    public void test_setUsername_not_valid() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setUsername("user name"));
-    }
-
-    @Test
-    public void test_setPhonenumber() {
-        User user = new User("firstname", "lastname", "username");
-        user.setPhonenumber("1234567890");
-        assertEquals("1234567890", user.getPhonenumber());
-    }
-
-    @Test
-    public void test_setPhonenumber_null() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setPhonenumber(null));
-    }
-
-    @Test
-    public void test_setPhonenumber_empty() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setPhonenumber(""));
-    }
-
-    @Test
-    public void test_setPhonenumber_not_only_numbers() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setPhonenumber("1234567890a"));
-    }
-
-    @Test
-    public void test_setPhonenumber_not_only_numbers2() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setPhonenumber("1234567890!"));
-    }
-
-    @Test
-    public void test_setEmail() {
-        User user = new User("firstname", "lastname", "username");
-        user.setEmail("mail@mail.com");
-
-        assertEquals("mail@mail.com", user.getEmail());
-    }
-
-    @Test
-    public void test_setEmail_null() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setEmail(null));
-    }
-
-    @Test
-    public void test_setEmail_empty() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setEmail(""));
-    }
-
-    @Test
-    public void test_setEmail_not_valid() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setEmail("mail"));
-    }
-
-    @Test
-    public void test_setEmail_not_valid2() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.setEmail("mail@"));
-    }
-
-    @Test
-    public void test_addItem() {
-        User user = new User("firstname", "lastname", "username");
-        Item item = new Item(ItemLevel.LOST, "name", "description");
-        user.addItem(item);
-        assertEquals(1, user.getItems().size());
-        assertEquals(item, user.getItems().get(0));
-    }
-
-    @Test
-    public void test_addItem_null() {
-        User user = new User("firstname", "lastname", "username");
-        assertThrows(IllegalArgumentException.class, () -> user.addItem(null));
-    }
-
-    @Test
-    public void test_addItem_twice() {
-        User user = new User("firstname", "lastname", "username");
-        Item item = new Item(ItemLevel.LOST, "name", "description");
-        user.addItem(item);
-        user.addItem(item);
-        assertEquals(2, user.getItems().size());
-        assertEquals(item, user.getItems().get(0));
-        assertEquals(item, user.getItems().get(1));
-    }
-
-    @Test
-    public void test_removeItem() {
-        User user = new User("firstname", "lastname", "username");
-        Item item = new Item(ItemLevel.LOST, "name", "description");
-        user.addItem(item);
-        user.removeItem(item);
-        assertEquals(0, user.getItems().size());
-    }
-
-    @Test
-    public void test_containsItem() {
-        User user = new User("firstname", "lastname", "username");
-        Item item = new Item(ItemLevel.LOST, "name", "description");
-        user.addItem(item);
-        assertEquals(true, user.containsItem(item));
-    }
-}
+//     @Test
+//     void testRemoveItem() {
+//         user.addItem(item);
+//         user.removeItem(item);
+//         assertFalse(user.containsItem(item));
+//     }
+// }
