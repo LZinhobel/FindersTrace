@@ -11,22 +11,22 @@
     
     
     <div id="left_box">
-    <h1>Sign Up!</h1>
+    <h1 id="signInText">Sign Up!</h1>
 
 <form action="/registerUser" method="post" id="loginForm">
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username" required>
-    <label for="firstname">Firstname:</label>
-    <input type="text" name="firstname" id="firstname" required>
-    <label for="lastname">Lastname:</label>
-    <input type="text" name="lastname" id="lastname" required>
-    <input type="submit" value="register">
+    <label for="username" id="usernamelbl">Username:</label>
+    <input type="text" name="username" class="username" required placeholder="username">
+    <label for="firstname" id="firstnamelbl">Firstname:</label>
+    <input type="text" name="firstname" id="firstname" class="username"  required placeholder="firstname">
+    <label for="lastname" id="lastnamelbl">Lastname:</label>
+    <input type="text" name="lastname" id="lastname" class="username"  required placeholder="lastname">
+    <input type="submit" value="register" id="loginSubmitButton">
 </form>
 </div>
 
 <div id="right_box">
-    <h1>Already Signed up?</h1>
-    <p>Sign in to report lost and found items. Find them within your Organisation.</p>
+    <h1 id="signupText">Already signed up?</h1>
+    <p id="signupP">Sign in to report lost and found <br> items. Find them within your <br> Organisation.</p>
     <a id="register_button" href="../login/index.html">Sign in</a>
 </div>
 

@@ -1091,6 +1091,7 @@ label {
     padding: 1.5%;
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 #loginSubmitButton:hover{
@@ -1155,5 +1156,31 @@ label {
     border-radius: 2px;
     padding: 2px;
     width: 15vw;
+    font-size: large;
+}
+
+#usernamelbl{
+    color: #F5F3F3;
+    margin-left: -40%;
+}
+
+#firstnamelbl{
+    color: #F5F3F3;
+    margin-left: -40%;
+}
+
+#lastnamelbl{
+    color: #F5F3F3;
+    margin-left: -40%;
+}
+
+.username {
+    background-color: var(--lightestPurple);
+    color: var(--darkerPurple);
+    border: none;
+    border-radius: 2px;
+    padding: 2px;
+    width: 15vw;
+    
     font-size: large;
 }
