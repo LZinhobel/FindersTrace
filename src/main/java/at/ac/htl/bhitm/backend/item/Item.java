@@ -89,6 +89,10 @@ public class Item {
     public long getId() {
         return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     
     public Item() {
         this(ItemLevel.LOST, "No title");
