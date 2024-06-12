@@ -757,7 +757,6 @@ label {
 
 
 
-<<<<<<< HEAD
 /*LOGIN*/
 #loginForm {
     background-color: var(--lighterPurple);
@@ -932,9 +931,8 @@ label {
     line-height: 30px;
 
     color: #FFFFFF;
-=======
 
-
+}
 
 
 #register_button {
@@ -1060,7 +1058,6 @@ label {
     position: absolute;
     top: 10%;
     margin-bottom: 15%;
->>>>>>> 31217e4 (Login-Page)
 }
 
 #notLoggedInNavLink {
