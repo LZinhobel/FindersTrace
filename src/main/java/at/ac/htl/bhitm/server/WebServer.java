@@ -68,7 +68,7 @@ public class WebServer {
         if (user != null) {
             return Response.seeOther(new URI("/overview")).build();
         } else {
-            return Response.seeOther(new URI("/login?message=Login failed")).build();
+            return Response.seeOther(new URI("/login?message=Login%20failed")).build();
         }
     }
 
