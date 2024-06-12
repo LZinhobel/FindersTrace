@@ -958,6 +958,7 @@ label {
 
 
 #left_box {
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -973,9 +974,9 @@ label {
 
 #left_box>h1 {
     position: absolute;
-    font-size: 3rem;
+    font-size: 7vh;
     top: 10%;
-    left: 36.5%;
+    left: 35%;
 }
 
 #loginForm {
@@ -997,6 +998,7 @@ label {
     border-radius: 5px;
     border: none;
     margin-bottom: 5%;
+
 }
 
 #submit_button {
@@ -1055,7 +1057,7 @@ label {
     height: 80vh;
     bottom: 10vh;
     background-color: var(--lightestPurple);
-    border-radius: 50px 0px 0px 50px;
+    border-radius: 50px 6px 6px 50px;
     color: black;
 }
 
@@ -1063,6 +1065,7 @@ label {
     position: absolute;
     top: 10%;
     margin-bottom: 15%;
+
 }
 
 #notLoggedInNavLink {
@@ -1078,3 +1081,47 @@ label {
     margin-left: 20%;
 }
 
+
+#loginSubmitButton{
+    background-color: var(--middlePurple);
+    width: 50%;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1.5%;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+#loginSubmitButton:hover{
+    color: white;
+}
+
+#userNameLogin{
+    color: #F5F3F3;
+    margin-left: -30%;
+}
+
+#signInText{
+    font-style: italic;
+
+}
+
+#readyforlandf{
+    font-style: italic;
+    margin-top: 20%;
+}
+
+#signupText{
+    margin-top: 15%;
+    font-style: italic;
+    font-size: 7vh;
+    font-weight: 300;
+}
+
+#signupP{
+    text-align: left;
+    font-size: 3vh;
+    font-weight: 300;
+    color: #464242;
+}

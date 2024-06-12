@@ -10,19 +10,20 @@
 
 
 <div id="left_box">
-<h1>Sign In!</h1>
+<h1 id="signInText">Sign in</h1>
 <form action="/loginUser" method="post" id="loginForm">
-    <label for="username">Your Username:</label>
+    <label for="username" id="userNameLogin">Your Username:</label>
     <input placeholder="Username"  name="username" id="username" required>
-    <input id="submit_button" type="submit" value="Login">
+    <p id="readyforlandf">Ready for lost and found?</p>
+    <input id="loginSubmitButton" type="submit" value="Login">
     
 </form>
 </div>
 <div id="right_box">
-    <h1>Wanna Sign up?</h1>
+    <h1 id="signupText">Wanna Sign up?</h1>
     
-    <p>Sign up to report lost and found items. <br>Find them within your Organisation.</p>
-    <a id="register_button" href="../register">Sign Up?</a>
+    <p id="signupP">Sign up to report lost and found <br> items. Find them within your <br> Organisation.</p>
+    <a id="register_button" href="../register">Sign up</a>
 </div>
 </body>
 </html>
