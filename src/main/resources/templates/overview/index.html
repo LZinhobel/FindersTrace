@@ -9,10 +9,20 @@
 <body>
 <div id="navbar"></div>
 
-{#if user}
+<!-- {#if user}
     {#include 'navbar.html' userId=user.getId()}
 {#else}
     {#include 'navbar.html' userId=-1}
+{/if} -->
+
+{#if user}
+    {#let userId=user.getId()}
+        {#include 'navbar.html' userId=user.getId()}
+    {/let}
+{#else}
+    {#let userId=-1}
+        {#include 'navbar.html' userId=-1}
+    {/let}
 {/if}
 
     <div id="content">

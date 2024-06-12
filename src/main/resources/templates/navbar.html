@@ -8,6 +8,6 @@
     {#if userId > -1}
         <img id="usericon" src="../img/defaultuser.svg" alt="usericon" onclick='window.location.href="../profile?index={userId}"'></nav>
     {#else}
-        <a href="../login">Login</a>
+        <a href="../login" id="notLoggedInNavLink">Login</a>
     {/if}
 </nav>

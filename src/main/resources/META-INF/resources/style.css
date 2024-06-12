@@ -928,3 +928,9 @@ label {
     color: #FFFFFF;
 }
 
+#notLoggedInNavLink {
+    text-decoration: none;
+    color: var(--darkerPurple);
+    cursor: pointer;
+}
+
