@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-
-<img src="./img/logo.png" alt="" id="welcomeLogo">
+    <body id="login_body">
+    
+    
+    <div id="left_box">
+    <h1>Sign Up!</h1>
 
 <form action="/registerUser" method="post" id="loginForm">
     <label for="username">Username:</label>
@@ -19,9 +22,13 @@
     <input type="text" name="lastname" id="lastname" required>
     <input type="submit" value="register">
 </form>
+</div>
 
-
-
+<div id="right_box">
+    <h1>Already Signed up?</h1>
+    <p>Sign in to report lost and found items. Find them within your Organisation.</p>
+    <a id="register_button" href="../login/index.html">Sign in</a>
+</div>
 
 </body>
 </html>
