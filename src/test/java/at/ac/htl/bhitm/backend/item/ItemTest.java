@@ -1,102 +1,102 @@
-// package at.ac.htl.bhitm.backend.item;
+package at.ac.htl.bhitm.backend.item;
 
-// import at.ac.htl.bhitm.backend.user.User;
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
-// import org.mockito.Mockito;
+import at.ac.htl.bhitm.backend.user.User;
+import org.junit.jupiter.api.Test;
 
-// import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-// class ItemTest {
-//     private Item item;
-//     private User user;
+import java.util.ArrayList;
 
-//     @BeforeEach
-//     void setUp() {
-//         user = Mockito.mock(User.class);
-//         Mockito.when(user.getFirstname()).thenReturn("Test Firstname");
-//         item = new Item(ItemLevel.LOST, "Test Item", "Test Description", "Test Image Path");
-//         item.setOwner(user);
-//     }
+public class ItemTest {
 
-//     @Test
-//     void getTitle() {
-//         assertEquals("Test Item", item.getTitle());
-//     }
+    @Test
+    public void testConstructors() {
+        Item item = new Item();
+        assertNotNull(item);
 
-//     @Test
-//     void getDescription() {
-//         assertEquals("Test Description", item.getDescription());
-//     }
+        item = new Item(ItemLevel.LOST, "title");
+        assertEquals(ItemLevel.LOST, item.getCurrentStatus());
+        assertEquals("title", item.getTitle());
 
-//     @Test
-//     void getCurrentStatus() {
-//         assertEquals(ItemLevel.LOST, item.getCurrentStatus());
-//     }
+        item = new Item(ItemLevel.LOST, "title", "description");
+        assertEquals(ItemLevel.LOST, item.getCurrentStatus());
+        assertEquals("title", item.getTitle());
+        assertEquals("description", item.getDescription());
 
-//     @Test
-//     void getImgPath() {
-//         assertEquals("Test Image Path", item.getImgPath());
-//     }
+        item = new Item(ItemLevel.LOST, "title", "description", "imgPath");
+        assertEquals(ItemLevel.LOST, item.getCurrentStatus());
+        assertEquals("title", item.getTitle());
+        assertEquals("description", item.getDescription());
+        assertEquals("imgPath", item.getImgPath());
+    }
 
-//     @Test
-//     void getDate() {
-//         assertNotNull(item.getDate());
-//     }
+    @Test
+    public void testGettersAndSetters() {
+        Item item = new Item();
+        item.setTitle("title");
+        assertEquals("title", item.getTitle());
 
-//     @Test
-//     void getDatePretty() {
-//         assertNotNull(item.getDatePretty());
-//     }
+        item.setDescription("description");
+        assertEquals("description", item.getDescription());
 
-//     @Test
-//     void setDate() {
-//         item.setDate("2022-01-01");
-//         assertEquals("2022-01-01", item.getDate());
-//     }
+        item.setCurrentStatus(ItemLevel.FOUND);
+        assertEquals(ItemLevel.FOUND, item.getCurrentStatus());
 
-//     @Test
-//     void setTitle() {
-//         item.setTitle("New Title");
-//         assertEquals("New Title", item.getTitle());
-//     }
+        item.setImgPath("imgPath");
+        assertEquals("imgPath", item.getImgPath());
 
-//     @Test
-//     void setDescription() {
-//         item.setDescription("New Description");
-//         assertEquals("New Description", item.getDescription());
-//     }
+        User user = new User();
+        item.setOwner(user);
+        assertEquals(user, item.getOwner());
+    }
 
-//     @Test
-//     void setCurrentStatus() {
-//         item.setCurrentStatus(ItemLevel.LOST);
-//         assertEquals(ItemLevel.LOST, item.getCurrentStatus());
-//     }
+    @Test
+    public void testToString() {
+        Item item = new Item(ItemLevel.LOST, "title", "description", "imgPath");
+        item.setId(1L); // Set the id
+        String expected = String.format("#%d: %s (%s) %s - hinzugefügt am %s | %s", 
+                                        item.getId(), item.getTitle(), item.getCurrentStatus(), 
+                                        item.getDescription(), item.getDatePretty(), item.getImgPath());
+        assertEquals(expected, item.toString());
+    }
 
-//     @Test
-//     void setImgPath() {
-//         item.setImgPath("New Image Path");
-//         assertEquals("New Image Path", item.getImgPath());
-//     }
+    @Test
+    public void testEditItem() {
+        Item item = new Item();
+        item.editItem(ItemLevel.FOUND, "newTitle", "newDescription", "newImgPath");
+        assertEquals(ItemLevel.FOUND, item.getCurrentStatus());
+        assertEquals("newTitle", item.getTitle());
+        assertEquals("newDescription", item.getDescription());
+        assertEquals("newImgPath", item.getImgPath());
+    }
 
-//     @Test
-//     void toStringTest() {
-//         assertNotNull(item.toString());
-//     }
+    @Test
+    public void testAddItemToUser() {
+        Item item = new Item();
+        User user = new User();
+        user.setItems(new ArrayList<>()); // Initialize the items list
+        item.addItemToUser(user);
+        assertTrue(user.getItems().contains(item));
+    }
 
-//     @Test
-//     void editItem() {
-//         item.editItem(ItemLevel.FOUND, "Edited Title", "Edited Description", "Edited Image Path");
-//         assertEquals(ItemLevel.FOUND, item.getCurrentStatus());
-//         assertEquals("Edited Title", item.getTitle());
-//         assertEquals("Edited Description", item.getDescription());
-//         assertEquals("Edited Image Path", item.getImgPath());
-//     }
+    @Test
+    public void testSetDescription() {
+        Item item = new Item();
+        item.setDescription("description");
+        assertEquals("description", item.getDescription());
+        item.setDescription(null);
+        assertEquals("No description available", item.getDescription());
+        item.setDescription("");
+        assertEquals("No description available", item.getDescription());
+    }
 
-//     @Test
-//     void addItemToUser() {
-//         User newUser = Mockito.mock(User.class);
-//         item.addItemToUser(newUser);
-//         Mockito.verify(newUser).addItem(item);
-//     }
-// }
+    @Test
+    public void testSetTitle() {
+        Item item = new Item();
+        item.setTitle("title");
+        assertEquals("title", item.getTitle());
+        assertThrows(ItemException.class, () -> item.setTitle(null));
+        assertThrows(ItemException.class, () -> item.setTitle(""));
+        assertThrows(ItemException.class, () -> item.setTitle("this title will be to long and will throw an exception"));
+    }
+}

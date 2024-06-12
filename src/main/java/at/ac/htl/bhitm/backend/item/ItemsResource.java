@@ -67,8 +67,8 @@ public class ItemsResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        if (!item.getTitle().isBlank()) itemToEdit.setTitle(item.getTitle());
-        if (!item.getDescription().isBlank()) itemToEdit.setDescription(item.getDescription());
+        itemToEdit.setTitle(item.getTitle());
+        itemToEdit.setDescription(item.getDescription());
         if (item.getCurrentStatus() != null) itemToEdit.setCurrentStatus(item.getCurrentStatus());
         if (!item.getImgPath().isBlank()) itemToEdit.setImgPath(item.getImgPath());
 
