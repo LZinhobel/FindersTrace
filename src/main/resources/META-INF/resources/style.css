@@ -134,7 +134,7 @@ nav>a {
     color: black;
     font-size: 250%;
     margin-right: 2%;
-    margin-left: 15%;
+    margin-left: 10%;
     margin-right: -5%;
     font-weight: 600;
 }
@@ -1064,6 +1064,8 @@ label {
     text-decoration: none;
     color: var(--darkerPurple);
     cursor: pointer;
+    margin-left: -5%;
+    margin-right: 5%;
 }
 
 .imgHelp{
