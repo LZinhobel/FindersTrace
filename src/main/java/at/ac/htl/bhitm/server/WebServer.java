@@ -196,6 +196,7 @@ public class WebServer {
 
     @GET
     @Path("/edit")
+    @Transactional
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance edit(@QueryParam("index") Integer index, 
     @QueryParam("title") String title, 
@@ -215,16 +216,13 @@ public class WebServer {
             return details(index, request);
         }
 
-
+        Item item = mng.getById((long) index);
         if (title != null && imgPath != null) {
-            Item item = mng.getById((long) index);
-            mng.edit(0, item);
+            mng.edit(item.getId(), new Item(status, title, description, imgPath));
         }
 
-        Item item = null;
         String lostOrFound = "";
         if (index != null) {
-            item = mng.getById((long) index);
             lostOrFound = item.getCurrentStatus().toString().equals("LOST") ? "Verlust" : "Fund";
         }
 

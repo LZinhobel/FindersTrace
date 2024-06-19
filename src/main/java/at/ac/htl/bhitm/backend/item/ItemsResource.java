@@ -72,6 +72,7 @@ public class ItemsResource {
         if (item.getCurrentStatus() != null) itemToEdit.setCurrentStatus(item.getCurrentStatus());
         if (!item.getImgPath().isBlank()) itemToEdit.setImgPath(item.getImgPath());
 
+        itemToEdit = itemsRepository.getEntityManager().merge(itemToEdit);
         itemsRepository.persist(itemToEdit);
 
         return Response.ok().build();

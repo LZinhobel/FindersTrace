@@ -535,6 +535,11 @@ nav>a {
     flex-direction: column;
 }
 
+.details_image_box_edit>img {
+    height: 100%;
+    border-radius: 10px 0px 0px 0;
+}
+
 .details_image_box>img {
     border-radius: 10px 0px 0px 10px;
 }
