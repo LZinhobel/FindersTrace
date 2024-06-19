@@ -9,12 +9,6 @@
 <body>
 <div id="navbar"></div>
 
-<!-- {#if user}
-    {#include 'navbar.html' userId=user.getId()}
-{#else}
-    {#include 'navbar.html' userId=-1}
-{/if} -->
-
 {#if user}
     {#let userId=user.getId()}
         {#include 'navbar.html' userId=user.getId()}

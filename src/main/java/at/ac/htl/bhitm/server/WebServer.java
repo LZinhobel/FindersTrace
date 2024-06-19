@@ -118,6 +118,7 @@ public class WebServer {
                 .collect(Collectors.toList());
         } else {
             filteredItems = new ArrayList<>(mng.all());
+            filteredItems.sort((item1, item2) -> item1.getDate().compareTo(item2.getDate()));
         }
 
         return overviewTemplate.data("filteredItems", filteredItems)
